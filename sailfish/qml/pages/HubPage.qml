@@ -10,7 +10,7 @@ Page
 		ListElement
 		{
 			title: "Artists"
-			pageUrl: "ArtistsPage.qml"
+			pageUrl: "CollectionPage.qml"
 		}
 
 		ListElement

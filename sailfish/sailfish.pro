@@ -40,12 +40,11 @@ SOURCES += src/sailfish.cpp \
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
     rpm/sailfish.changes.in \
-    rpm/sailfish.spec \
+    rpm/subsoniq.spec \
     rpm/sailfish.yaml \
     translations/*.ts \
     qml/pages/HubPage.qml \
     qml/pages/SettingsPage.qml \
-    qml/pages/ArtistsPage.qml \
     subsoniq.desktop \
     qml/subsoniq.qml \
     qml/pages/DirectoryPage.qml \
@@ -53,7 +52,8 @@ OTHER_FILES += \
     qml/pages/AlbumTemplate.qml \
     qml/pages/TrackTemplate.qml \
     qml/pages/PlaylistPage.qml \
-    qml/pages/MediaControls.qml
+    qml/pages/MediaControls.qml \
+    qml/pages/CollectionPage.qml
 
 # to disable building translations every time, comment out the
 # following CONFIG line
