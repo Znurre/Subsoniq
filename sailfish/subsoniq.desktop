@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+X-Nemo-Application-Type=silica-qt5
+Icon=sailfish
+Exec=subsoniq
+Name=Subsoniq
+# translation example:
+# your app name in German locale (de)
+Name[de]=sailfish
+
