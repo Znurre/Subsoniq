@@ -1,9 +1,10 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "Player.h"
-
 #include <QMainWindow>
+
+#include "Player.h"
+#include "MetadataController.h"
 
 class MainWindow : public QMainWindow
 {
@@ -11,6 +12,7 @@ class MainWindow : public QMainWindow
 		MainWindow();
 
 	private:
+		MetadataController m_metadata;
 		Playlist m_playlist;
 		Player m_player;
 };

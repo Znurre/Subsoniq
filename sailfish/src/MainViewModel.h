@@ -7,6 +7,7 @@
 #include "Playlist.h"
 #include "Player.h"
 #include "PlaylistModel.h"
+#include "MetadataController.h"
 
 class MainViewModel : public QObject
 {
@@ -24,6 +25,7 @@ class MainViewModel : public QObject
 		QObject *player();
 
 	private:
+		MetadataController m_metadata;
 		Playlist m_playlist;
 		PlaylistModel m_playlistModel;
 		Player m_player;

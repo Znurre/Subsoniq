@@ -20,7 +20,10 @@ SOURCES += \
 	Settings.cpp \
 	SubsonicAdapter.cpp \
 	Track.cpp \
-	UrlBuilder.cpp
+	UrlBuilder.cpp \
+    MetadataController.cpp \
+    AudioBuffer.cpp \
+    PlayerController.cpp
 
 HEADERS += \
 	ImageResponseTransformer.h \
@@ -43,5 +46,8 @@ HEADERS += \
 	Settings.h \
 	SubsonicAdapter.h \
 	Track.h \
-	UrlBuilder.h
+	UrlBuilder.h \
+    MetadataController.h \
+    AudioBuffer.h \
+    PlayerController.h
 

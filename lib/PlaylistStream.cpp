@@ -5,6 +5,7 @@
 #include "PlaylistNode.h"
 #include "Track.h"
 #include "SenderInjector.h"
+#include "MetadataController.h"
 
 PlaylistStream::PlaylistStream(Playlist &playlist)
 	: m_readBuffer(&m_array)

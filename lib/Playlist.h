@@ -6,6 +6,7 @@
 
 class Track;
 class PlaylistNode;
+class MetadataController;
 
 class Playlist : public QObject
 {

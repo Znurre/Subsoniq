@@ -12,41 +12,16 @@
 
 #include "Playlist.h"
 #include "PlaylistStream.h"
+#include "PlayerController.h"
 
 class Track;
-
-class PlayerController : public QObject
-{
-	Q_OBJECT
-
-	public:
-		void play()
-		{
-			emit playRequested();
-		}
-
-		void pause()
-		{
-			emit pauseRequested();
-		}
-
-		void setMedia(const QMediaContent &media, QIODevice *stream)
-		{
-			emit setMediaRequested(media, stream);
-		}
-
-	signals:
-		void playRequested();
-		void pauseRequested();
-		void setMediaRequested(const QMediaContent &media, QIODevice *stream);
-};
 
 class Player : public QThread
 {
 	Q_OBJECT
 
 	public:
-		Player(Playlist &playlist);
+		Player(Playlist &playlist, MetadataController &metadata);
 		~Player();
 
 	public slots:
@@ -60,6 +35,8 @@ class Player : public QThread
 		void onStateChanged(QMediaPlayer::State state);
 
 		Playlist &m_playlist;
+		MetadataController &m_metadata;
+
 		PlayerController m_controller;
 
 	signals:

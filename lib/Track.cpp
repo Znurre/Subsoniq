@@ -34,6 +34,13 @@ QString Track::coverArt() const
 		.toString();
 }
 
+int Track::duration() const
+{
+	return m_object
+		.value("duration")
+		.toInt();
+}
+
 int Track::size() const
 {
 	return m_object

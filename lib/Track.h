@@ -17,6 +17,7 @@ class Track : public QObject
 		QString title() const;
 		QString coverArt() const;
 
+		int duration() const;
 		int size() const;
 
 		operator QString() const;

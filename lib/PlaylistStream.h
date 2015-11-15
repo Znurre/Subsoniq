@@ -8,37 +8,11 @@
 #include <QMutex>
 
 #include "SubsonicAdapter.h"
+#include "AudioBuffer.h"
 
 class Playlist;
 class PlaylistNode;
-
-class AudioBuffer : public QBuffer
-{
-	Q_OBJECT
-
-	public:
-		AudioBuffer(QByteArray *buffer)
-			: QBuffer(buffer)
-		{
-
-		}
-
-	private:
-		qint64 readData(char *data, qint64 maxlen) override
-		{
-			const qint64 size = QBuffer::readData(data, maxlen);
-
-			if (size < maxlen)
-			{
-				emit bufferUnderrun();
-			}
-
-			return size;
-		}
-
-	signals:
-		void bufferUnderrun();
-};
+class MetadataController;
 
 class PlaylistStream : public QIODevice
 {
@@ -53,15 +27,17 @@ class PlaylistStream : public QIODevice
 	public:
 		PlaylistStream(Playlist &playlist);
 
-		qint64 bytesAvailable() const override;
-		qint64 pos() const override;
-
 		void queue(PlaylistNode *node);
 		void requestNext();
 
 	private:
 		bool isSequential() const override;
 		bool atEnd() const override;
+
+		qint64 bytesAvailable() const override;
+		qint64 pos() const override;
+		qint64 readData(char *data, qint64 maxlen) override;
+		qint64 writeData(const char *data, qint64 len) override;
 
 		void onBufferUnderrun();
 		void onReadyRead(QNetworkReply *reply);
@@ -77,11 +53,9 @@ class PlaylistStream : public QIODevice
 		AudioBuffer m_writeBuffer;
 
 		Playlist &m_playlist;
+
 		SubsonicAdapter m_adapter;
 		Status m_status;
-
-		qint64 readData(char *data, qint64 maxlen) override;
-		qint64 writeData(const char *data, qint64 len) override;
 };
 
 #endif // PLAYLISTSTREAM_H

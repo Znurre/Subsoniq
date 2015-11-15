@@ -8,7 +8,7 @@
 #include "Track.h"
 
 MainWindow::MainWindow()
-	: m_player(m_playlist)
+	: m_player(m_playlist, m_metadata)
 {
 	CollectionBrowserWidget *collectionBrowser = new CollectionBrowserWidget();
 	PlaylistWidget *playlist = new PlaylistWidget(m_playlist);

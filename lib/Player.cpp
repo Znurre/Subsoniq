@@ -2,8 +2,9 @@
 #include "PlaylistNode.h"
 #include "Track.h"
 
-Player::Player(Playlist &playlist)
+Player::Player(Playlist &playlist, MetadataController &metadata)
 	: m_playlist(playlist)
+	, m_metadata(metadata)
 {
 	start();
 }

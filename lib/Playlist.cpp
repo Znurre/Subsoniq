@@ -1,5 +1,6 @@
 #include "Playlist.h"
 #include "PlaylistNode.h"
+#include "MetadataController.h"
 
 Playlist::Playlist()
 	: m_end(nullptr)
