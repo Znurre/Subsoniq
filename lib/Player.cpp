@@ -2,7 +2,6 @@
 #include "PlaylistNode.h"
 #include "Track.h"
 #include "MetadataController.h"
-#include "MediaPlayer.h"
 
 Player::Player(Playlist &playlist, MetadataController &metadata)
 	: m_playlist(playlist)
@@ -28,9 +27,14 @@ void Player::play(PlaylistNode *node)
 	}
 }
 
-void Player::playPause()
+void Player::resume()
 {
-	m_controller.playPause();
+	m_controller.play();
+}
+
+void Player::pause()
+{
+	m_controller.pause();
 }
 
 void Player::previous()
@@ -59,7 +63,7 @@ void Player::next()
 
 void Player::run()
 {
-	MediaPlayer player(nullptr, QMediaPlayer::StreamPlayback);
+	QMediaPlayer player(nullptr, QMediaPlayer::StreamPlayback);
 
 	connect(&player, (void (QMediaPlayer::*)())&QMediaPlayer::metaDataChanged, &m_playlist, &Playlist::execute);
 	connect(&player, &QMediaPlayer::stateChanged, &m_playlist, &Playlist::execute);
@@ -67,20 +71,9 @@ void Player::run()
 	connect(&player, &QMediaPlayer::stateChanged, &m_metadata, &MetadataController::setState);
 	connect(&player, &QMediaPlayer::positionChanged, &m_metadata, &MetadataController::setPosition);
 
-	connect(&m_controller, &PlayerController::setMediaRequested, &player, &MediaPlayer::setMedia);
-	connect(&m_controller, &PlayerController::playRequested, &player, &MediaPlayer::play);
-	connect(&m_controller, &PlayerController::playPauseRequested, &player, &MediaPlayer::playPause);
+	connect(&m_controller, &PlayerController::setMediaRequested, &player, &QMediaPlayer::setMedia);
+	connect(&m_controller, &PlayerController::playRequested, &player, &QMediaPlayer::play);
+	connect(&m_controller, &PlayerController::pauseRequested, &player, &QMediaPlayer::pause);
 
 	exec();
-}
-
-void Player::onStateChanged(QMediaPlayer::State state)
-{
-	qDebug() << state;
-
-//	if (state == QMediaPlayer::StoppedState)
-//	{
-//		m_playlist.prepare(nullptr);
-//		m_playlist.execute();
-//	}
 }

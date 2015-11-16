@@ -30,7 +30,7 @@ SOURCES += src/sailfish.cpp \
     src/CoverArtImageProvider.cpp \
     src/ImageResponseObject.cpp \
     src/ICollectionNodeProxy.cpp \
-    src/Utility.cpp
+    src/MediaControlsViewModel.cpp
 
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
@@ -71,7 +71,7 @@ HEADERS += \
     src/CoverArtImageProvider.h \
     src/ImageResponseObject.h \
     src/ICollectionNodeProxy.h \
-    src/Utility.h
+    src/MediaControlsViewModel.h
 
 LIBS += -L$$OUT_PWD/../lib/ -lsubsoniq
 

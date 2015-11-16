@@ -9,6 +9,14 @@ DockedPanel
 	contentHeight: height
 	open: main.metadata.state > 0
 
+	MediaControlsViewModel
+	{
+		id: model
+
+		metadata: main.metadata
+		player: main.player
+	}
+
 	Column
 	{
 		id: column
@@ -18,8 +26,6 @@ DockedPanel
 
 		Slider
 		{
-			property var author: main.metadata.artist
-			property var title: main.metadata.title
 			property var duration: main.metadata.duration
 			property var position: main.metadata.position
 
@@ -28,7 +34,7 @@ DockedPanel
 			value: position
 			valueText: Format.formatDuration(position, Format.DurationShort)
 
-			label: Utility.formatTrack(author, title)
+			label: model.displayTitle
 
 			minimumValue: 0
 			maximumValue: duration
@@ -60,14 +66,12 @@ DockedPanel
 			{
 				icon
 				{
-					source: main.metadata.state == 1
-						? "image://theme/icon-m-pause"
-						: "image://theme/icon-m-play"
+					source: model.playPauseIcon
 				}
 
 				id: pauseButton
 				width: parent.width / 3
-				onClicked: main.player.playPause()
+				onClicked: model.playPause()
 			}
 
 			IconButton

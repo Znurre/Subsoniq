@@ -26,13 +26,13 @@ class Player : public QThread
 
 	public slots:
 		void play(PlaylistNode *node);
-		void playPause();
+		void resume();
+		void pause();
 		void previous();
 		void next();
 
 	private:
 		void run() override;
-		void onStateChanged(QMediaPlayer::State state);
 
 		Playlist &m_playlist;
 		MetadataController &m_metadata;

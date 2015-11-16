@@ -36,20 +36,21 @@
 #include <sailfishapp.h>
 
 #include "SettingsPageViewModel.h"
+#include "MediaControlsViewModel.h"
+#include "MainViewModel.h"
 
 #include "CollectionModel.h"
 #include "CoverArtImageProvider.h"
-#include "MainViewModel.h"
 #include "Track.h"
 #include "MetadataController.h"
 #include "ICollectionNode.h"
 #include "ICollectionNodeProxy.h"
-#include "Utility.h"
 
 int main(int argc, char *argv[])
 {
 	qmlRegisterType<SettingsPageViewModel>("harbour.subsoniq", 1, 0, "SettingsPageViewModel");
 	qmlRegisterType<MainViewModel>("harbour.subsoniq", 1, 0, "MainViewModel");
+	qmlRegisterType<MediaControlsViewModel>("harbour.subsoniq", 1, 0, "MediaControlsViewModel");
 
 	qmlRegisterType<CollectionModel>("harbour.subsoniq", 1, 0, "CollectionModel");
 //	qmlRegisterType<MetadataController>("harbour.subsoniq", 1, 0, "MetadataController");
@@ -59,8 +60,6 @@ int main(int argc, char *argv[])
 	qmlRegisterType<Playlist>();
 	qmlRegisterType<ICollectionNode>();
 	qmlRegisterType<ICollectionNodeProxy>();
-
-	qmlRegisterSingletonType<Utility>("harbour.subsoniq", 1, 0, "Utility", &Utility::qmlInstance);
 
 	// SailfishApp::main() will display "qml/template.qml", if you need more
 	// control over initialization, you can use:
