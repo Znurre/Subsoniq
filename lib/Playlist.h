@@ -50,6 +50,7 @@ class Playlist : public QObject
 
 		void add(Track *track);
 		void remove(PlaylistNode *node);
+		void clear();
 
 		void prepare(const PendingPlaylistNode &pending);
 		void execute();
@@ -64,7 +65,6 @@ class Playlist : public QObject
 		PlaylistNode *m_current;
 
 		PendingPlaylistNode m_pending;
-
 		MetadataController &m_metadata;
 
 		QList<PlaylistNode *> m_playlist;

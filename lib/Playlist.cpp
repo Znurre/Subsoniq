@@ -85,3 +85,13 @@ int Playlist::count() const
 {
 	return m_playlist.count();
 }
+
+void Playlist::clear()
+{
+	qDeleteAll(m_playlist);
+
+	m_playlist.clear();
+
+	m_end = nullptr;
+	m_current = nullptr;
+}

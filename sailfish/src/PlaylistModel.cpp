@@ -109,6 +109,13 @@ void PlaylistModel::addAll(ICollectionNode *parent)
 	}
 }
 
+void PlaylistModel::clear()
+{
+	m_playlist.clear();
+
+	emit layoutChanged();
+}
+
 void PlaylistModel::onPlaylistChanged()
 {
 	emit layoutChanged();

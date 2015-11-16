@@ -32,6 +32,7 @@ class PlaylistModel : public QAbstractListModel
 	public slots:
 		void add(ICollectionNode *node);
 		void addAll(ICollectionNode *parent);
+		void clear();
 
 	private:
 		void onPlaylistChanged();

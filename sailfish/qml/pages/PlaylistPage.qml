@@ -15,6 +15,16 @@ Page
 			text: "The playlist is empty"
 		}
 
+		PullDownMenu
+		{
+			MenuItem
+			{
+				text: "Clear"
+				enabled: view.count > 0
+				onClicked: main.playlistModel.clear()
+			}
+		}
+
 		anchors
 		{
 			fill: parent
