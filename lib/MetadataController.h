@@ -34,6 +34,8 @@ class MetadataController : public QObject
 
 	private:
 		Track *m_current;
+		Track *m_pending;
+
 		PlaylistStream *m_stream;
 
 		int m_state;

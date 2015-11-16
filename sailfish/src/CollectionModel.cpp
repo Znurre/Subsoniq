@@ -44,21 +44,8 @@ void CollectionModel::response(const QJsonObject &envelope)
 	m_root = new CollectionRootNode(envelope);
 	m_status = Finished;
 
-	connect(m_root, &ICollectionNode::dataChanged, this, &CollectionModel::nodeExpanded);
-
 	emit layoutChanged();
 	emit statusChanged();
-}
-
-void CollectionModel::nodeExpanded(ICollectionNode *node)
-{
-//	const QModelIndex &index = createIndex(node->row(), 0, node);
-//	const QList<QPersistentModelIndex> indexes =
-//	{
-//		index
-//	};
-
-//	emit layoutChanged(indexes);
 }
 
 QModelIndex CollectionModel::index(int row, int column, const QModelIndex &parent) const

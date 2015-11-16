@@ -22,3 +22,8 @@ QObject *MainViewModel::player()
 {
 	return &m_player;
 }
+
+QObject *MainViewModel::metadata()
+{
+	return &m_metadata;
+}

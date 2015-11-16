@@ -52,20 +52,23 @@ void Playlist::execute()
 	PlaylistNode *node = m_pending.node();
 	PlaylistStream *stream = m_pending.stream();
 
-	Track *track = nullptr;
-
-	if (node)
+	if (m_current != node)
 	{
-		track = node->track();
+		Track *track = nullptr;
+
+		if (node)
+		{
+			track = node->track();
+		}
+
+		m_metadata.setCurrent(track, stream);
+
+		m_current = node;
+
+		qDebug() << "Current track changed";
+
+		emit playlistChanged();
 	}
-
-	m_metadata.setCurrent(track, stream);
-
-	m_current = node;
-
-	qDebug() << "Current track changed";
-
-	emit playlistChanged();
 }
 
 PlaylistNode *Playlist::current() const

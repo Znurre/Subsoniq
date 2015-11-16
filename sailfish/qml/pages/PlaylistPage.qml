@@ -18,7 +18,6 @@ Page
 		anchors
 		{
 			fill: parent
-			bottom: mediaControls.top
 		}
 
 		header: PageHeader

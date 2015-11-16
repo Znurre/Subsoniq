@@ -58,7 +58,6 @@ class CollectionModel : public QAbstractItemModel
 
 	private:
 		void response(const QJsonObject &envelope);
-		void nodeExpanded(ICollectionNode *node);
 
 		ICollectionNode *m_root;
 		SubsonicAdapter m_adapter;

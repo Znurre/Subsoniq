@@ -36,27 +36,22 @@
 #include <sailfishapp.h>
 
 #include "SettingsPageViewModel.h"
-#include "ArtistsPageViewModel.h"
 
-#include "ArtistsModel.h"
 #include "CollectionModel.h"
 #include "CoverArtImageProvider.h"
-#include "GroupModel.h"
 #include "MainViewModel.h"
 #include "Track.h"
 #include "MetadataController.h"
 #include "ICollectionNode.h"
 #include "ICollectionNodeProxy.h"
+#include "Utility.h"
 
 int main(int argc, char *argv[])
 {
 	qmlRegisterType<SettingsPageViewModel>("harbour.subsoniq", 1, 0, "SettingsPageViewModel");
-	qmlRegisterType<ArtistsPageViewModel>("harbour.subsoniq", 1, 0, "ArtistsPageViewModel");
 	qmlRegisterType<MainViewModel>("harbour.subsoniq", 1, 0, "MainViewModel");
 
 	qmlRegisterType<CollectionModel>("harbour.subsoniq", 1, 0, "CollectionModel");
-	qmlRegisterType<ArtistsModel>("harbour.subsoniq", 1, 0, "ArtistsModel");
-	qmlRegisterType<GroupModel>("harbour.subsoniq", 1, 0, "GroupModel");
 //	qmlRegisterType<MetadataController>("harbour.subsoniq", 1, 0, "MetadataController");
 
 	qmlRegisterType<Track>();
@@ -64,6 +59,8 @@ int main(int argc, char *argv[])
 	qmlRegisterType<Playlist>();
 	qmlRegisterType<ICollectionNode>();
 	qmlRegisterType<ICollectionNodeProxy>();
+
+	qmlRegisterSingletonType<Utility>("harbour.subsoniq", 1, 0, "Utility", &Utility::qmlInstance);
 
 	// SailfishApp::main() will display "qml/template.qml", if you need more
 	// control over initialization, you can use:

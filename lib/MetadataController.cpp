@@ -1,4 +1,5 @@
 #include "MetadataController.h"
+#include "Playlist.h"
 #include "Track.h"
 
 MetadataController::MetadataController()
@@ -48,12 +49,21 @@ int MetadataController::duration() const
 
 int MetadataController::position() const
 {
-	return (m_position - m_previous);
+	return (m_position - m_previous) / 1000;
 }
 
 void MetadataController::setCurrent(Track *current, PlaylistStream *stream)
 {
+	qDebug() << current;
+
 	m_current = current;
+
+	if (m_current == nullptr)
+	{
+		m_state = QMediaPlayer::StoppedState;
+
+		emit stateChanged();
+	}
 
 	if (m_stream != stream)
 	{
@@ -72,11 +82,16 @@ void MetadataController::setCurrent(Track *current, PlaylistStream *stream)
 
 void MetadataController::setState(QMediaPlayer::State state)
 {
-	m_state = state;
+	qDebug() << "State change requested" << state;
 
-	qDebug() << state;
+	if (state != QMediaPlayer::StoppedState)
+	{
+		m_state = state;
 
-	emit stateChanged();
+		qDebug() << "State set to" << state;
+
+		emit stateChanged();
+	}
 }
 
 void MetadataController::setPosition(int position)

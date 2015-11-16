@@ -5,9 +5,9 @@ void PlayerController::play()
 	emit playRequested();
 }
 
-void PlayerController::pause()
+void PlayerController::playPause()
 {
-	emit pauseRequested();
+	emit playPauseRequested();
 }
 
 void PlayerController::setMedia(const QMediaContent &media, QIODevice *stream)

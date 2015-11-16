@@ -16,6 +16,7 @@ class MainViewModel : public QObject
 	Q_PROPERTY(QObject *playlistModel READ playlistModel CONSTANT)
 	Q_PROPERTY(QObject *playlist READ playlist CONSTANT)
 	Q_PROPERTY(QObject *player READ player CONSTANT)
+	Q_PROPERTY(QObject *metadata READ metadata CONSTANT)
 
 	public:
 		MainViewModel();
@@ -23,6 +24,7 @@ class MainViewModel : public QObject
 		QObject *playlistModel();
 		QObject *playlist();
 		QObject *player();
+		QObject *metadata();
 
 	private:
 		MetadataController m_metadata;

@@ -25,13 +25,13 @@ DockedPanel
 
 			width: parent.width
 			handleVisible: false
-			value: duration
-			valueText: Format.formatDuration(duration, Format.DurationShort)
+			value: position
+			valueText: Format.formatDuration(position, Format.DurationShort)
 
-			label: "%1 - %2".arg(author, title)
+			label: Utility.formatTrack(author, title)
 
 			minimumValue: 0
-			maximumValue: 200
+			maximumValue: duration
 			enabled: false
 		}
 
@@ -60,9 +60,12 @@ DockedPanel
 			{
 				icon
 				{
-					source: "image://theme/icon-m-pause"
+					source: main.metadata.state == 1
+						? "image://theme/icon-m-pause"
+						: "image://theme/icon-m-play"
 				}
 
+				id: pauseButton
 				width: parent.width / 3
 				onClicked: main.player.playPause()
 			}

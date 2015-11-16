@@ -23,7 +23,8 @@ SOURCES += \
 	UrlBuilder.cpp \
     MetadataController.cpp \
     AudioBuffer.cpp \
-    PlayerController.cpp
+    PlayerController.cpp \
+    MediaPlayer.cpp
 
 HEADERS += \
 	ImageResponseTransformer.h \
@@ -49,5 +50,6 @@ HEADERS += \
 	UrlBuilder.h \
     MetadataController.h \
     AudioBuffer.h \
-    PlayerController.h
+    PlayerController.h \
+    MediaPlayer.h
 

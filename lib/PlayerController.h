@@ -11,12 +11,12 @@ class PlayerController : public QObject
 
 	public:
 		void play();
-		void pause();
+		void playPause();
 		void setMedia(const QMediaContent &media, QIODevice *stream);
 
 	signals:
 		void playRequested();
-		void pauseRequested();
+		void playPauseRequested();
 		void setMediaRequested(const QMediaContent &media, QIODevice *stream);
 };
 

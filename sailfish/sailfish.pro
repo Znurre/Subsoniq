@@ -18,13 +18,8 @@ QT += multimedia
 
 SOURCES += src/sailfish.cpp \
     src/SettingsPageViewModel.cpp \
-    src/ArtistsPageViewModel.cpp \
-    src/ArtistsModel.cpp \
     src/CollectionNodeBase.cpp \
     src/CollectionArtistNode.cpp \
-    src/GroupModel.cpp \
-    src/ArtistGroupNode.cpp \
-    src/ArtistGroupRow.cpp \
     src/ICollectionNodeResolver.cpp \
     src/CollectionAlbumNode.cpp \
     src/CollectionTrackNode.cpp \
@@ -34,7 +29,8 @@ SOURCES += src/sailfish.cpp \
     src/MainViewModel.cpp \
     src/CoverArtImageProvider.cpp \
     src/ImageResponseObject.cpp \
-    src/ICollectionNodeProxy.cpp
+    src/ICollectionNodeProxy.cpp \
+    src/Utility.cpp
 
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
@@ -61,15 +57,10 @@ TRANSLATIONS += translations/sailfish-de.ts
 
 HEADERS += \
     src/SettingsPageViewModel.h \
-    src/ArtistsPageViewModel.h \
-    src/ArtistsModel.h \
     src/CollectionNodeBase.h \
     src/CollectionArtistNode.h \
     src/ICollectionNode.h \
-    src/GroupModel.h \
     src/IArtistModelNode.h \
-    src/ArtistGroupNode.h \
-    src/ArtistGroupRow.h \
     src/ICollectionNodeResolver.h \
     src/CollectionAlbumNode.h \
     src/CollectionTrackNode.h \
@@ -79,7 +70,8 @@ HEADERS += \
     src/MainViewModel.h \
     src/CoverArtImageProvider.h \
     src/ImageResponseObject.h \
-    src/ICollectionNodeProxy.h
+    src/ICollectionNodeProxy.h \
+    src/Utility.h
 
 LIBS += -L$$OUT_PWD/../lib/ -lsubsoniq
 

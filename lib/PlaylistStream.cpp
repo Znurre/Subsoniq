@@ -27,17 +27,26 @@ void PlaylistStream::queue(PlaylistNode *node)
 
 	m_playlist.prepare(pending);
 
-	Track *track = node->track();
+	if (node)
+	{
+		Track *track = node->track();
 
-	QNetworkReply *reply = m_adapter.stream(*track);
+		QNetworkReply *reply = m_adapter.stream(*track);
 
-	ISenderInjector *readyRead = SenderInjector::create(reply, this, &PlaylistStream::onReadyRead);
-	ISenderInjector *finished = SenderInjector::create(reply, this, &PlaylistStream::onFinished);
+		ISenderInjector *readyRead = SenderInjector::create(reply, this, &PlaylistStream::onReadyRead);
+		ISenderInjector *finished = SenderInjector::create(reply, this, &PlaylistStream::onFinished);
 
-	connect(reply, &QNetworkReply::readyRead, readyRead, &ISenderInjector::invoke);
-	connect(reply, &QNetworkReply::finished, finished, &ISenderInjector::invoke);
+		connect(reply, &QNetworkReply::readyRead, readyRead, &ISenderInjector::invoke);
+		connect(reply, &QNetworkReply::finished, finished, &ISenderInjector::invoke);
 
-	m_status = Buffering;
+		m_status = Buffering;
+	}
+	else
+	{
+		m_status = End;
+
+		qDebug() << "This is the end";
+	}
 }
 
 void PlaylistStream::requestNext()
@@ -47,19 +56,19 @@ void PlaylistStream::requestNext()
 	PlaylistNode *current = m_playlist.current();
 	PlaylistNode *next = current->child();
 
-	if (!next)
-	{
-		qDebug() << "We've reached the end of the playlist";
+//	if (!next)
+//	{
+//		qDebug() << "We've reached the end of the playlist";
 
-		static const PendingPlaylistNode pending;
+//		static const PendingPlaylistNode pending;
 
-		m_playlist.prepare(pending);
-		m_playlist.execute();
-	}
-	else
-	{
+//		m_playlist.prepare(pending);
+//		m_playlist.execute();
+//	}
+//	else
+//	{
 		queue(next);
-	}
+//	}
 }
 
 bool PlaylistStream::isSequential() const
@@ -84,7 +93,7 @@ void PlaylistStream::onBufferUnderrun()
 
 qint64 PlaylistStream::bytesAvailable() const
 {
-	while (atEnd())
+	while (atEnd() && m_status != End)
 	{
 		const QMutexLocker waitLock(&m_waitMutex);
 

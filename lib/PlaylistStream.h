@@ -21,7 +21,8 @@ class PlaylistStream : public QIODevice
 	enum Status
 	{
 		Idle,
-		Buffering
+		Buffering,
+		End
 	};
 
 	public:
