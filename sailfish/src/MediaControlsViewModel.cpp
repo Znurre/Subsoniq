@@ -32,6 +32,10 @@ void MediaControlsViewModel::setMetadata(MetadataController *metadata)
 {
 	m_metadata = metadata;
 
+	connect(m_metadata, &MetadataController::artistChanged, this, &MediaControlsViewModel::displayTitleChanged);
+	connect(m_metadata, &MetadataController::titleChanged, this, &MediaControlsViewModel::displayTitleChanged);
+	connect(m_metadata, &MetadataController::stateChanged, this, &MediaControlsViewModel::playPauseIconChanged);
+
 	emit metadataChanged();
 	emit displayTitleChanged();
 	emit playPauseIconChanged();

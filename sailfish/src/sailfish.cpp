@@ -56,8 +56,10 @@ int main(int argc, char *argv[])
 //	qmlRegisterType<MetadataController>("harbour.subsoniq", 1, 0, "MetadataController");
 
 	qmlRegisterType<Track>();
+	qmlRegisterType<Player>();
 	qmlRegisterType<PlaylistNode>();
 	qmlRegisterType<Playlist>();
+	qmlRegisterType<MetadataController>();
 	qmlRegisterType<ICollectionNode>();
 	qmlRegisterType<ICollectionNodeProxy>();
 

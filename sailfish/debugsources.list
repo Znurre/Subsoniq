@@ -4,7 +4,7 @@
 /usr/src/debug/moc_MainViewModel.cpp
 /usr/src/debug/moc_CollectionTrackNode.cpp
 /usr/src/debug/moc_CollectionModel.cpp
-/usr/src/debug/moc_Utility.cpp
+/usr/src/debug/moc_MediaControlsViewModel.cpp
 /usr/src/debug/moc_ICollectionNode.cpp
 /usr/src/debug/moc_CollectionNodeBase.cpp
 /usr/src/debug/moc_SettingsPageViewModel.cpp
