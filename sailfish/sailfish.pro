@@ -34,7 +34,6 @@ SOURCES += src/sailfish.cpp \
     src/MainViewModel.cpp \
     src/CoverArtImageProvider.cpp \
     src/ImageResponseObject.cpp \
-    src/MetadataController.cpp \
     src/ICollectionNodeProxy.cpp
 
 OTHER_FILES += \
@@ -80,7 +79,6 @@ HEADERS += \
     src/MainViewModel.h \
     src/CoverArtImageProvider.h \
     src/ImageResponseObject.h \
-    src/MetadataController.h \
     src/ICollectionNodeProxy.h
 
 LIBS += -L$$OUT_PWD/../lib/ -lsubsoniq

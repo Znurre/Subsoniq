@@ -5,6 +5,7 @@
 #include <QObject>
 
 class Track;
+class PlaylistStream;
 
 class MetadataController : public QObject
 {
@@ -27,12 +28,13 @@ class MetadataController : public QObject
 		int duration() const;
 		int position() const;
 
-		void setCurrent(Track *current, bool discardPosition);
-		void setStatus(QMediaPlayer::State state);
+		void setCurrent(Track *current, PlaylistStream *stream);
+		void setState(QMediaPlayer::State state);
 		void setPosition(int position);
 
 	private:
 		Track *m_current;
+		PlaylistStream *m_stream;
 
 		int m_state;
 		int m_position;

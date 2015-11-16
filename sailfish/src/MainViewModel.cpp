@@ -2,7 +2,8 @@
 #include "ICollectionNode.h"
 
 MainViewModel::MainViewModel()
-	: m_playlistModel(m_playlist)
+	: m_playlist(m_metadata)
+	, m_playlistModel(m_playlist)
 	, m_player(m_playlist, m_metadata)
 {
 }

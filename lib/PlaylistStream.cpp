@@ -23,9 +23,11 @@ PlaylistStream::PlaylistStream(Playlist &playlist)
 
 void PlaylistStream::queue(PlaylistNode *node)
 {
-	m_playlist.prepare(node);
+	PendingPlaylistNode pending(this, node);
 
-	const Track *track = node->track();
+	m_playlist.prepare(pending);
+
+	Track *track = node->track();
 
 	QNetworkReply *reply = m_adapter.stream(*track);
 
@@ -49,7 +51,9 @@ void PlaylistStream::requestNext()
 	{
 		qDebug() << "We've reached the end of the playlist";
 
-		m_playlist.prepare(nullptr);
+		static const PendingPlaylistNode pending;
+
+		m_playlist.prepare(pending);
 		m_playlist.execute();
 	}
 	else

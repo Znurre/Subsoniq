@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
 	qmlRegisterType<CollectionModel>("harbour.subsoniq", 1, 0, "CollectionModel");
 	qmlRegisterType<ArtistsModel>("harbour.subsoniq", 1, 0, "ArtistsModel");
 	qmlRegisterType<GroupModel>("harbour.subsoniq", 1, 0, "GroupModel");
-	qmlRegisterType<MetadataController>("harbour.subsoniq", 1, 0, "MetadataController");
+//	qmlRegisterType<MetadataController>("harbour.subsoniq", 1, 0, "MetadataController");
 
 	qmlRegisterType<Track>();
 	qmlRegisterType<PlaylistNode>();

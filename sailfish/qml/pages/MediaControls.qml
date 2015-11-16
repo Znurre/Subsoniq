@@ -5,20 +5,9 @@ import harbour.subsoniq 1.0
 
 DockedPanel
 {
-	property alias author: slider.author
-	property alias title: slider.title
-	property alias duration: slider.duration
-	property alias position: slider.position
-
 	height: column.height + Theme.paddingLarge * 2
 	contentHeight: height
-	open: metadataController.isPlaying
-
-	MetadataController
-	{
-		id: metadataController
-		playlist: main.playlist
-	}
+	open: main.metadata.state > 0
 
 	Column
 	{
@@ -29,22 +18,21 @@ DockedPanel
 
 		Slider
 		{
-			id: slider
-
-			property string author
-			property string title
-			property int duration
-			property int position
+			property var author: main.metadata.artist
+			property var title: main.metadata.title
+			property var duration: main.metadata.duration
+			property var position: main.metadata.position
 
 			width: parent.width
 			handleVisible: false
-			valueText: Format.formatDuration(slider.value, Format.DurationShort)
+			value: duration
+			valueText: Format.formatDuration(duration, Format.DurationShort)
 
-			label: metadataController.formattedTitle
+			label: "%1 - %2".arg(author, title)
 
 			minimumValue: 0
 			maximumValue: 200
-			enabled: true
+			enabled: false
 		}
 
 		Row

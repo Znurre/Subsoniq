@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "PlaylistNode.h"
 #include "Track.h"
+#include "MetadataController.h"
 
 Player::Player(Playlist &playlist, MetadataController &metadata)
 	: m_playlist(playlist)
@@ -60,7 +61,9 @@ void Player::run()
 	QMediaPlayer player(nullptr, QMediaPlayer::StreamPlayback);
 
 	connect(&player, (void (QMediaPlayer::*)())&QMediaPlayer::metaDataChanged, &m_playlist, &Playlist::execute);
-	connect(&player, &QMediaPlayer::stateChanged, this, &Player::onStateChanged);
+
+	connect(&player, &QMediaPlayer::stateChanged, &m_metadata, &MetadataController::setState);
+	connect(&player, &QMediaPlayer::positionChanged, &m_metadata, &MetadataController::setPosition);
 
 	connect(&m_controller, &PlayerController::setMediaRequested, &player, &QMediaPlayer::setMedia);
 	connect(&m_controller, &PlayerController::playRequested, &player, &QMediaPlayer::play);

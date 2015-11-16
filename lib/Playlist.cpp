@@ -2,10 +2,10 @@
 #include "PlaylistNode.h"
 #include "MetadataController.h"
 
-Playlist::Playlist()
+Playlist::Playlist(MetadataController &metadata)
 	: m_end(nullptr)
 	, m_current(nullptr)
-	, m_pending(nullptr)
+	, m_metadata(metadata)
 {
 
 }
@@ -42,14 +42,26 @@ void Playlist::remove(PlaylistNode *node)
 	emit playlistChanged();
 }
 
-void Playlist::prepare(PlaylistNode *node)
+void Playlist::prepare(const PendingPlaylistNode &pending)
 {
-	m_pending = node;
+	m_pending = pending;
 }
 
 void Playlist::execute()
 {
-	m_current = m_pending;
+	PlaylistNode *node = m_pending.node();
+	PlaylistStream *stream = m_pending.stream();
+
+	Track *track = nullptr;
+
+	if (node)
+	{
+		track = node->track();
+	}
+
+	m_metadata.setCurrent(track, stream);
+
+	m_current = node;
 
 	qDebug() << "Current track changed";
 

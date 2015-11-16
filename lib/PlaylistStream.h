@@ -53,7 +53,6 @@ class PlaylistStream : public QIODevice
 		AudioBuffer m_writeBuffer;
 
 		Playlist &m_playlist;
-
 		SubsonicAdapter m_adapter;
 		Status m_status;
 };
