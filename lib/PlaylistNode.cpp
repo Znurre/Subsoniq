@@ -1,6 +1,14 @@
 #include "PlaylistNode.h"
 #include "Track.h"
 
+PlaylistNode::PlaylistNode()
+	: m_track(nullptr)
+	, m_parent(nullptr)
+	, m_child(nullptr)
+{
+
+}
+
 PlaylistNode::PlaylistNode(Track *track, PlaylistNode *parent)
 	: m_track(track)
 	, m_parent(parent)
@@ -27,4 +35,11 @@ PlaylistNode *PlaylistNode::parent() const
 PlaylistNode *PlaylistNode::child() const
 {
 	return m_child;
+}
+
+PlaylistNode *PlaylistNode::invalid()
+{
+	static PlaylistNode fallback;
+
+	return &fallback;
 }

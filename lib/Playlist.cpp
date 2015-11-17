@@ -50,30 +50,23 @@ void Playlist::prepare(const PendingPlaylistNode &pending)
 void Playlist::execute()
 {
 	PlaylistNode *node = m_pending.node();
+	PlaylistNode *safe = node ?: PlaylistNode::invalid();
+
+	m_current = node;
+
+	Track *track = safe->track();
 	PlaylistStream *stream = m_pending.stream();
 
-	if (m_current != node)
-	{
-		Track *track = nullptr;
+	m_metadata.setCurrent(track, stream);
 
-		if (node)
-		{
-			track = node->track();
-		}
+	qDebug() << "Current track changed";
 
-		m_metadata.setCurrent(track, stream);
-
-		m_current = node;
-
-		qDebug() << "Current track changed";
-
-		emit playlistChanged();
-	}
+	emit playlistChanged();
 }
 
 PlaylistNode *Playlist::current() const
 {
-	return m_current;
+	return m_current ?: PlaylistNode::invalid();
 }
 
 PlaylistNode *Playlist::nodeAt(int index) const

@@ -22,7 +22,11 @@ class PlaylistNode : public QObject
 		PlaylistNode *parent() const;
 		PlaylistNode *child() const;
 
+		static PlaylistNode *invalid();
+
 	private:
+		PlaylistNode();
+
 		Track *m_track;
 
 		PlaylistNode *m_parent;
