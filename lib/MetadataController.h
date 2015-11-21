@@ -4,8 +4,7 @@
 #include <QMediaPlayer>
 #include <QObject>
 
-#include "Settings.h"
-#include "SubsonicAdapter.h"
+#include "Scrobbler.h"
 
 class Track;
 class PlaylistStream;
@@ -41,8 +40,7 @@ class MetadataController : public QObject
 
 		PlaylistStream *m_stream;
 
-		Settings m_settings;
-		SubsonicAdapter m_adapter;
+		Scrobbler m_scrobbler;
 
 		int m_state;
 		int m_position;

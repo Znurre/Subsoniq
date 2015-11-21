@@ -42,7 +42,7 @@ class SubsonicAdapter : public QObject
 			m_requestFactory
 				.request("getCoverArt.view"
 					, api::id = id
-					, api::size = "64")
+					, api::size = QStringLiteral("64"))
 				.callback(instance, callback);
 		}
 
@@ -52,15 +52,16 @@ class SubsonicAdapter : public QObject
 				.request("stream.view"
 					, api::id = id
 					, api::maxBitRate = m_settings.bitRate()
-					, api::format = "ogg")
+					, api::format = QStringLiteral("ogg"))
 				.stream();
 		}
 
-		void scrobble(const QString &id)
+		void scrobble(const QString &id, bool submission)
 		{
 			m_requestFactory
 				.request("scrobble.view"
-					, api::id = id)
+					, api::id = id
+					, api::submission = submission)
 				.stream();
 		}
 

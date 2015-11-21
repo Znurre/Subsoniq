@@ -60,10 +60,7 @@ void MetadataController::setCurrent(Track *current, PlaylistStream *stream)
 
 	if (m_current)
 	{
-		if (m_settings.scrobble())
-		{
-			m_adapter.scrobble(*current);
-		}
+		m_scrobbler.nowPlaying(m_current);
 	}
 	else
 	{

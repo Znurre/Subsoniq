@@ -19,4 +19,9 @@ namespace api
 
 		return KeyValue(m_name, string);
 	}
+
+	KeyValue Key::operator =(bool value) const
+	{
+		return KeyValue(m_name, value ? "true" : "false");
+	}
 }
