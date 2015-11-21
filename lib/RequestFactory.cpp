@@ -1,8 +1,9 @@
 #include "RequestFactory.h"
 
-RequestFactory::RequestFactory(QObject *parent)
+RequestFactory::RequestFactory(QObject *parent, Settings &settings)
 	: m_network(parent)
-	, m_urlBuilder(m_settings)
+	, m_settings(settings)
+	, m_urlBuilder(settings)
 {
 	connect(&m_network, &QNetworkAccessManager::sslErrors, this, &RequestFactory::sslErrors);
 }

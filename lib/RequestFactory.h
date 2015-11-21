@@ -16,7 +16,7 @@ class Settings;
 class RequestFactory : public QObject
 {
 	public:
-		RequestFactory(QObject *parent);
+		RequestFactory(QObject *parent, Settings &settings);
 
 		template<class ...T>
 		Request request(const QString &method, T... arguments)
@@ -47,7 +47,7 @@ class RequestFactory : public QObject
 
 		QNetworkAccessManager m_network;
 
-		Settings m_settings;
+		Settings &m_settings;
 		UrlBuilder m_urlBuilder;
 };
 

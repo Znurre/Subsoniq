@@ -14,7 +14,7 @@ class SubsonicAdapter : public QObject
 
 	public:
 		SubsonicAdapter(QObject *parent = 0)
-			: m_requestFactory(parent)
+			: m_requestFactory(parent, m_settings)
 		{
 
 		}
@@ -51,12 +51,13 @@ class SubsonicAdapter : public QObject
 			return m_requestFactory
 				.request("stream.view"
 					, api::id = id
-					, api::format = "ogg"
-					, api::maxBitRate = "320")
+					, api::maxBitRate = m_settings.bitRate()
+					, api::format = "ogg")
 				.stream();
 		}
 
 	private:
+		Settings m_settings;
 		RequestFactory m_requestFactory;
 };
 

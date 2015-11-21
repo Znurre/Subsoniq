@@ -11,6 +11,7 @@ namespace api
 			Key(const char *name);
 
 			KeyValue operator =(const QString &value) const;
+			KeyValue operator =(int value) const;
 
 		private:
 			QString m_name;

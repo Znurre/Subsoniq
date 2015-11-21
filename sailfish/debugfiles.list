@@ -2,7 +2,7 @@
 %dir /usr/lib/debug/usr
 %dir /usr/lib/debug/usr/bin
 %dir /usr/lib/debug/.build-id
-%dir /usr/lib/debug/.build-id/24
+%dir /usr/lib/debug/.build-id/6c
 /usr/lib/debug/usr/bin/subsoniq.debug
-/usr/lib/debug/.build-id/24/7bd2c6f9ab91cac0d90741bc628963e5523200
-/usr/lib/debug/.build-id/24/7bd2c6f9ab91cac0d90741bc628963e5523200.debug
+/usr/lib/debug/.build-id/6c/060459398ad529768065c83ab7cf506408fb53
+/usr/lib/debug/.build-id/6c/060459398ad529768065c83ab7cf506408fb53.debug

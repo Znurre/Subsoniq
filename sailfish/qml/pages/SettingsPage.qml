@@ -27,6 +27,7 @@ Dialog
 			anchors
 			{
 				top: header.bottom
+				bottom: parent.bottom
 			}
 
 			width: parent.width
@@ -78,6 +79,25 @@ Dialog
 					target: model
 					property: "password"
 					value: password.text
+				}
+			}
+
+			Slider
+			{
+				id: bitRate
+				width: parent.width
+				maximumValue: 320
+				minimumValue: 128
+				value: model.bitRate
+				valueText: value
+				stepSize: 64
+				label: "Bitrate" + " kbps"
+
+				Binding
+				{
+					target: model
+					property: "bitRate"
+					value: bitRate.value
 				}
 			}
 		}

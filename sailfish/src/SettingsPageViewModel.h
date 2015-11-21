@@ -12,6 +12,7 @@ class SettingsPageViewModel : public QObject
 	Q_PROPERTY(QString serverUrl READ serverUrl WRITE setServerUrl NOTIFY serverUrlChanged)
 	Q_PROPERTY(QString username READ username WRITE setUsername NOTIFY usernameChanged)
 	Q_PROPERTY(QString password READ password WRITE setPassword NOTIFY passwordChanged)
+	Q_PROPERTY(int bitRate READ bitRate WRITE setBitRate NOTIFY bitRateChanged)
 
 	public:
 		SettingsPageViewModel();
@@ -25,6 +26,9 @@ class SettingsPageViewModel : public QObject
 		QString password() const;
 		void setPassword(const QString &password);
 
+		int bitRate() const;
+		void setBitRate(int bitRate);
+
 	private:
 		Settings m_settings;
 
@@ -32,6 +36,7 @@ class SettingsPageViewModel : public QObject
 		void serverUrlChanged();
 		void usernameChanged();
 		void passwordChanged();
+		void bitRateChanged();
 };
 
 #endif // SETTINGSPAGEVIEWMODEL_H

@@ -39,3 +39,15 @@ void SettingsPageViewModel::setPassword(const QString &password)
 
 	emit passwordChanged();
 }
+
+int SettingsPageViewModel::bitRate() const
+{
+	return m_settings.bitRate();
+}
+
+void SettingsPageViewModel::setBitRate(int bitRate)
+{
+	m_settings.setBitRate(bitRate);
+
+	emit bitRateChanged();
+}

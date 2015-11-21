@@ -32,3 +32,14 @@ void Settings::setPassword(const QString &password)
 	m_subject.setValue(Password, password);
 	m_subject.sync();
 }
+
+int Settings::bitRate() const
+{
+	return value<int>(BitRate, 320);
+}
+
+void Settings::setBitRate(int bitRate)
+{
+	m_subject.setValue(BitRate, bitRate);
+	m_subject.sync();
+}

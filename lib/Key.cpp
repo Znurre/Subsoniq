@@ -13,4 +13,10 @@ namespace api
 		return KeyValue(m_name, value);
 	}
 
+	KeyValue Key::operator =(int value) const
+	{
+		const QString &string = QString::number(value);
+
+		return KeyValue(m_name, string);
+	}
 }

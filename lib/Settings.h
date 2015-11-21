@@ -9,6 +9,7 @@ class Settings
 	const QString ServerUrl = "ServerUrl";
 	const QString Username = "Username";
 	const QString Password = "Password";
+	const QString BitRate = "BitRate";
 
 	public:
 		QString serverUrl() const;
@@ -20,12 +21,15 @@ class Settings
 		QString password() const;
 		void setPassword(const QString &password);
 
+		int bitRate() const;
+		void setBitRate(int bitRate);
+
 	private:
 		template<class T>
-		T value(const QString &key) const
+		T value(const QString &key, const QVariant &defaultValue = QVariant()) const
 		{
 			return m_subject
-				.value(key)
+				.value(key, defaultValue)
 				.value<T>();
 		}
 
