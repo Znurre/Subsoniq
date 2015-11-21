@@ -89,9 +89,9 @@ Dialog
 				maximumValue: 320
 				minimumValue: 128
 				value: model.bitRate
-				valueText: value
+				valueText: value + " kbps"
 				stepSize: 64
-				label: "Bitrate" + " kbps"
+				label: "Bitrate"
 
 				Binding
 				{
