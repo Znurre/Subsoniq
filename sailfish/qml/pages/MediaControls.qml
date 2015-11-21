@@ -13,6 +13,9 @@ DockedPanel
 	{
 		id: model
 
+		pauseIcon: "image://theme/icon-m-pause"
+		playIcon: "image://theme/icon-m-play"
+
 		metadata: main.metadata
 		player: main.player
 	}

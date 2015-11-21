@@ -35,9 +35,35 @@ void MediaControlsViewModel::setMetadata(MetadataController *metadata)
 	connect(m_metadata, &MetadataController::artistChanged, this, &MediaControlsViewModel::displayTitleChanged);
 	connect(m_metadata, &MetadataController::titleChanged, this, &MediaControlsViewModel::displayTitleChanged);
 	connect(m_metadata, &MetadataController::stateChanged, this, &MediaControlsViewModel::playPauseIconChanged);
+	connect(m_metadata, &MetadataController::stateChanged, this, &MediaControlsViewModel::isPlayingChanged);
 
 	emit metadataChanged();
 	emit displayTitleChanged();
+	emit playPauseIconChanged();
+	emit isPlayingChanged();
+}
+
+QString MediaControlsViewModel::playIcon() const
+{
+	return m_playIcon;
+}
+
+void MediaControlsViewModel::setPlayIcon(const QString &playIcon)
+{
+	m_playIcon = playIcon;
+
+	emit playPauseIconChanged();
+}
+
+QString MediaControlsViewModel::pauseIcon() const
+{
+	return m_pauseIcon;
+}
+
+void MediaControlsViewModel::setPauseIcon(const QString &pauseIcon)
+{
+	m_pauseIcon = pauseIcon;
+
 	emit playPauseIconChanged();
 }
 
@@ -69,12 +95,12 @@ QString MediaControlsViewModel::playPauseIcon() const
 		{
 			case QMediaPlayer::PausedState:
 			{
-				return "image://theme/icon-m-play";
+				return m_playIcon;
 			}
 
 			case QMediaPlayer::PlayingState:
 			{
-				return "image://theme/icon-m-pause";
+				return m_pauseIcon;
 			}
 
 			default:
@@ -85,6 +111,16 @@ QString MediaControlsViewModel::playPauseIcon() const
 	}
 
 	return QString::null;
+}
+
+bool MediaControlsViewModel::isPlaying() const
+{
+	if (m_metadata)
+	{
+		return m_metadata->state() > QMediaPlayer::StoppedState;
+	}
+
+	return false;
 }
 
 void MediaControlsViewModel::playPause()

@@ -52,14 +52,17 @@ void Playlist::execute()
 	PlaylistNode *node = m_pending.node();
 	PlaylistNode *safe = node ?: PlaylistNode::invalid();
 
-	m_current = node;
+	if (safe != m_current)
+	{
+		m_current = node;
 
-	Track *track = safe->track();
-	PlaylistStream *stream = m_pending.stream();
+		Track *track = safe->track();
+		PlaylistStream *stream = m_pending.stream();
 
-	m_metadata.setCurrent(track, stream);
+		m_metadata.setCurrent(track, stream);
 
-	qDebug() << "Current track changed";
+		qDebug() << "Current track changed";
+	}
 
 	emit playlistChanged();
 }
