@@ -58,7 +58,14 @@ void MetadataController::setCurrent(Track *current, PlaylistStream *stream)
 
 	m_current = current;
 
-	if (m_current == nullptr)
+	if (m_current)
+	{
+		if (m_settings.scrobble())
+		{
+			m_adapter.scrobble(*current);
+		}
+	}
+	else
 	{
 		m_state = QMediaPlayer::StoppedState;
 

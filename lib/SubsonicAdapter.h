@@ -56,6 +56,14 @@ class SubsonicAdapter : public QObject
 				.stream();
 		}
 
+		void scrobble(const QString &id)
+		{
+			m_requestFactory
+				.request("scrobble.view"
+					, api::id = id)
+				.stream();
+		}
+
 	private:
 		Settings m_settings;
 		RequestFactory m_requestFactory;

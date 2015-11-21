@@ -4,6 +4,9 @@
 #include <QMediaPlayer>
 #include <QObject>
 
+#include "Settings.h"
+#include "SubsonicAdapter.h"
+
 class Track;
 class PlaylistStream;
 
@@ -37,6 +40,9 @@ class MetadataController : public QObject
 		Track *m_pending;
 
 		PlaylistStream *m_stream;
+
+		Settings m_settings;
+		SubsonicAdapter m_adapter;
 
 		int m_state;
 		int m_position;

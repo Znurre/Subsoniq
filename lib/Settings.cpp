@@ -43,3 +43,14 @@ void Settings::setBitRate(int bitRate)
 	m_subject.setValue(BitRate, bitRate);
 	m_subject.sync();
 }
+
+bool Settings::scrobble() const
+{
+	return value<bool>(Scrobble);
+}
+
+void Settings::setScrobble(bool scrobble)
+{
+	m_subject.setValue(Scrobble, scrobble);
+	m_subject.sync();
+}

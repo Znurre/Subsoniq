@@ -10,6 +10,7 @@ class Settings
 	const QString Username = "Username";
 	const QString Password = "Password";
 	const QString BitRate = "BitRate";
+	const QString Scrobble = "Scrobble";
 
 	public:
 		QString serverUrl() const;
@@ -23,6 +24,9 @@ class Settings
 
 		int bitRate() const;
 		void setBitRate(int bitRate);
+
+		bool scrobble() const;
+		void setScrobble(bool scrobble);
 
 	private:
 		template<class T>

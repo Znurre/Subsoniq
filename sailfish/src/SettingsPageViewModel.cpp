@@ -51,3 +51,15 @@ void SettingsPageViewModel::setBitRate(int bitRate)
 
 	emit bitRateChanged();
 }
+
+bool SettingsPageViewModel::scrobble() const
+{
+	return m_settings.scrobble();
+}
+
+void SettingsPageViewModel::setScrobble(bool scrobble)
+{
+	m_settings.setScrobble(scrobble);
+
+	emit scrobbleChanged();
+}

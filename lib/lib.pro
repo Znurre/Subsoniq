@@ -18,7 +18,6 @@ SOURCES += \
 	Request.cpp \
 	RequestFactory.cpp \
 	Settings.cpp \
-	SubsonicAdapter.cpp \
 	Track.cpp \
 	UrlBuilder.cpp \
     MetadataController.cpp \

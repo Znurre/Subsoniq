@@ -13,6 +13,7 @@ class SettingsPageViewModel : public QObject
 	Q_PROPERTY(QString username READ username WRITE setUsername NOTIFY usernameChanged)
 	Q_PROPERTY(QString password READ password WRITE setPassword NOTIFY passwordChanged)
 	Q_PROPERTY(int bitRate READ bitRate WRITE setBitRate NOTIFY bitRateChanged)
+	Q_PROPERTY(bool scrobble READ scrobble WRITE setScrobble NOTIFY scrobbleChanged)
 
 	public:
 		SettingsPageViewModel();
@@ -29,6 +30,9 @@ class SettingsPageViewModel : public QObject
 		int bitRate() const;
 		void setBitRate(int bitRate);
 
+		bool scrobble() const;
+		void setScrobble(bool scrobble);
+
 	private:
 		Settings m_settings;
 
@@ -37,6 +41,7 @@ class SettingsPageViewModel : public QObject
 		void usernameChanged();
 		void passwordChanged();
 		void bitRateChanged();
+		void scrobbleChanged();
 };
 
 #endif // SETTINGSPAGEVIEWMODEL_H

@@ -100,6 +100,21 @@ Dialog
 					value: bitRate.value
 				}
 			}
+
+			TextSwitch
+			{
+				id: scrobble
+				text: "Scrobble"
+				description: "Requires configuration on the Subsonic server"
+				checked: model.scrobble
+
+				Binding
+				{
+					target: model
+					property: "scrobble"
+					value: scrobble.checked
+				}
+			}
 		}
 	}
 }
