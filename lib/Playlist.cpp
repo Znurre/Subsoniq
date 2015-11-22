@@ -12,6 +12,8 @@ Playlist::Playlist(MetadataController &metadata)
 
 void Playlist::add(Track *track)
 {
+	const int index = count();
+
 	PlaylistNode *node = new PlaylistNode(track, m_end);
 
 	if (m_end)
@@ -22,11 +24,13 @@ void Playlist::add(Track *track)
 	m_end = node;
 	m_playlist << node;
 
-	emit playlistChanged();
+	emit nodeAppended(index);
 }
 
 void Playlist::remove(PlaylistNode *node)
 {
+	const int index = count();
+
 	if (m_end == node)
 	{
 		m_end = node->parent();
@@ -39,7 +43,7 @@ void Playlist::remove(PlaylistNode *node)
 
 	m_playlist.removeAll(node);
 
-	emit playlistChanged();
+	emit nodeRemoved(index);
 }
 
 void Playlist::prepare(const PendingPlaylistNode &pending)
@@ -49,6 +53,7 @@ void Playlist::prepare(const PendingPlaylistNode &pending)
 
 void Playlist::execute()
 {
+	PlaylistNode *current = m_current;
 	PlaylistNode *node = m_pending.node();
 	PlaylistNode *safe = node ?: PlaylistNode::invalid();
 
@@ -62,9 +67,10 @@ void Playlist::execute()
 		m_metadata.setCurrent(track, stream);
 
 		qDebug() << "Current track changed";
-	}
 
-	emit playlistChanged();
+		raiseNodeChanged(current);
+		raiseNodeChanged(node);
+	}
 }
 
 PlaylistNode *Playlist::current() const
@@ -80,6 +86,17 @@ PlaylistNode *Playlist::nodeAt(int index) const
 int Playlist::count() const
 {
 	return m_playlist.count();
+}
+
+void Playlist::raiseNodeChanged(PlaylistNode *node)
+{
+	for (int i = 0; i < m_playlist.count(); i++)
+	{
+		if (m_playlist[i] == node)
+		{
+			emit nodeChanged(i);
+		}
+	}
 }
 
 void Playlist::clear()

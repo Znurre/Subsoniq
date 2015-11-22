@@ -9,7 +9,10 @@
 PlaylistModel::PlaylistModel(Playlist &playlist)
 	: m_playlist(playlist)
 {
-	connect(&playlist, &Playlist::playlistChanged, this, &PlaylistModel::onPlaylistChanged);
+//	connect(&playlist, &Playlist::playlistChanged, this, &PlaylistModel::onPlaylistChanged);
+
+	connect(&playlist, &Playlist::nodeChanged, this, &PlaylistModel::onNodeChanged);
+	connect(&playlist, &Playlist::nodeAppended, this, &PlaylistModel::onNodeAppended);
 }
 
 int PlaylistModel::rowCount(const QModelIndex &parent) const
@@ -114,6 +117,20 @@ void PlaylistModel::clear()
 	m_playlist.clear();
 
 	emit layoutChanged();
+}
+
+void PlaylistModel::onNodeChanged(int nodeIndex)
+{
+	const QModelIndex &topLeft = index(nodeIndex, 0, NoParent);
+
+	emit dataChanged(topLeft, topLeft);
+}
+
+void PlaylistModel::onNodeAppended(int index)
+{
+	beginInsertRows(NoParent, index, index);
+
+	endInsertRows();
 }
 
 void PlaylistModel::onPlaylistChanged()

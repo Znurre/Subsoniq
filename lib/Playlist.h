@@ -61,6 +61,8 @@ class Playlist : public QObject
 		int count() const;
 
 	private:
+		void raiseNodeChanged(PlaylistNode *node);
+
 		PlaylistNode *m_end;
 		PlaylistNode *m_current;
 
@@ -70,7 +72,9 @@ class Playlist : public QObject
 		QList<PlaylistNode *> m_playlist;
 
 	signals:
-		void playlistChanged();
+		void nodeChanged(int index);
+		void nodeRemoved(int index);
+		void nodeAppended(int index);
 };
 
 #endif // PLAYLIST_H

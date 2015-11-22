@@ -20,6 +20,8 @@ class MetadataController : public QObject
 	Q_PROPERTY(int duration READ duration NOTIFY durationChanged)
 	Q_PROPERTY(int position READ position NOTIFY positionChanged)
 
+	const Track *EndOfPlaylist = nullptr;
+
 	public:
 		MetadataController();
 

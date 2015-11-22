@@ -11,6 +11,8 @@ class PlaylistModel : public QAbstractListModel
 {
 	Q_OBJECT
 
+	const QModelIndex NoParent;
+
 	public:
 		enum Roles
 		{
@@ -35,6 +37,8 @@ class PlaylistModel : public QAbstractListModel
 		void clear();
 
 	private:
+		void onNodeChanged(int nodeIndex);
+		void onNodeAppended(int index);
 		void onPlaylistChanged();
 
 		Playlist &m_playlist;

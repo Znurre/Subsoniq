@@ -58,11 +58,7 @@ void MetadataController::setCurrent(Track *current, PlaylistStream *stream)
 
 	m_current = current;
 
-	if (m_current)
-	{
-		m_scrobbler.nowPlaying(m_current);
-	}
-	else
+	if (m_current == EndOfPlaylist)
 	{
 		m_state = QMediaPlayer::StoppedState;
 
@@ -78,6 +74,8 @@ void MetadataController::setCurrent(Track *current, PlaylistStream *stream)
 	{
 		m_previous += m_position;
 	}
+
+	m_scrobbler.nowPlaying(m_current);
 
 	emit artistChanged();
 	emit titleChanged();
