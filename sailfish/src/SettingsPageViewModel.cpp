@@ -11,7 +11,9 @@ QString SettingsPageViewModel::serverUrl() const
 
 void SettingsPageViewModel::setServerUrl(const QString &serverUrl)
 {
-	m_settings.setServerUrl(serverUrl);
+	const QString &simplified = serverUrl.simplified();
+
+	m_settings.setServerUrl(simplified);
 
 	emit serverUrlChanged();
 }
