@@ -9,22 +9,9 @@
 #include "NodeHelper.h"
 
 CollectionModel::CollectionModel()
-	: m_root(nullptr)
-	, m_status(Loading)
+	: m_kask(&m_root)
 {
 
-}
-
-CollectionModel::~CollectionModel()
-{
-	qDebug() << "~CollectionModel()";
-
-	delete m_root;
-}
-
-int CollectionModel::status() const
-{
-	return m_status;
 }
 
 QHash<int, QByteArray> CollectionModel::roleNames() const
@@ -42,8 +29,7 @@ QHash<int, QByteArray> CollectionModel::roleNames() const
 
 void CollectionModel::response(const QJsonObject &envelope)
 {
-	m_root = new CollectionRootNode(envelope);
-	m_status = Finished;
+	Q_UNUSED(envelope);
 
 	emit layoutChanged();
 	emit statusChanged();
@@ -51,16 +37,11 @@ void CollectionModel::response(const QJsonObject &envelope)
 
 QModelIndex CollectionModel::index(int row, int column, const QModelIndex &parent) const
 {
-	if (!hasIndex(row, column, parent))
-	{
-		return QModelIndex();
-	}
-
 	ICollectionNode *parentNode = nullptr;
 
 	if (!parent.isValid())
 	{
-		parentNode = m_root;
+		parentNode = m_kask;
 	}
 	else
 	{
@@ -78,10 +59,8 @@ QModelIndex CollectionModel::index(int row, int column, const QModelIndex &paren
 	{
 		return createIndex(row, column, childNode);
 	}
-	else
-	{
-		return QModelIndex();
-	}
+
+	return QModelIndex();
 }
 
 QModelIndex CollectionModel::parent(const QModelIndex &child) const
@@ -94,7 +73,7 @@ QModelIndex CollectionModel::parent(const QModelIndex &child) const
 	ICollectionNode *childNode = (ICollectionNode *)child.internalPointer();
 	ICollectionNode *parentNode = childNode->parent();
 
-	if (!parentNode || parentNode == m_root)
+	if (!parentNode || parentNode == m_kask)
 	{
 		return QModelIndex();
 	}
@@ -104,16 +83,11 @@ QModelIndex CollectionModel::parent(const QModelIndex &child) const
 
 int CollectionModel::rowCount(const QModelIndex &parent) const
 {
-	if (parent.column() > 0)
-	{
-		return 0;
-	}
-
 	ICollectionNode *parentNode;
 
 	if (!parent.isValid())
 	{
-		parentNode = m_root;
+		parentNode = m_kask;
 	}
 	else
 	{
@@ -201,7 +175,7 @@ bool CollectionModel::canFetchMore(const QModelIndex &parent) const
 		return node->canFetchMore();
 	}
 
-	return !m_root;
+	return m_root.canFetchMore();
 }
 
 void CollectionModel::fetchMore(const QModelIndex &parent)

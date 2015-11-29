@@ -7,6 +7,7 @@
 CollectionNodeBase::CollectionNodeBase(ICollectionNode *parent, int index)
 	: m_parent(parent)
 	, m_collectionNodeResolver(this)
+	, m_status(Loading)
 	, m_fetches(0)
 	, m_index(index)
 {
@@ -35,6 +36,11 @@ Track *CollectionNodeBase::track()
 	return nullptr;
 }
 
+ICollectionNode::Status CollectionNodeBase::status() const
+{
+	return m_status;
+}
+
 int CollectionNodeBase::row() const
 {
 	return m_index;
@@ -47,18 +53,16 @@ int CollectionNodeBase::childCount() const
 
 bool CollectionNodeBase::hasChildren() const
 {
-	return !m_fetches || m_children.count();
+	return m_children.count();
 }
 
 bool CollectionNodeBase::canFetchMore() const
 {
-	return !m_fetches;
+	return !m_status;
 }
 
 void CollectionNodeBase::fetchMore()
 {
-	m_fetches++;
-
 	m_adapter.getMusicDirectory(id(), this, &CollectionNodeBase::response);
 }
 
@@ -79,12 +83,8 @@ void CollectionNodeBase::response(const QJsonObject &envelope)
 		const QJsonObject &object = value
 			.toObject();
 
-		ICollectionNode *node = m_collectionNodeResolver.resolve(object, i++);
-
-		connect(node, &ICollectionNode::dataChanged, this, &ICollectionNode::dataChanged);
-
-		m_children << node;
+		m_children << m_collectionNodeResolver.resolve(object, i++);
 	}
 
-	emit dataChanged(this);
+	m_status = Finished;
 }

@@ -2,6 +2,7 @@
 #define COLLECTIONMODEL_H
 
 #include "JsonResponseTransformer.h"
+#include "CollectionRootNode.h"
 #include "SubsonicAdapter.h"
 
 #include <QAbstractItemModel>
@@ -11,10 +12,6 @@ class ICollectionNode;
 class CollectionModel : public QAbstractItemModel
 {
 	Q_OBJECT
-
-	Q_PROPERTY(int status READ status NOTIFY statusChanged)
-
-	Q_ENUMS(Status)
 
 	public:
 		enum Roles
@@ -27,16 +24,7 @@ class CollectionModel : public QAbstractItemModel
 			Grouping = Qt::UserRole + 5
 		};
 
-		enum Status
-		{
-			Loading,
-			Finished
-		};
-
 		CollectionModel();
-		~CollectionModel();
-
-		int status() const;
 
 		QHash<int, QByteArray> roleNames() const override;
 
@@ -59,10 +47,10 @@ class CollectionModel : public QAbstractItemModel
 	private:
 		void response(const QJsonObject &envelope);
 
-		ICollectionNode *m_root;
-		SubsonicAdapter m_adapter;
+		CollectionRootNode m_root;
+		CollectionRootNode *m_kask;
 
-		int m_status;
+		SubsonicAdapter m_adapter;
 
 	signals:
 		void statusChanged();

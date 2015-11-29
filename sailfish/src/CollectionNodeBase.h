@@ -18,6 +18,7 @@ class CollectionNodeBase : public ICollectionNode
 		ICollectionNode *parent() const override;
 
 		Track *track() override;
+		Status status() const override;
 
 		int row() const override;
 		int childCount() const override;
@@ -33,6 +34,7 @@ class CollectionNodeBase : public ICollectionNode
 		ICollectionNode *m_parent;
 		ICollectionNodeResolver m_collectionNodeResolver;
 
+		Status m_status;
 		SubsonicAdapter m_adapter;
 
 		QList<ICollectionNode *> m_children;

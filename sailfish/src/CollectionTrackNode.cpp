@@ -50,6 +50,11 @@ ICollectionNode *CollectionTrackNode::parent() const
 	return m_parent;
 }
 
+ICollectionNode::Status CollectionTrackNode::status() const
+{
+	return Finished;
+}
+
 Track *CollectionTrackNode::track()
 {
 	return &m_track;

@@ -11,7 +11,15 @@ class ICollectionNode : public QObject
 {
 	Q_OBJECT
 
+	Q_ENUMS(Status)
+
 	public:
+		enum Status
+		{
+			Loading,
+			Finished
+		};
+
 		virtual ~ICollectionNode() = default;
 
 		virtual QIcon icon() const = 0;
@@ -24,6 +32,7 @@ class ICollectionNode : public QObject
 		virtual ICollectionNode *childAt(int index) const = 0;
 		virtual ICollectionNode *parent() const = 0;
 
+		virtual Status status() const = 0;
 		virtual Track *track() = 0;
 
 		virtual int row() const = 0;
@@ -33,9 +42,6 @@ class ICollectionNode : public QObject
 		virtual bool canFetchMore() const = 0;
 
 		virtual void fetchMore() = 0;
-
-	signals:
-		void dataChanged(ICollectionNode *node);
 };
 
 #endif // ICOLLECTIONNODE

@@ -4,44 +4,10 @@
 #include "CollectionArtistNode.h"
 #include "CollectionRootNode.h"
 
-CollectionRootNode::CollectionRootNode(const QJsonObject &root)
-	: m_root(root)
+CollectionRootNode::CollectionRootNode()
+	: m_status(Loading)
 {
-	int i = 0;
 
-	const QJsonObject &indexes = root
-		.value("indexes")
-		.toObject();
-
-	const QJsonArray &index = indexes
-		.value("index")
-		.toArray();
-
-	for (const QJsonValue &value : index)
-	{
-		const QJsonObject &section = value
-			.toObject();
-
-		const QString &name = section
-			.value("name")
-			.toString();
-
-		const QJsonArray &artist = section
-			.value("artist")
-			.toArray();
-
-		for (const QJsonValue &value : artist)
-		{
-			const QJsonObject &object = value
-				.toObject();
-
-			ICollectionNode *node = new CollectionArtistNode(name, object, this, i++);
-
-			connect(node, &ICollectionNode::dataChanged, this, &ICollectionNode::dataChanged);
-
-			m_children << node;
-		}
-	}
 }
 
 CollectionRootNode::~CollectionRootNode()
@@ -86,6 +52,11 @@ ICollectionNode *CollectionRootNode::parent() const
 	return nullptr;
 }
 
+ICollectionNode::Status CollectionRootNode::status() const
+{
+	return m_status;
+}
+
 Track *CollectionRootNode::track()
 {
 	return nullptr;
@@ -108,10 +79,47 @@ bool CollectionRootNode::hasChildren() const
 
 bool CollectionRootNode::canFetchMore() const
 {
-	return false;
+	return !m_status;
 }
 
 void CollectionRootNode::fetchMore()
 {
+	m_adapter.getIndexes(this, &CollectionRootNode::response);
+}
 
+void CollectionRootNode::response(const QJsonObject &envelope)
+{
+	int i = 0;
+
+	const QJsonObject &indexes = envelope
+		.value("indexes")
+		.toObject();
+
+	const QJsonArray &index = indexes
+		.value("index")
+		.toArray();
+
+	for (const QJsonValue &value : index)
+	{
+		const QJsonObject &section = value
+			.toObject();
+
+		const QString &name = section
+			.value("name")
+			.toString();
+
+		const QJsonArray &artist = section
+			.value("artist")
+			.toArray();
+
+		for (const QJsonValue &value : artist)
+		{
+			const QJsonObject &object = value
+				.toObject();
+
+			m_children << new CollectionArtistNode(name, object, this, i++);
+		}
+	}
+
+	m_status = Finished;
 }
