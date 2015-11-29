@@ -3,7 +3,7 @@ import Sailfish.Silica 1.0
 
 import harbour.subsoniq 1.0
 
-Dialog
+SubsoniqPage
 {
 	SettingsPageViewModel
 	{
@@ -17,8 +17,26 @@ Dialog
 			fill: parent
 		}
 
-		DialogHeader
+		PullDownMenu
 		{
+			Repeater
+			{
+				model: menuItemModel
+
+				SubsoniqMenuItem
+				{
+					text: title
+					image: icon
+					enabled: pageUrl != "SettingsPage.qml"
+
+					onClicked: navigate(pageUrl);
+				}
+			}
+		}
+
+		PageHeader
+		{
+			title: "Settings"
 			id: header
 		}
 
@@ -40,6 +58,11 @@ Dialog
 				label: placeholderText
 				width: parent.width
 				text: model.serverUrl
+
+				font
+				{
+					capitalization: Font.AllLowercase
+				}
 
 				Binding
 				{

@@ -6,12 +6,13 @@
 #include "QStringEx.h"
 #include "Key.h"
 #include "ICollectionNodeProxy.h"
+#include "NodeHelper.h"
 
 CollectionModel::CollectionModel()
 	: m_root(nullptr)
 	, m_status(Loading)
 {
-	m_adapter.getIndexes(this, &CollectionModel::response);
+
 }
 
 CollectionModel::~CollectionModel()
@@ -167,10 +168,7 @@ QVariant CollectionModel::data(const QModelIndex &index, int role) const
 
 		case Roles::CoverUrl:
 		{
-			const QString &id = node->id();
-			const QString &url = QStringEx::format("image://cover/%1", id);
-
-			return url;
+			return NodeHelper::getCoverUrl(node, "64");
 		}
 
 		case Roles::Grouping:
@@ -203,7 +201,7 @@ bool CollectionModel::canFetchMore(const QModelIndex &parent) const
 		return node->canFetchMore();
 	}
 
-	return false;
+	return !m_root;
 }
 
 void CollectionModel::fetchMore(const QModelIndex &parent)
@@ -213,6 +211,10 @@ void CollectionModel::fetchMore(const QModelIndex &parent)
 	if (node)
 	{
 		node->fetchMore();
+	}
+	else
+	{
+		m_adapter.getIndexes(this, &CollectionModel::response);
 	}
 }
 

@@ -10,7 +10,7 @@
 #   - translation filenames have to be changed
 
 # The name of your application
-TARGET = subsoniq
+TARGET = harbour-subsoniq
 
 CONFIG += sailfishapp c++11
 
@@ -30,25 +30,29 @@ SOURCES += src/sailfish.cpp \
     src/CoverArtImageProvider.cpp \
     src/ImageResponseObject.cpp \
     src/ICollectionNodeProxy.cpp \
-    src/MediaControlsViewModel.cpp
+    src/MediaControlsViewModel.cpp \
+    src/HighlightsModel.cpp \
+    src/NodeHelper.cpp
 
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
-    rpm/sailfish.changes.in \
-    rpm/subsoniq.spec \
-    rpm/sailfish.yaml \
+    rpm/harbour-subsoniq.spec \
     translations/*.ts \
-    qml/pages/HubPage.qml \
     qml/pages/SettingsPage.qml \
-    subsoniq.desktop \
     qml/subsoniq.qml \
-    qml/pages/DirectoryPage.qml \
     qml/pages/ArtistTemplate.qml \
     qml/pages/AlbumTemplate.qml \
     qml/pages/TrackTemplate.qml \
     qml/pages/PlaylistPage.qml \
     qml/pages/MediaControls.qml \
-    qml/pages/CollectionPage.qml
+    qml/pages/CollectionPage.qml \
+    rpm/harbour-subsoniq.changes.in \
+    rpm/harbour-subsoniq.yaml \
+    harbour-subsoniq.desktop \
+    qml/pages/AlbumPage.qml \
+    qml/pages/SubsoniqPage.qml \
+    qml/pages/SubsoniqMenuItem.qml \
+    qml/pages/SearchPage.qml
 
 # to disable building translations every time, comment out the
 # following CONFIG line
@@ -71,7 +75,14 @@ HEADERS += \
     src/CoverArtImageProvider.h \
     src/ImageResponseObject.h \
     src/ICollectionNodeProxy.h \
-    src/MediaControlsViewModel.h
+    src/MediaControlsViewModel.h \
+    src/HighlightsModel.h \
+    src/NodeHelper.h
+
+resources.files = icon-s-album.png icon-s-playlist.png
+resources.path = /usr/share/$${TARGET}
+
+INSTALLS += resources
 
 LIBS += -L$$OUT_PWD/../lib/ -lsubsoniq
 

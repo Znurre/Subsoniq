@@ -30,6 +30,7 @@ namespace api
 	const Key format = "format";
 	const Key maxBitRate = "maxBitRate";
 	const Key size = "size";
+	const Key type = "type";
 }
 
 #endif // KEY_H

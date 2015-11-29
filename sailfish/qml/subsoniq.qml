@@ -9,8 +9,47 @@ ApplicationWindow
 {
 	Component.onCompleted:
 	{
-		pageStack.push("pages/HubPage.qml");
+		pageStack.push("pages/CollectionPage.qml");
 		pageStack.pushAttached(playlistPage)
+	}
+
+	ListModel
+	{
+		id: menuItemModel
+
+		ListElement
+		{
+			title: "Settings"
+			pageUrl: "SettingsPage.qml"
+			icon: "image://theme/icon-s-setting"
+		}
+
+//		ListElement
+//		{
+//			title: "Playlists"
+//			icon: "../../icon-s-playlist.png"
+//		}
+
+//		ListElement
+//		{
+//			title: "Albums"
+//			pageUrl: "AlbumPage.qml"
+//			icon: "../../icon-s-album.png"
+//		}
+
+		ListElement
+		{
+			title: "Artists"
+			pageUrl: "CollectionPage.qml"
+			icon: "image://theme/icon-cover-people"
+		}
+
+		ListElement
+		{
+			title: "Search"
+			pageUrl: "SearchPage.qml"
+			icon: "image://theme/icon-cover-search"
+		}
 	}
 
 	MainViewModel
@@ -21,11 +60,6 @@ ApplicationWindow
 	PlaylistPage
 	{
 		id: playlistPage
-	}
-
-	CollectionModel
-	{
-		id: collectionModel
 	}
 
 	cover: Qt.resolvedUrl("cover/CoverPage.qml")

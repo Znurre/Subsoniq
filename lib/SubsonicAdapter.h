@@ -20,30 +20,48 @@ class SubsonicAdapter : public QObject
 		}
 
 		template<class TInstance>
-		void getIndexes(TInstance *instance, JsonCallback<TInstance> callback)
+		SubsonicAdapter &getIndexes(TInstance *instance, JsonCallback<TInstance> callback)
 		{
 			m_requestFactory
 				.request("getIndexes.view")
 				.callback(instance, callback);
+
+			return *this;
 		}
 
 		template<class TInstance>
-		void getMusicDirectory(const QString &id, TInstance *instance, JsonCallback<TInstance> callback)
+		SubsonicAdapter &getMusicDirectory(const QString &id, TInstance *instance, JsonCallback<TInstance> callback)
 		{
 			m_requestFactory
 				.request("getMusicDirectory.view"
 					, api::id = id)
 				.callback(instance, callback);
+
+			return *this;
 		}
 
 		template<class TInstance>
-		void getCoverArt(const QString &id, TInstance *instance, ImageCallback<TInstance> callback)
+		SubsonicAdapter &getCoverArt(const QString &id, const QString &size, TInstance *instance, ImageCallback<TInstance> callback)
 		{
 			m_requestFactory
 				.request("getCoverArt.view"
 					, api::id = id
-					, api::size = QStringLiteral("64"))
+					, api::size = size)
 				.callback(instance, callback);
+
+			return *this;
+		}
+
+		template<class TInstance>
+		SubsonicAdapter &getAlbumList(const QString &type, TInstance *instance, JsonCallback<TInstance> callback)
+		{
+			m_requestFactory
+				.request("getAlbumList.view"
+					, api::type = type
+					, api::size = QStringLiteral("9"))
+				.callback(instance, callback);
+
+			return *this;
 		}
 
 		QNetworkReply *stream(const QString &id)
@@ -56,13 +74,15 @@ class SubsonicAdapter : public QObject
 				.stream();
 		}
 
-		void scrobble(const QString &id, bool submission)
+		SubsonicAdapter &scrobble(const QString &id, bool submission)
 		{
 			m_requestFactory
 				.request("scrobble.view"
 					, api::id = id
 					, api::submission = submission)
 				.stream();
+
+			return *this;
 		}
 
 	private:

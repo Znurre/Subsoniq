@@ -68,7 +68,7 @@ QVariant PlaylistModel::data(const QModelIndex &index, int role) const
 		case Roles::CoverUrl:
 		{
 			const QString &id = track->coverArt();
-			const QString &url = QStringEx::format("image://cover/%1", id);
+			const QString &url = QStringEx::format("image://cover/%1?64", id);
 
 			return url;
 		}
