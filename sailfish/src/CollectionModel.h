@@ -13,6 +13,10 @@ class CollectionModel : public QAbstractItemModel
 {
 	Q_OBJECT
 
+	Q_PROPERTY(int status READ status NOTIFY statusChanged)
+
+	Q_ENUMS(Status)
+
 	public:
 		enum Roles
 		{
@@ -24,7 +28,15 @@ class CollectionModel : public QAbstractItemModel
 			Grouping = Qt::UserRole + 5
 		};
 
+		enum Status
+		{
+			Loading,
+			Finished
+		};
+
 		CollectionModel();
+
+		int status() const;
 
 		QHash<int, QByteArray> roleNames() const override;
 
@@ -51,6 +63,8 @@ class CollectionModel : public QAbstractItemModel
 		CollectionRootNode *m_kask;
 
 		SubsonicAdapter m_adapter;
+
+		int m_status;
 
 	signals:
 		void statusChanged();

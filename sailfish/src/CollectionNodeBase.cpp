@@ -3,11 +3,12 @@
 
 #include "CollectionAlbumNode.h"
 #include "CollectionNodeBase.h"
+#include "CollectionModel.h"
 
-CollectionNodeBase::CollectionNodeBase(ICollectionNode *parent, int index)
+CollectionNodeBase::CollectionNodeBase(ICollectionNode *parent, CollectionModel *model, int index)
 	: m_parent(parent)
-	, m_collectionNodeResolver(this)
-	, m_status(Loading)
+	, m_collectionNodeResolver(this, model)
+	, m_model(model)
 	, m_fetches(0)
 	, m_index(index)
 {
@@ -36,11 +37,6 @@ Track *CollectionNodeBase::track()
 	return nullptr;
 }
 
-ICollectionNode::Status CollectionNodeBase::status() const
-{
-	return m_status;
-}
-
 int CollectionNodeBase::row() const
 {
 	return m_index;
@@ -58,7 +54,7 @@ bool CollectionNodeBase::hasChildren() const
 
 bool CollectionNodeBase::canFetchMore() const
 {
-	return !m_status;
+	return !m_model->status();
 }
 
 void CollectionNodeBase::fetchMore()
@@ -85,6 +81,4 @@ void CollectionNodeBase::response(const QJsonObject &envelope)
 
 		m_children << m_collectionNodeResolver.resolve(object, i++);
 	}
-
-	m_status = Finished;
 }

@@ -9,9 +9,16 @@
 #include "NodeHelper.h"
 
 CollectionModel::CollectionModel()
-	: m_kask(&m_root)
+	: m_root(this)
+	, m_kask(&m_root)
+	, m_status(Loading)
 {
 
+}
+
+int CollectionModel::status() const
+{
+	return m_status;
 }
 
 QHash<int, QByteArray> CollectionModel::roleNames() const
@@ -111,11 +118,6 @@ int CollectionModel::columnCount(const QModelIndex &parent) const
 
 QVariant CollectionModel::data(const QModelIndex &index, int role) const
 {
-	if (!index.isValid())
-	{
-		return QVariant();
-	}
-
 	ICollectionNode *node = (ICollectionNode *)index.internalPointer();
 
 	switch (role)
@@ -181,15 +183,14 @@ bool CollectionModel::canFetchMore(const QModelIndex &parent) const
 void CollectionModel::fetchMore(const QModelIndex &parent)
 {
 	ICollectionNode *node = (ICollectionNode *)parent.internalPointer();
+	ICollectionNode *k = node ?: m_kask;
 
-	if (node)
-	{
-		node->fetchMore();
-	}
-	else
-	{
-		m_adapter.getIndexes(this, &CollectionModel::response);
-	}
+	k->fetchMore();
+
+	m_status = Finished;
+
+	emit statusChanged();
+	emit layoutChanged();
 }
 
 QString CollectionModel::getPageTitle(const QModelIndex &index) const

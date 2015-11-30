@@ -3,11 +3,12 @@
 
 #include "CollectionArtistNode.h"
 #include "CollectionRootNode.h"
+#include "CollectionModel.h"
 
-CollectionRootNode::CollectionRootNode()
-	: m_status(Loading)
+CollectionRootNode::CollectionRootNode(CollectionModel *model)
+	: m_model(model)
 {
-
+	qDebug() << "CollectionRootNode";
 }
 
 CollectionRootNode::~CollectionRootNode()
@@ -52,11 +53,6 @@ ICollectionNode *CollectionRootNode::parent() const
 	return nullptr;
 }
 
-ICollectionNode::Status CollectionRootNode::status() const
-{
-	return m_status;
-}
-
 Track *CollectionRootNode::track()
 {
 	return nullptr;
@@ -79,7 +75,7 @@ bool CollectionRootNode::hasChildren() const
 
 bool CollectionRootNode::canFetchMore() const
 {
-	return !m_status;
+	return !m_model->status();
 }
 
 void CollectionRootNode::fetchMore()
@@ -117,9 +113,7 @@ void CollectionRootNode::response(const QJsonObject &envelope)
 			const QJsonObject &object = value
 				.toObject();
 
-			m_children << new CollectionArtistNode(name, object, this, i++);
+			m_children << new CollectionArtistNode(name, object, this, m_model, i++);
 		}
 	}
-
-	m_status = Finished;
 }

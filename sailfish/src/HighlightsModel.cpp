@@ -76,7 +76,7 @@ void HighlightsModel::response(const QJsonObject &envelope, bool starred)
 	{
 		const QJsonObject &album = value.toObject();
 
-		m_nodes << new CollectionAlbumNode(album, nullptr, 0);
+		m_nodes << new CollectionAlbumNode(album, nullptr, nullptr, 0);
 	}
 
 	emit layoutChanged();

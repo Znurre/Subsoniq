@@ -21,7 +21,6 @@ class CollectionTrackNode : public ICollectionNode
 		ICollectionNode *childAt(int index) const override;
 		ICollectionNode *parent() const override;
 
-		Status status() const override;
 		Track *track() override;
 
 		int row() const override;

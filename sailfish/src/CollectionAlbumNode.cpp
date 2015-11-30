@@ -1,7 +1,7 @@
 #include "CollectionAlbumNode.h"
 
-CollectionAlbumNode::CollectionAlbumNode(const QJsonObject &object, ICollectionNode *parent, int index)
-	: CollectionNodeBase(parent, index)
+CollectionAlbumNode::CollectionAlbumNode(const QJsonObject &object, ICollectionNode *parent, CollectionModel *model, int index)
+	: CollectionNodeBase(parent, model, index)
 	, m_image("media-album-cover-manager-amarok.png")
 	, m_object(object)
 {

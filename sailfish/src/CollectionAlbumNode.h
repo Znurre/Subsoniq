@@ -11,7 +11,7 @@
 class CollectionAlbumNode : public CollectionNodeBase
 {
 	public:
-		CollectionAlbumNode(const QJsonObject &object, ICollectionNode *parent, int index);
+		CollectionAlbumNode(const QJsonObject &object, ICollectionNode *parent, CollectionModel *model, int index);
 
 		QIcon icon() const override;
 

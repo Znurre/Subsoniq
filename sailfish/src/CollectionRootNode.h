@@ -6,10 +6,12 @@
 #include "ICollectionNode.h"
 #include "SubsonicAdapter.h"
 
+class CollectionModel;
+
 class CollectionRootNode : public ICollectionNode
 {
 	public:
-		CollectionRootNode();
+		CollectionRootNode(CollectionModel *model);
 		~CollectionRootNode();
 
 		QIcon icon() const override;
@@ -22,7 +24,6 @@ class CollectionRootNode : public ICollectionNode
 		ICollectionNode *childAt(int index) const override;
 		ICollectionNode *parent() const override;
 
-		Status status() const override;
 		Track *track() override;
 
 		int row() const override;
@@ -36,7 +37,7 @@ class CollectionRootNode : public ICollectionNode
 	private:
 		void response(const QJsonObject &envelope);
 
-		Status m_status;
+		CollectionModel *m_model;
 		SubsonicAdapter m_adapter;
 
 		QList<ICollectionNode *> m_children;

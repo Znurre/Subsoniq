@@ -14,7 +14,7 @@ CollectionAlbumNode::CollectionAlbumNode(const QJsonObject &object, ICollectionN
 		.value("coverArt")
 		.toString();
 
-	m_adapter.getCoverArt(coverArtId, this, &CollectionAlbumNode::imageResponse);
+	m_adapter.getCoverArt(coverArtId, "64", this, &CollectionAlbumNode::imageResponse);
 }
 
 QIcon CollectionAlbumNode::icon() const
