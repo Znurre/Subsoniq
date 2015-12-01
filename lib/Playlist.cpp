@@ -1,6 +1,7 @@
 #include "Playlist.h"
 #include "PlaylistNode.h"
 #include "MetadataController.h"
+#include "Track.h"
 
 Playlist::Playlist(MetadataController &metadata)
 	: m_end(nullptr)
@@ -14,7 +15,8 @@ void Playlist::add(Track *track)
 {
 	const int index = count();
 
-	PlaylistNode *node = new PlaylistNode(track, m_end);
+	Track *copy = new Track(*track);
+	PlaylistNode *node = new PlaylistNode(copy, m_end);
 
 	if (m_end)
 	{

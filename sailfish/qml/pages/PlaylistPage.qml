@@ -7,6 +7,11 @@ Page
 {
 	id: page
 
+	RemorsePopup
+	{
+		id: remorse
+	}
+
 	SilicaListView
 	{
 		ViewPlaceholder
@@ -21,7 +26,7 @@ Page
 			{
 				text: "Clear"
 				enabled: view.count > 0
-				onClicked: main.playlistModel.clear()
+				onClicked: remorse.execute("Clearing", main.playlistModel.clear)
 			}
 		}
 

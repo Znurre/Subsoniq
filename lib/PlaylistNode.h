@@ -14,6 +14,7 @@ class PlaylistNode : public QObject
 
 	public:
 		PlaylistNode(Track *track, PlaylistNode *parent);
+		~PlaylistNode();
 
 		Track *track() const;
 

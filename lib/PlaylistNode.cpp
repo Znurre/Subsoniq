@@ -17,6 +17,11 @@ PlaylistNode::PlaylistNode(Track *track, PlaylistNode *parent)
 
 }
 
+PlaylistNode::~PlaylistNode()
+{
+	delete m_track;
+}
+
 Track *PlaylistNode::track() const
 {
 	return m_track;

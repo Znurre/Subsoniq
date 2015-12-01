@@ -1,14 +1,11 @@
 #ifndef TRACK_H
 #define TRACK_H
 
-#include <QObject>
+#include <QString>
 #include <QJsonObject>
-#include <QMetaType>
 
-class Track : public QObject
+class Track
 {
-	Q_OBJECT
-
 	public:
 		Track(const QJsonObject &object);
 
@@ -25,7 +22,5 @@ class Track : public QObject
 	private:
 		QJsonObject m_object;
 };
-
-Q_DECLARE_METATYPE(Track *)
 
 #endif // TRACK_H
