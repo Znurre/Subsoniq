@@ -16,8 +16,6 @@ class CollectionNodeBase : public ICollectionNode
 		CollectionNodeBase();
 		~CollectionNodeBase();
 
-		QString headerTemplate() const override;
-
 		ICollectionNode *childAt(int index) const override;
 
 		Track *track() override;

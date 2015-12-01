@@ -18,7 +18,6 @@ class CollectionRootNode : public ICollectionNode
 
 		QString title() const override;
 		QString viewTemplate() const override;
-		QString headerTemplate() const override;
 		QString id() const override;
 		QString grouping() const override;
 

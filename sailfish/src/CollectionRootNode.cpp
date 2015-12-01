@@ -33,11 +33,6 @@ QString CollectionRootNode::viewTemplate() const
 	return QString::null;
 }
 
-QString CollectionRootNode::headerTemplate() const
-{
-	return "ArtistsHeaderTemplate.qml";
-}
-
 QString CollectionRootNode::id() const
 {
 	return QString::null;

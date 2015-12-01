@@ -9,7 +9,7 @@ ApplicationWindow
 {
 	Component.onCompleted:
 	{
-		pageStack.push("pages/CollectionPage.qml");
+		pageStack.push("pages/ArtistsPage.qml");
 		pageStack.pushAttached(playlistPage)
 	}
 
@@ -40,7 +40,7 @@ ApplicationWindow
 		ListElement
 		{
 			title: "Artists"
-			pageUrl: "CollectionPage.qml"
+			pageUrl: "ArtistsPage.qml"
 			icon: "image://theme/icon-cover-people"
 		}
 

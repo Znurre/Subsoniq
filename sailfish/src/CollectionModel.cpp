@@ -10,7 +10,7 @@
 
 CollectionModel::CollectionModel()
 	: m_root(&m_scopedRoot)
-	, m_status(Loading)
+	, m_status(Finished)
 {
 
 }
@@ -146,13 +146,6 @@ QString CollectionModel::getPageTitle(const QModelIndex &index) const
 	ICollectionNode *node = getNode(index);
 
 	return node->title();
-}
-
-QString CollectionModel::getHeaderTemplate(const QModelIndex &index) const
-{
-	ICollectionNode *node = getNode(index);
-
-	return node->headerTemplate();
 }
 
 QObject *CollectionModel::getParentNode(const QModelIndex &index) const

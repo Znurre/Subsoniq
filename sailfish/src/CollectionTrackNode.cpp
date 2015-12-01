@@ -26,11 +26,6 @@ QString CollectionTrackNode::viewTemplate() const
 	return "TrackTemplate.qml";
 }
 
-QString CollectionTrackNode::headerTemplate() const
-{
-	return QString::null;
-}
-
 QString CollectionTrackNode::id() const
 {
 	return QString::null;

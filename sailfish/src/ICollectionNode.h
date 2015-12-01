@@ -18,7 +18,6 @@ class ICollectionNode : public QObject
 
 		virtual QString title() const = 0;
 		virtual QString viewTemplate() const = 0;
-		virtual QString headerTemplate() const = 0;
 		virtual QString id() const = 0;
 		virtual QString grouping() const = 0;
 

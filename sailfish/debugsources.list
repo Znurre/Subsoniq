@@ -2,6 +2,7 @@
 /usr/src/debug/home
 /usr/src/debug/moc_ICollectionNodeProxy.cpp
 /usr/src/debug/moc_MainViewModel.cpp
+/usr/src/debug/moc_CollectionModelProxy.cpp
 /usr/src/debug/moc_CollectionTrackNode.cpp
 /usr/src/debug/moc_CollectionModel.cpp
 /usr/src/debug/moc_MediaControlsViewModel.cpp

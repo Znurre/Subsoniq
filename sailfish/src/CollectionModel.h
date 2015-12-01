@@ -1,15 +1,18 @@
 #ifndef COLLECTIONMODEL_H
 #define COLLECTIONMODEL_H
 
+#include <QAbstractItemModel>
+
 #include "JsonResponseTransformer.h"
 #include "CollectionRootNode.h"
 #include "SubsonicAdapter.h"
-
-#include <QAbstractItemModel>
+#include "ICollectionModel.h"
 
 class ICollectionNode;
 
-class CollectionModel : public QAbstractItemModel
+class CollectionModel
+	: public QAbstractItemModel
+	, public ICollectionModel
 {
 	Q_OBJECT
 
@@ -55,8 +58,6 @@ class CollectionModel : public QAbstractItemModel
 		void fetchMore(const QModelIndex &parent) override;
 
 		Q_INVOKABLE QString getPageTitle(const QModelIndex &index) const;
-		Q_INVOKABLE QString getHeaderTemplate(const QModelIndex &index) const;
-
 		Q_INVOKABLE QObject *getParentNode(const QModelIndex &index) const;
 
 	private:

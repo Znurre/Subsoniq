@@ -32,7 +32,8 @@ SOURCES += src/sailfish.cpp \
     src/ICollectionNodeProxy.cpp \
     src/MediaControlsViewModel.cpp \
     src/HighlightsModel.cpp \
-    src/NodeHelper.cpp
+    src/NodeHelper.cpp \
+    src/CollectionModelProxy.cpp
 
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
@@ -53,8 +54,7 @@ OTHER_FILES += \
     qml/pages/SubsoniqPage.qml \
     qml/pages/SubsoniqMenuItem.qml \
     qml/pages/SearchPage.qml \
-    qml/pages/ArtistsHeaderTemplate.qml \
-    qml/pages/CollectionHeaderTemplate.qml
+    qml/pages/ArtistsPage.qml
 
 # to disable building translations every time, comment out the
 # following CONFIG line
@@ -79,7 +79,9 @@ HEADERS += \
     src/ICollectionNodeProxy.h \
     src/MediaControlsViewModel.h \
     src/HighlightsModel.h \
-    src/NodeHelper.h
+    src/NodeHelper.h \
+    src/CollectionModelProxy.h \
+    src/ICollectionModel.h
 
 resources.files = icon-s-album.png icon-s-playlist.png
 resources.path = /usr/share/$${TARGET}

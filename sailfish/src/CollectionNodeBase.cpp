@@ -18,11 +18,6 @@ CollectionNodeBase::~CollectionNodeBase()
 	qDeleteAll(m_children);
 }
 
-QString CollectionNodeBase::headerTemplate() const
-{
-	return "CollectionHeaderTemplate.qml";
-}
-
 ICollectionNode *CollectionNodeBase::childAt(int index) const
 {
 	return m_children[index];

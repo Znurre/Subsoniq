@@ -10,7 +10,7 @@ SubsoniqPage
 
 	id: page
 
-	CollectionModel
+	CollectionModelProxy
 	{
 		id: collectionModel
 	}
@@ -32,17 +32,6 @@ SubsoniqPage
 					onClicked: navigate(pageUrl);
 				}
 			}
-
-			MenuLabel
-			{
-
-			}
-
-			MenuItem
-			{
-				text: "Play all"
-				onClicked: main.playlistModel.addAll(parentNode.subject)
-			}
 		}
 
 		BusyIndicator
@@ -61,9 +50,13 @@ SubsoniqPage
 			fill: parent
 		}
 
-		header: PageHeader
+		header: SearchField
 		{
-			title: collectionModel.getPageTitle(index)
+			id: searchField
+			width: parent.width
+			placeholderText: "Filter"
+
+			onTextChanged: collectionModel.setFilterFixedString(searchField.text)
 		}
 
 		section
