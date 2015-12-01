@@ -11,22 +11,21 @@ class CollectionModel;
 class CollectionRootNode : public ICollectionNode
 {
 	public:
-		CollectionRootNode(CollectionModel *model);
+		CollectionRootNode();
 		~CollectionRootNode();
 
 		QIcon icon() const override;
 
 		QString title() const override;
 		QString viewTemplate() const override;
+		QString headerTemplate() const override;
 		QString id() const override;
 		QString grouping() const override;
 
 		ICollectionNode *childAt(int index) const override;
-		ICollectionNode *parent() const override;
 
 		Track *track() override;
 
-		int row() const override;
 		int childCount() const override;
 
 		bool hasChildren() const override;
@@ -37,10 +36,11 @@ class CollectionRootNode : public ICollectionNode
 	private:
 		void response(const QJsonObject &envelope);
 
-		CollectionModel *m_model;
 		SubsonicAdapter m_adapter;
 
 		QList<ICollectionNode *> m_children;
+
+		bool m_canFetchMore;
 };
 
 #endif // COLLECTIONROOTNODE_H

@@ -5,8 +5,8 @@
 #include "CollectionRootNode.h"
 #include "CollectionModel.h"
 
-CollectionRootNode::CollectionRootNode(CollectionModel *model)
-	: m_model(model)
+CollectionRootNode::CollectionRootNode()
+	: m_canFetchMore(true)
 {
 	qDebug() << "CollectionRootNode";
 }
@@ -25,12 +25,17 @@ QIcon CollectionRootNode::icon() const
 
 QString CollectionRootNode::title() const
 {
-	return "Collection";
+	return "Artists";
 }
 
 QString CollectionRootNode::viewTemplate() const
 {
 	return QString::null;
+}
+
+QString CollectionRootNode::headerTemplate() const
+{
+	return "ArtistsHeaderTemplate.qml";
 }
 
 QString CollectionRootNode::id() const
@@ -48,19 +53,9 @@ ICollectionNode *CollectionRootNode::childAt(int index) const
 	return m_children[index];
 }
 
-ICollectionNode *CollectionRootNode::parent() const
-{
-	return nullptr;
-}
-
 Track *CollectionRootNode::track()
 {
 	return nullptr;
-}
-
-int CollectionRootNode::row() const
-{
-	return 0;
 }
 
 int CollectionRootNode::childCount() const
@@ -75,7 +70,7 @@ bool CollectionRootNode::hasChildren() const
 
 bool CollectionRootNode::canFetchMore() const
 {
-	return !m_model->status();
+	return m_canFetchMore;
 }
 
 void CollectionRootNode::fetchMore()
@@ -85,8 +80,6 @@ void CollectionRootNode::fetchMore()
 
 void CollectionRootNode::response(const QJsonObject &envelope)
 {
-	int i = 0;
-
 	const QJsonObject &indexes = envelope
 		.value("indexes")
 		.toObject();
@@ -113,7 +106,9 @@ void CollectionRootNode::response(const QJsonObject &envelope)
 			const QJsonObject &object = value
 				.toObject();
 
-			m_children << new CollectionArtistNode(name, object, this, m_model, i++);
+			m_children << new CollectionArtistNode(name, object);
 		}
 	}
+
+	m_canFetchMore = false;
 }

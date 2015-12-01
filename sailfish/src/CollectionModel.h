@@ -37,6 +37,7 @@ class CollectionModel : public QAbstractItemModel
 		CollectionModel();
 
 		int status() const;
+		void setStatus(int status);
 
 		QHash<int, QByteArray> roleNames() const override;
 
@@ -49,18 +50,20 @@ class CollectionModel : public QAbstractItemModel
 		QVariant data(const QModelIndex &index, int role) const override;
 
 		bool hasChildren(const QModelIndex &parent) const override;
-
 		bool canFetchMore(const QModelIndex &parent) const override;
+
 		void fetchMore(const QModelIndex &parent) override;
 
 		Q_INVOKABLE QString getPageTitle(const QModelIndex &index) const;
+		Q_INVOKABLE QString getHeaderTemplate(const QModelIndex &index) const;
+
 		Q_INVOKABLE QObject *getParentNode(const QModelIndex &index) const;
 
 	private:
-		void response(const QJsonObject &envelope);
+		ICollectionNode *getNode(const QModelIndex &index) const;
 
-		CollectionRootNode m_root;
-		CollectionRootNode *m_kask;
+		CollectionRootNode m_scopedRoot;
+		CollectionRootNode *m_root;
 
 		SubsonicAdapter m_adapter;
 

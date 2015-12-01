@@ -62,9 +62,10 @@ SubsoniqPage
 			fill: parent
 		}
 
-		header: PageHeader
+		header: Loader
 		{
-			title: collectionModel.getPageTitle(index)
+			width: parent.width
+			source: collectionModel.getHeaderTemplate(index)
 		}
 
 		section

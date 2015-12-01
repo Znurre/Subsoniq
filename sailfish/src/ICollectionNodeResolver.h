@@ -9,9 +9,7 @@ class CollectionModel;
 class ICollectionNodeResolver
 {
 	public:
-		ICollectionNodeResolver(ICollectionNode *parent, CollectionModel *model);
-
-		ICollectionNode *resolve(const QJsonObject &object, int index) const;
+		ICollectionNode *resolve(const QJsonObject &object) const;
 
 	private:
 		ICollectionNode *m_parent;

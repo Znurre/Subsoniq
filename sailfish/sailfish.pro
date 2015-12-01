@@ -52,7 +52,9 @@ OTHER_FILES += \
     qml/pages/AlbumPage.qml \
     qml/pages/SubsoniqPage.qml \
     qml/pages/SubsoniqMenuItem.qml \
-    qml/pages/SearchPage.qml
+    qml/pages/SearchPage.qml \
+    qml/pages/ArtistsHeaderTemplate.qml \
+    qml/pages/CollectionHeaderTemplate.qml
 
 # to disable building translations every time, comment out the
 # following CONFIG line

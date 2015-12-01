@@ -5,12 +5,8 @@
 #include "CollectionNodeBase.h"
 #include "CollectionModel.h"
 
-CollectionNodeBase::CollectionNodeBase(ICollectionNode *parent, CollectionModel *model, int index)
-	: m_parent(parent)
-	, m_collectionNodeResolver(this, model)
-	, m_model(model)
-	, m_fetches(0)
-	, m_index(index)
+CollectionNodeBase::CollectionNodeBase()
+	: m_canFetchMore(true)
 {
 
 }
@@ -22,24 +18,19 @@ CollectionNodeBase::~CollectionNodeBase()
 	qDeleteAll(m_children);
 }
 
+QString CollectionNodeBase::headerTemplate() const
+{
+	return "CollectionHeaderTemplate.qml";
+}
+
 ICollectionNode *CollectionNodeBase::childAt(int index) const
 {
 	return m_children[index];
 }
 
-ICollectionNode *CollectionNodeBase::parent() const
-{
-	return m_parent;
-}
-
 Track *CollectionNodeBase::track()
 {
 	return nullptr;
-}
-
-int CollectionNodeBase::row() const
-{
-	return m_index;
 }
 
 int CollectionNodeBase::childCount() const
@@ -54,7 +45,7 @@ bool CollectionNodeBase::hasChildren() const
 
 bool CollectionNodeBase::canFetchMore() const
 {
-	return !m_model->status();
+	return m_canFetchMore;
 }
 
 void CollectionNodeBase::fetchMore()
@@ -64,8 +55,6 @@ void CollectionNodeBase::fetchMore()
 
 void CollectionNodeBase::response(const QJsonObject &envelope)
 {
-	int i = 0;
-
 	const QJsonObject &directory = envelope
 		.value("directory")
 		.toObject();
@@ -79,6 +68,8 @@ void CollectionNodeBase::response(const QJsonObject &envelope)
 		const QJsonObject &object = value
 			.toObject();
 
-		m_children << m_collectionNodeResolver.resolve(object, i++);
+		m_children << m_collectionNodeResolver.resolve(object);
 	}
+
+	m_canFetchMore = false;
 }

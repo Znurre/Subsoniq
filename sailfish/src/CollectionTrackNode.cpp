@@ -1,11 +1,9 @@
 #include "CollectionTrackNode.h"
 #include "QStringEx.h"
 
-CollectionTrackNode::CollectionTrackNode(const QJsonObject &object, ICollectionNode *parent, int index)
-	 : m_parent(parent)
-	 , m_track(object)
+CollectionTrackNode::CollectionTrackNode(const QJsonObject &object)
+	 : m_track(object)
 	 , m_object(object)
-	 , m_index(index)
 {
 	qDebug() << object;
 }
@@ -28,6 +26,11 @@ QString CollectionTrackNode::viewTemplate() const
 	return "TrackTemplate.qml";
 }
 
+QString CollectionTrackNode::headerTemplate() const
+{
+	return QString::null;
+}
+
 QString CollectionTrackNode::id() const
 {
 	return QString::null;
@@ -45,19 +48,9 @@ ICollectionNode *CollectionTrackNode::childAt(int index) const
 	return nullptr;
 }
 
-ICollectionNode *CollectionTrackNode::parent() const
-{
-	return m_parent;
-}
-
 Track *CollectionTrackNode::track()
 {
 	return &m_track;
-}
-
-int CollectionTrackNode::row() const
-{
-	return m_index;
 }
 
 int CollectionTrackNode::childCount() const

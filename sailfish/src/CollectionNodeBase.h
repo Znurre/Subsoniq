@@ -13,15 +13,15 @@ class CollectionNodeBase : public ICollectionNode
 	Q_OBJECT
 
 	public:
-		CollectionNodeBase(ICollectionNode *parent, CollectionModel *model, int index);
+		CollectionNodeBase();
 		~CollectionNodeBase();
 
+		QString headerTemplate() const override;
+
 		ICollectionNode *childAt(int index) const override;
-		ICollectionNode *parent() const override;
 
 		Track *track() override;
 
-		int row() const override;
 		int childCount() const override;
 
 		bool hasChildren() const override;
@@ -32,16 +32,12 @@ class CollectionNodeBase : public ICollectionNode
 	private:
 		void response(const QJsonObject &envelope);
 
-		ICollectionNode *m_parent;
 		ICollectionNodeResolver m_collectionNodeResolver;
-
-		CollectionModel *m_model;
 		SubsonicAdapter m_adapter;
 
 		QList<ICollectionNode *> m_children;
 
-		int m_fetches;
-		int m_index;
+		bool m_canFetchMore;
 };
 
 #endif // COLLECTIONNODEBASE_H

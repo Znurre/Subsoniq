@@ -18,15 +18,14 @@ class ICollectionNode : public QObject
 
 		virtual QString title() const = 0;
 		virtual QString viewTemplate() const = 0;
+		virtual QString headerTemplate() const = 0;
 		virtual QString id() const = 0;
 		virtual QString grouping() const = 0;
 
 		virtual ICollectionNode *childAt(int index) const = 0;
-		virtual ICollectionNode *parent() const = 0;
 
 		virtual Track *track() = 0;
 
-		virtual int row() const = 0;
 		virtual int childCount() const = 0;
 
 		virtual bool hasChildren() const = 0;

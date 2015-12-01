@@ -9,8 +9,7 @@
 #include "NodeHelper.h"
 
 CollectionModel::CollectionModel()
-	: m_root(this)
-	, m_kask(&m_root)
+	: m_root(&m_scopedRoot)
 	, m_status(Loading)
 {
 
@@ -19,6 +18,13 @@ CollectionModel::CollectionModel()
 int CollectionModel::status() const
 {
 	return m_status;
+}
+
+void CollectionModel::setStatus(int status)
+{
+	m_status = status;
+
+	emit statusChanged();
 }
 
 QHash<int, QByteArray> CollectionModel::roleNames() const
@@ -34,79 +40,26 @@ QHash<int, QByteArray> CollectionModel::roleNames() const
 	};
 }
 
-void CollectionModel::response(const QJsonObject &envelope)
-{
-	Q_UNUSED(envelope);
-
-	emit layoutChanged();
-	emit statusChanged();
-}
-
 QModelIndex CollectionModel::index(int row, int column, const QModelIndex &parent) const
 {
-	ICollectionNode *parentNode = nullptr;
-
-	if (!parent.isValid())
-	{
-		parentNode = m_kask;
-	}
-	else
-	{
-		parentNode = (ICollectionNode *)parent.internalPointer();
-	}
-
-	if (!parentNode)
-	{
-		return QModelIndex();
-	}
-
+	ICollectionNode *parentNode = getNode(parent);
 	ICollectionNode *childNode = parentNode->childAt(row);
 
-	if (childNode)
-	{
-		return createIndex(row, column, childNode);
-	}
-
-	return QModelIndex();
+	return createIndex(row, column, childNode);
 }
 
 QModelIndex CollectionModel::parent(const QModelIndex &child) const
 {
-	if (!child.isValid())
-	{
-		return QModelIndex();
-	}
+	Q_UNUSED(child);
 
-	ICollectionNode *childNode = (ICollectionNode *)child.internalPointer();
-	ICollectionNode *parentNode = childNode->parent();
-
-	if (!parentNode || parentNode == m_kask)
-	{
-		return QModelIndex();
-	}
-
-	return createIndex(parentNode->row(), 0, parentNode);
+	return QModelIndex();
 }
 
 int CollectionModel::rowCount(const QModelIndex &parent) const
 {
-	ICollectionNode *parentNode;
+	ICollectionNode *node = getNode(parent);
 
-	if (!parent.isValid())
-	{
-		parentNode = m_kask;
-	}
-	else
-	{
-		parentNode = (ICollectionNode *)parent.internalPointer();
-	}
-
-	if (!parentNode)
-	{
-		return 0;
-	}
-
-	return parentNode->childCount();
+	return node->childCount();
 }
 
 int CollectionModel::columnCount(const QModelIndex &parent) const
@@ -158,38 +111,31 @@ QVariant CollectionModel::data(const QModelIndex &index, int role) const
 
 bool CollectionModel::hasChildren(const QModelIndex &parent) const
 {
-	ICollectionNode *node = (ICollectionNode *)parent.internalPointer();
+	ICollectionNode *node = getNode(parent);
 
-	if (node)
-	{
-		return node->hasChildren();
-	}
-
-	return true;
+	return node->hasChildren();
 }
 
 bool CollectionModel::canFetchMore(const QModelIndex &parent) const
 {
-	ICollectionNode *node = (ICollectionNode *)parent.internalPointer();
+	ICollectionNode *node = getNode(parent);
 
-	if (node)
-	{
-		return node->canFetchMore();
-	}
-
-	return m_root.canFetchMore();
+	return node->canFetchMore();
 }
 
 void CollectionModel::fetchMore(const QModelIndex &parent)
 {
-	ICollectionNode *node = (ICollectionNode *)parent.internalPointer();
-	ICollectionNode *k = node ?: m_kask;
+	setStatus(Loading);
 
-	k->fetchMore();
+	ICollectionNode *node = getNode(parent);
 
-	m_status = Finished;
+	if (node)
+	{
+		node->fetchMore();
+	}
 
-	emit statusChanged();
+	setStatus(Finished);
+
 	emit layoutChanged();
 }
 
@@ -197,14 +143,16 @@ QString CollectionModel::getPageTitle(const QModelIndex &index) const
 {
 	Q_UNUSED(index);
 
-	ICollectionNode *node = (ICollectionNode *)index.internalPointer();
+	ICollectionNode *node = getNode(index);
 
-	if (node)
-	{
-		return node->title();
-	}
+	return node->title();
+}
 
-	return "Artists";
+QString CollectionModel::getHeaderTemplate(const QModelIndex &index) const
+{
+	ICollectionNode *node = getNode(index);
+
+	return node->headerTemplate();
 }
 
 QObject *CollectionModel::getParentNode(const QModelIndex &index) const
@@ -213,4 +161,9 @@ QObject *CollectionModel::getParentNode(const QModelIndex &index) const
 	ICollectionNodeProxy *proxy = new ICollectionNodeProxy(node);
 
 	return proxy;
+}
+
+ICollectionNode *CollectionModel::getNode(const QModelIndex &index) const
+{
+	return (ICollectionNode *)index.internalPointer() ?: m_root;
 }

@@ -5,9 +5,8 @@
 #include "CollectionAlbumNode.h"
 #include "CollectionArtistNode.h"
 
-CollectionArtistNode::CollectionArtistNode(const QString &grouping, const QJsonObject &object, ICollectionNode *parent, CollectionModel *model, int index)
-	: CollectionNodeBase(parent, model, index)
-	, m_grouping(grouping)
+CollectionArtistNode::CollectionArtistNode(const QString &grouping, const QJsonObject &object)
+	: m_grouping(grouping)
 	, m_object(object)
 {
 
