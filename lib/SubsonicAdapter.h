@@ -85,6 +85,17 @@ class SubsonicAdapter : public QObject
 			return *this;
 		}
 
+		template<class TInstance>
+		SubsonicAdapter &search2(const QString &query, TInstance *instance, JsonCallback<TInstance> callback)
+		{
+			m_requestFactory
+				.request("search2.view"
+					, api::query = query)
+				.callback(instance, callback);
+
+			return *this;
+		}
+
 	private:
 		Settings m_settings;
 		RequestFactory m_requestFactory;

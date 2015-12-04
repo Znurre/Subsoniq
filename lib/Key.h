@@ -26,6 +26,7 @@ namespace api
 	const Key c = "c";
 	const Key f = "f";
 	const Key id = "id";
+	const Key query = "query";
 	const Key submission = "submission";
 	const Key format = "format";
 	const Key maxBitRate = "maxBitRate";
