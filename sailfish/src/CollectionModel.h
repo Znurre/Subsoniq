@@ -1,9 +1,7 @@
 #ifndef COLLECTIONMODEL_H
 #define COLLECTIONMODEL_H
 
-#include <QAbstractItemModel>
-
-#include "JsonResponseTransformer.h"
+#include "SubsoniqModelBase.h"
 #include "CollectionRootNode.h"
 #include "SubsonicAdapter.h"
 #include "ICollectionModel.h"
@@ -11,45 +9,16 @@
 class ICollectionNode;
 
 class CollectionModel
-	: public QAbstractItemModel
+	: public SubsoniqModelBase
 	, public ICollectionModel
 {
-	Q_OBJECT
-
-	Q_PROPERTY(int status READ status NOTIFY statusChanged)
-
-	Q_ENUMS(Status)
-
 	public:
-		enum Roles
-		{
-			ModelData = Qt::UserRole,
-			Title = Qt::UserRole + 1,
-			Icon = Qt::UserRole + 2,
-			ViewTemplate = Qt::UserRole + 3,
-			CoverUrl = Qt::UserRole + 4,
-			Grouping = Qt::UserRole + 5,
-			ModelIndex = Qt::UserRole + 6
-		};
-
-		enum Status
-		{
-			Loading,
-			Finished
-		};
-
 		CollectionModel();
 
-		int status() const;
-		void setStatus(int status);
-
-		QHash<int, QByteArray> roleNames() const override;
-
 		QModelIndex index(int row, int column, const QModelIndex &parent) const override;
-		QModelIndex parent(const QModelIndex &child) const override;
 
+		int status() const;
 		int rowCount(const QModelIndex &parent) const override;
-		int columnCount(const QModelIndex &parent) const override;
 
 		QVariant data(const QModelIndex &index, int role) const override;
 
@@ -68,11 +37,6 @@ class CollectionModel
 		CollectionRootNode *m_root;
 
 		SubsonicAdapter m_adapter;
-
-		int m_status;
-
-	signals:
-		void statusChanged();
 };
 
 #endif // COLLECTIONMODEL_H

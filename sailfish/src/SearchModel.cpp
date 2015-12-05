@@ -6,40 +6,9 @@
 #include "NodeHelper.h"
 #include "SearchModel.h"
 
-SearchModel::SearchModel()
-	: m_status(0)
-{
-}
-
 SearchModel::~SearchModel()
 {
 	qDeleteAll(m_nodes);
-}
-
-int SearchModel::status() const
-{
-	return m_status;
-}
-
-void SearchModel::setStatus(int status)
-{
-	m_status = status;
-
-	emit statusChanged();
-}
-
-QHash<int, QByteArray> SearchModel::roleNames() const
-{
-	return
-	{
-		{ Roles::ModelData, "modelData" },
-		{ Roles::Title, "name" },
-		{ Roles::Icon, "icon" },
-		{ Roles::ViewTemplate, "viewTemplate" },
-		{ Roles::CoverUrl, "coverUrl" },
-		{ Roles::Grouping, "grouping" },
-		{ Roles::ModelIndex, "modelIndex" }
-	};
 }
 
 QModelIndex SearchModel::index(int row, int column, const QModelIndex &parent) const
@@ -49,13 +18,6 @@ QModelIndex SearchModel::index(int row, int column, const QModelIndex &parent) c
 	ICollectionNode *node = m_nodes[row];
 
 	return createIndex(row, column, node);
-}
-
-int SearchModel::rowCount(const QModelIndex &parent) const
-{
-	Q_UNUSED(parent);
-
-	return m_nodes.count();
 }
 
 QVariant SearchModel::data(const QModelIndex &index, int role) const
@@ -101,6 +63,13 @@ QVariant SearchModel::data(const QModelIndex &index, int role) const
 	}
 
 	return QVariant();
+}
+
+int SearchModel::rowCount(const QModelIndex &parent) const
+{
+	Q_UNUSED(parent);
+
+	return m_nodes.count();
 }
 
 void SearchModel::search(const QString &query)

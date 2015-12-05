@@ -10,35 +10,13 @@
 
 CollectionModel::CollectionModel()
 	: m_root(&m_scopedRoot)
-	, m_status(Finished)
 {
 
 }
 
 int CollectionModel::status() const
 {
-	return m_status;
-}
-
-void CollectionModel::setStatus(int status)
-{
-	m_status = status;
-
-	emit statusChanged();
-}
-
-QHash<int, QByteArray> CollectionModel::roleNames() const
-{
-	return
-	{
-		{ Roles::ModelData, "modelData" },
-		{ Roles::Title, "name" },
-		{ Roles::Icon, "icon" },
-		{ Roles::ViewTemplate, "viewTemplate" },
-		{ Roles::CoverUrl, "coverUrl" },
-		{ Roles::Grouping, "grouping" },
-		{ Roles::ModelIndex, "modelIndex" }
-	};
+	return SubsoniqModelBase::status();
 }
 
 QModelIndex CollectionModel::index(int row, int column, const QModelIndex &parent) const
@@ -49,25 +27,11 @@ QModelIndex CollectionModel::index(int row, int column, const QModelIndex &paren
 	return createIndex(row, column, childNode);
 }
 
-QModelIndex CollectionModel::parent(const QModelIndex &child) const
-{
-	Q_UNUSED(child);
-
-	return QModelIndex();
-}
-
 int CollectionModel::rowCount(const QModelIndex &parent) const
 {
 	ICollectionNode *node = getNode(parent);
 
 	return node->childCount();
-}
-
-int CollectionModel::columnCount(const QModelIndex &parent) const
-{
-	Q_UNUSED(parent);
-
-	return 1;
 }
 
 QVariant CollectionModel::data(const QModelIndex &index, int role) const
