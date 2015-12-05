@@ -28,7 +28,8 @@ class CollectionModel
 			Icon = Qt::UserRole + 2,
 			ViewTemplate = Qt::UserRole + 3,
 			CoverUrl = Qt::UserRole + 4,
-			Grouping = Qt::UserRole + 5
+			Grouping = Qt::UserRole + 5,
+			ModelIndex = Qt::UserRole + 6
 		};
 
 		enum Status

@@ -34,7 +34,8 @@ SOURCES += src/sailfish.cpp \
     src/HighlightsModel.cpp \
     src/NodeHelper.cpp \
     src/CollectionModelProxy.cpp \
-    src/SearchModel.cpp
+    src/SearchModel.cpp \
+    src/TypeGroupingResolver.cpp
 
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
@@ -83,7 +84,8 @@ HEADERS += \
     src/NodeHelper.h \
     src/CollectionModelProxy.h \
     src/ICollectionModel.h \
-    src/SearchModel.h
+    src/SearchModel.h \
+    src/TypeGroupingResolver.h
 
 resources.files = icon-s-album.png icon-s-playlist.png
 resources.path = /usr/share/$${TARGET}

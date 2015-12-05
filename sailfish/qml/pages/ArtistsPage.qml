@@ -5,9 +5,6 @@ import harbour.subsoniq 1.0
 
 SubsoniqPage
 {
-	property var index: null
-	property var parentNode: collectionModel.getParentNode(index)
-
 	id: page
 
 	CollectionModelProxy
@@ -72,7 +69,6 @@ SubsoniqPage
 		{
 			id: visualDataModel
 			model: collectionModel
-			rootIndex: index
 
 			delegate: Loader
 			{

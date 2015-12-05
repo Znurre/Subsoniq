@@ -7,6 +7,11 @@ SubsoniqPage
 {
 	id: page
 
+	SearchModel
+	{
+		id: searchModel
+	}
+
 	SilicaListView
 	{
 		anchors
@@ -31,10 +36,34 @@ SubsoniqPage
 			}
 		}
 
-		ViewPlaceholder
+		header: SearchField
 		{
-			text: "Nothing here yet"
-			enabled: true
+			id: searchField
+			width: parent.width
+			placeholderText: "Search"
+
+			Keys.onReturnPressed: searchModel.search(searchField.text)
+		}
+
+		section
+		{
+			property: "grouping"
+			delegate: SectionHeader
+			{
+				text: section
+			}
+		}
+
+		model: VisualDataModel
+		{
+			id: visualDataModel
+			model: searchModel
+
+			delegate: Loader
+			{
+				id: loader
+				source: viewTemplate
+			}
 		}
 	}
 }

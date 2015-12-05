@@ -8,7 +8,7 @@ BackgroundItem
 
 	onClicked:
 	{
-		pageStack.push("CollectionPage.qml", { index: visualDataModel.modelIndex(index) })
+		pageStack.push("CollectionPage.qml", { index: modelIndex })
 		pageStack.pushAttached(playlistPage)
 	}
 

@@ -3,15 +3,12 @@ import Sailfish.Silica 1.0
 
 BackgroundItem
 {
-	property var proxyIndex: visualDataModel.modelIndex(index)
-	property var sourceIndex: collectionModel.mapToSource(proxyIndex)
-
 	width: page.width
 	height: Theme.itemSizeSmall
 
 	onClicked:
 	{
-		pageStack.push("CollectionPage.qml", { index: sourceIndex })
+		pageStack.push("CollectionPage.qml", { index: modelIndex })
 		pageStack.pushAttached(playlistPage)
 	}
 

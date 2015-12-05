@@ -36,7 +36,8 @@ QHash<int, QByteArray> CollectionModel::roleNames() const
 		{ Roles::Icon, "icon" },
 		{ Roles::ViewTemplate, "viewTemplate" },
 		{ Roles::CoverUrl, "coverUrl" },
-		{ Roles::Grouping, "grouping" }
+		{ Roles::Grouping, "grouping" },
+		{ Roles::ModelIndex, "modelIndex" }
 	};
 }
 
@@ -103,6 +104,11 @@ QVariant CollectionModel::data(const QModelIndex &index, int role) const
 		case Roles::Grouping:
 		{
 			return node->grouping();
+		}
+
+		case Roles::ModelIndex:
+		{
+			return index;
 		}
 	}
 

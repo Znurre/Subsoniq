@@ -7,6 +7,7 @@
 /usr/src/debug/moc_CollectionModel.cpp
 /usr/src/debug/moc_MediaControlsViewModel.cpp
 /usr/src/debug/moc_ICollectionNode.cpp
+/usr/src/debug/moc_SearchModel.cpp
 /usr/src/debug/moc_CollectionNodeBase.cpp
 /usr/src/debug/moc_SettingsPageViewModel.cpp
 /usr/src/debug/moc_PlaylistModel.cpp

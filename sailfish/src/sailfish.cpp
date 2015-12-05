@@ -39,11 +39,12 @@
 #include "MediaControlsViewModel.h"
 #include "MainViewModel.h"
 
+#include "Track.h"
 #include "CollectionModel.h"
 #include "CollectionModelProxy.h"
 #include "HighlightsModel.h"
 #include "CoverArtImageProvider.h"
-#include "Track.h"
+#include "SearchModel.h"
 #include "MetadataController.h"
 #include "ICollectionNode.h"
 #include "ICollectionNodeProxy.h"
@@ -57,6 +58,7 @@ int main(int argc, char *argv[])
 	qmlRegisterType<CollectionModel>("harbour.subsoniq", 1, 0, "CollectionModel");
 	qmlRegisterType<CollectionModelProxy>("harbour.subsoniq", 1, 0, "CollectionModelProxy");
 	qmlRegisterType<HighlightsModel>("harbour.subsoniq", 1, 0, "HighlightsModel");
+	qmlRegisterType<SearchModel>("harbour.subsoniq", 1, 0, "SearchModel");
 //	qmlRegisterType<MetadataController>("harbour.subsoniq", 1, 0, "MetadataController");
 
 	qmlRegisterType<Player>();
