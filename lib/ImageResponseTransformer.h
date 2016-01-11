@@ -9,7 +9,7 @@ template<class TInstance>
 class ImageResponseTransformer : public ResponseTransformerBase<TInstance, QImage>
 {
 	public:
-		ImageResponseTransformer(TInstance *instance, ImageCallback<TInstance> callback, QNetworkReply *reply, QEventLoop &loop)
+		ImageResponseTransformer(TInstance *instance, ImageCallback<TInstance> callback, QNetworkReply *reply, QEventLoop *loop)
 			: ResponseTransformerBase<TInstance, QImage>(instance, callback, reply, loop)
 		{
 

@@ -12,6 +12,8 @@ class CollectionModel
 	: public SubsoniqModelBase
 	, public ICollectionModel
 {
+	Q_OBJECT
+
 	public:
 		CollectionModel();
 

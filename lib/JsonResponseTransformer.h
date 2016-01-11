@@ -10,7 +10,7 @@ template<class TInstance>
 class JsonResponseTransformer : public ResponseTransformerBase<TInstance, QJsonObject>
 {
 	public:
-		JsonResponseTransformer(TInstance *instance, JsonCallback<TInstance> callback, QNetworkReply *reply, QEventLoop &loop)
+		JsonResponseTransformer(TInstance *instance, JsonCallback<TInstance> callback, QNetworkReply *reply, QEventLoop *loop)
 			: ResponseTransformerBase<TInstance, QJsonObject>(instance, callback, reply, loop)
 		{
 

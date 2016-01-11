@@ -22,10 +22,20 @@ class Request
 			QNetworkReply *reply = m_network.get(m_request);
 
 			m_responseTransformerFactory
-				.create(instance, callback, reply, loop)
+				.create(instance, callback, reply, &loop)
 				.connect(reply, &QNetworkReply::finished, &IResponseTransformer::handle);
 
 			loop.exec();
+		}
+
+		template<class TInstance, class TCallback>
+		void asyncCallback(TInstance *instance, TCallback callback)
+		{
+			QNetworkReply *reply = m_network.get(m_request);
+
+			m_responseTransformerFactory
+				.create(instance, callback, reply, nullptr)
+				.connect(reply, &QNetworkReply::finished, &IResponseTransformer::handle);
 		}
 
 		QNetworkReply *stream();

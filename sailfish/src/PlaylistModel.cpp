@@ -29,8 +29,8 @@ QHash<int, QByteArray> PlaylistModel::roleNames() const
 		{ Roles::ModelData, "modelData", },
 		{ Roles::Artist, "artist" },
 		{ Roles::Title, "title" },
-		{ Roles::CoverUrl, "coverUrl" },
-		{ Roles::IsPlaying, "isPlaying" }
+		{ Roles::IsPlaying, "isPlaying" },
+		{ Roles::NodeId, "nodeId" }
 	};
 }
 
@@ -65,17 +65,14 @@ QVariant PlaylistModel::data(const QModelIndex &index, int role) const
 			return track->title();
 		}
 
-		case Roles::CoverUrl:
-		{
-			const QString &id = track->coverArt();
-			const QString &url = QStringEx::format("image://cover/%1?64", id);
-
-			return url;
-		}
-
 		case Roles::IsPlaying:
 		{
 			return node == m_playlist.current();
+		}
+
+		case Roles::NodeId:
+		{
+			return track->id();
 		}
 	}
 

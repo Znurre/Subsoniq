@@ -59,11 +59,6 @@ SubsoniqPage
 				width: parent.width
 				text: model.serverUrl
 
-				font
-				{
-					capitalization: Font.AllLowercase
-				}
-
 				Binding
 				{
 					target: model

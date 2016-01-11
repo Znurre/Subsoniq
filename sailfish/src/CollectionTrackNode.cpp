@@ -13,12 +13,27 @@ QIcon CollectionTrackNode::icon() const
 	return QIcon();
 }
 
+QString CollectionTrackNode::trackNumber() const
+{
+	const int value = m_object
+		.value("track")
+		.toInt();
+
+	return QString::number(value);
+}
+
+QString CollectionTrackNode::artist() const
+{
+	return m_object
+		.value("artist")
+		.toString();
+}
+
 QString CollectionTrackNode::title() const
 {
-	const QJsonValue &track = m_object.value("track");
-	const QJsonValue &title = m_object.value("title");
-
-	return QStringEx::format("%1 - %2", track, title);
+	return m_object
+		.value("title")
+		.toString();
 }
 
 QString CollectionTrackNode::viewTemplate() const

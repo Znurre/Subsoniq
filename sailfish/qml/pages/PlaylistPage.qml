@@ -50,7 +50,7 @@ Page
 
 			onClicked: main.player.play(modelData)
 
-			Image
+			CoverImage
 			{
 				anchors
 				{
@@ -61,9 +61,8 @@ Page
 				}
 
 				id: image
-				source: coverUrl
+				coverId: nodeId
 				width: Theme.itemSizeSmall - (Theme.paddingSmall * 2)
-				asynchronous: true
 
 				BusyIndicator
 				{
@@ -72,7 +71,7 @@ Page
 						fill: parent
 					}
 
-					running: image.status === Image.Loading
+					running: !image.isReady
 				}
 			}
 

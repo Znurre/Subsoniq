@@ -10,20 +10,21 @@ CoverArtImageProvider::CoverArtImageProvider()
 
 QImage CoverArtImageProvider::requestImage(const QString &id, QSize *size, const QSize &requestedSize)
 {
+	Q_UNUSED(id);
 	Q_UNUSED(size);
 	Q_UNUSED(requestedSize);
 
-	const QUrl url(id, QUrl::TolerantMode);
+//	const QUrl url(id, QUrl::TolerantMode);
 
-	const QString &i = url.path();
-	const QString &s = url.query();
+//	const QString &imageId = url.path();
+//	const QString &imageSize = url.query();
 
-	qDebug() << i << s;
+//	ImageResponseObject iro;
+//	SubsonicAdapter adapter;
 
-	ImageResponseObject iro;
-	SubsonicAdapter adapter;
+//	adapter.getCoverArt(imageId, imageSize, &iro, &ImageResponseObject::response);
 
-	adapter.getCoverArt(i, s, &iro, &ImageResponseObject::response);
+//	return iro.image();
 
-	return iro.image();
+	return QImage();
 }

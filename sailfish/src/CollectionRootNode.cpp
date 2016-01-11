@@ -45,7 +45,7 @@ QString CollectionRootNode::grouping() const
 
 ICollectionNode *CollectionRootNode::childAt(int index) const
 {
-	return m_children[index];
+	return m_children.value(index);
 }
 
 Track *CollectionRootNode::track()

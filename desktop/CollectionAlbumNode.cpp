@@ -10,11 +10,11 @@ CollectionAlbumNode::CollectionAlbumNode(const QJsonObject &object, ICollectionN
 //	connect(&m_adapter, &SubsonicAdapter::finished, &m_transformer, &IResponseTransformer::handle);
 //	connect(&m_transformer, &ImageResponseTransformer::response, this, &CollectionAlbumNode::imageResponse);
 
-	const QString &coverArtId = object
-		.value("coverArt")
-		.toString();
+//	const QString &coverArtId = object
+//		.value("coverArt")
+//		.toString();
 
-	m_adapter.getCoverArt(coverArtId, "64", this, &CollectionAlbumNode::imageResponse);
+//	m_adapter.getCoverArt(coverArtId, "64", this, &CollectionAlbumNode::imageResponse);
 }
 
 QIcon CollectionAlbumNode::icon() const

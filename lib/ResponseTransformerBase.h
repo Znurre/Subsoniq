@@ -11,7 +11,7 @@ template<class TInstance, class TResult>
 class ResponseTransformerBase : public IResponseTransformer
 {
 	public:
-		ResponseTransformerBase(TInstance *instance, ResponseCallback<TInstance, TResult> callback, QNetworkReply *reply, QEventLoop &loop)
+		ResponseTransformerBase(TInstance *instance, ResponseCallback<TInstance, TResult> callback, QNetworkReply *reply, QEventLoop *loop)
 			: m_reply(reply)
 			, m_loop(loop)
 			, m_instance(instance)
@@ -31,7 +31,10 @@ class ResponseTransformerBase : public IResponseTransformer
 
 			(m_instance->*m_callback)(value);
 
-			m_loop.quit();
+			if (m_loop)
+			{
+				m_loop->quit();
+			}
 
 			delete this;
 		}
@@ -41,7 +44,7 @@ class ResponseTransformerBase : public IResponseTransformer
 
 	private:
 		QNetworkReply *m_reply;
-		QEventLoop &m_loop;
+		QEventLoop *m_loop;
 
 		TInstance *m_instance;
 		ResponseCallback<TInstance, TResult> m_callback;

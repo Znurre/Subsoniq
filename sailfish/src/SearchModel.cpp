@@ -46,9 +46,9 @@ QVariant SearchModel::data(const QModelIndex &index, int role) const
 			return node->viewTemplate();
 		}
 
-		case Roles::CoverUrl:
+		case Roles::NodeId:
 		{
-			return NodeHelper::getCoverUrl(node, "64");
+			return node->id();
 		}
 
 		case Roles::Grouping:

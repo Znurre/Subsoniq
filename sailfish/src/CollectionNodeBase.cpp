@@ -20,7 +20,7 @@ CollectionNodeBase::~CollectionNodeBase()
 
 ICollectionNode *CollectionNodeBase::childAt(int index) const
 {
-	return m_children[index];
+	return m_children.value(index);
 }
 
 Track *CollectionNodeBase::track()

@@ -20,7 +20,7 @@ class SubsoniqModelBase : public QAbstractItemModel
 			Title = Qt::UserRole + 1,
 			Icon = Qt::UserRole + 2,
 			ViewTemplate = Qt::UserRole + 3,
-			CoverUrl = Qt::UserRole + 4,
+			NodeId = Qt::UserRole + 4,
 			Grouping = Qt::UserRole + 5,
 			ModelIndex = Qt::UserRole + 6
 		};

@@ -19,8 +19,8 @@ class PlaylistModel : public QAbstractListModel
 			ModelData = Qt::UserRole,
 			Artist = Qt::UserRole + 1,
 			Title = Qt::UserRole + 2,
-			CoverUrl = Qt::UserRole + 3,
-			IsPlaying = Qt::UserRole + 4
+			IsPlaying = Qt::UserRole + 3,
+			NodeId = Qt::UserRole + 4
 		};
 
 		PlaylistModel(Playlist &playlist);

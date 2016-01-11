@@ -1,6 +1,8 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
+import harbour.subsoniq 1.0
+
 BackgroundItem
 {
 	width: page.width
@@ -12,7 +14,7 @@ BackgroundItem
 		pageStack.pushAttached(playlistPage)
 	}
 
-	Image
+	CoverImage
 	{
 		anchors
 		{
@@ -23,9 +25,8 @@ BackgroundItem
 		}
 
 		id: image
-		source: coverUrl
+		coverId: nodeId
 		width: Theme.itemSizeSmall - (Theme.paddingSmall * 2)
-		asynchronous: true
 
 		BusyIndicator
 		{
@@ -34,7 +35,7 @@ BackgroundItem
 				fill: parent
 			}
 
-			running: image.status === Image.Loading
+			running: !image.isReady
 		}
 	}
 

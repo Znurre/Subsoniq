@@ -21,7 +21,7 @@ ApplicationWindow
 		{
 			title: "Settings"
 			pageUrl: "SettingsPage.qml"
-			icon: "image://theme/icon-s-setting"
+			icon: "../../icon-s-setting.png"
 		}
 
 //		ListElement
@@ -41,14 +41,14 @@ ApplicationWindow
 		{
 			title: "Artists"
 			pageUrl: "ArtistsPage.qml"
-			icon: "image://theme/icon-cover-people"
+			icon: "../../icon-s-artists.png"
 		}
 
 		ListElement
 		{
 			title: "Search"
 			pageUrl: "SearchPage.qml"
-			icon: "image://theme/icon-cover-search"
+			icon: "../../icon-s-search.png"
 		}
 	}
 

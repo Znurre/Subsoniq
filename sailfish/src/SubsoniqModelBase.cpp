@@ -15,7 +15,7 @@ QHash<int, QByteArray> SubsoniqModelBase::roleNames() const
 		{ Title, "name" },
 		{ Icon, "icon" },
 		{ ViewTemplate, "viewTemplate" },
-		{ CoverUrl, "coverUrl" },
+		{ NodeId, "nodeId" },
 		{ Grouping, "grouping" },
 		{ ModelIndex, "modelIndex" }
 	};

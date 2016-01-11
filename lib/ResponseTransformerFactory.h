@@ -14,13 +14,13 @@ class ResponseTransformerFactory
 {
 	public:
 		template<class TInstance>
-		IResponseTransformer &create(TInstance *instance, JsonCallback<TInstance> callback, QNetworkReply *reply, QEventLoop &loop)
+		IResponseTransformer &create(TInstance *instance, JsonCallback<TInstance> callback, QNetworkReply *reply, QEventLoop *loop)
 		{
 			return *new JsonResponseTransformer<TInstance>(instance, callback, reply, loop);
 		}
 
 		template<class TInstance>
-		IResponseTransformer &create(TInstance *instance, ImageCallback<TInstance> callback, QNetworkReply *reply, QEventLoop &loop)
+		IResponseTransformer &create(TInstance *instance, ImageCallback<TInstance> callback, QNetworkReply *reply, QEventLoop *loop)
 		{
 			return *new ImageResponseTransformer<TInstance>(instance, callback, reply, loop);
 		}

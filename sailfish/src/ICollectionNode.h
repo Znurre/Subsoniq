@@ -31,6 +31,11 @@ class ICollectionNode : public QObject
 		virtual bool canFetchMore() const = 0;
 
 		virtual void fetchMore() = 0;
+
+		operator QString() const
+		{
+			return id();
+		}
 };
 
 #endif // ICOLLECTIONNODE

@@ -32,7 +32,6 @@
 #include <QtQuick>
 #endif
 
-#include <PlaylistNode.h>
 #include <sailfishapp.h>
 
 #include "SettingsPageViewModel.h"
@@ -48,12 +47,15 @@
 #include "MetadataController.h"
 #include "ICollectionNode.h"
 #include "ICollectionNodeProxy.h"
+#include "CoverImage.h"
+#include "PlaylistNode.h"
 
 int main(int argc, char *argv[])
 {
 	qmlRegisterType<SettingsPageViewModel>("harbour.subsoniq", 1, 0, "SettingsPageViewModel");
 	qmlRegisterType<MainViewModel>("harbour.subsoniq", 1, 0, "MainViewModel");
 	qmlRegisterType<MediaControlsViewModel>("harbour.subsoniq", 1, 0, "MediaControlsViewModel");
+	qmlRegisterType<CoverImage>("harbour.subsoniq", 1, 0, "CoverImage");
 
 	qmlRegisterType<CollectionModel>("harbour.subsoniq", 1, 0, "CollectionModel");
 	qmlRegisterType<CollectionModelProxy>("harbour.subsoniq", 1, 0, "CollectionModelProxy");

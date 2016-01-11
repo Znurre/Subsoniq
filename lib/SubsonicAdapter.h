@@ -47,7 +47,7 @@ class SubsonicAdapter : public QObject
 				.request("getCoverArt.view"
 					, api::id = id
 					, api::size = size)
-				.callback(instance, callback);
+				.asyncCallback(instance, callback);
 
 			return *this;
 		}
