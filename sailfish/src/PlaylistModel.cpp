@@ -13,6 +13,7 @@ PlaylistModel::PlaylistModel(Playlist &playlist)
 
 	connect(&playlist, &Playlist::nodeChanged, this, &PlaylistModel::onNodeChanged);
 	connect(&playlist, &Playlist::nodeAppended, this, &PlaylistModel::onNodeAppended);
+	connect(&playlist, &Playlist::nodeRemoved, this, &PlaylistModel::onNodeRemoved);
 }
 
 int PlaylistModel::rowCount(const QModelIndex &parent) const
@@ -109,6 +110,11 @@ void PlaylistModel::addAll(ICollectionNode *parent)
 	}
 }
 
+void PlaylistModel::remove(PlaylistNode *node)
+{
+	m_playlist.remove(node);
+}
+
 void PlaylistModel::clear()
 {
 	m_playlist.clear();
@@ -128,6 +134,13 @@ void PlaylistModel::onNodeAppended(int index)
 	beginInsertRows(NoParent, index, index);
 
 	endInsertRows();
+}
+
+void PlaylistModel::onNodeRemoved(int index)
+{
+	beginRemoveRows(NoParent, index, index);
+
+	endRemoveRows();
 }
 
 void PlaylistModel::onPlaylistChanged()

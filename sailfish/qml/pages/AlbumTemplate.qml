@@ -22,6 +22,7 @@ BackgroundItem
 			top: parent.top
 			bottom: parent.bottom
 			margins: Theme.paddingSmall
+			leftMargin: Theme.paddingLarge
 		}
 
 		id: image

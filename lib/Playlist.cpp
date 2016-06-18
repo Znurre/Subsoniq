@@ -31,7 +31,7 @@ void Playlist::add(Track *track)
 
 void Playlist::remove(PlaylistNode *node)
 {
-	const int index = count();
+	const int index = m_playlist.indexOf(node);
 
 	if (m_end == node)
 	{
@@ -41,6 +41,14 @@ void Playlist::remove(PlaylistNode *node)
 	if (m_current == node)
 	{
 		m_current = nullptr;
+	}
+
+	PlaylistNode *parent = node->parent();
+	PlaylistNode *child = node->child();
+
+	if (parent)
+	{
+		parent->attach(child);
 	}
 
 	m_playlist.removeAll(node);
@@ -82,7 +90,7 @@ PlaylistNode *Playlist::current() const
 
 PlaylistNode *Playlist::nodeAt(int index) const
 {
-	return m_playlist[index];
+	return m_playlist.value(index);
 }
 
 int Playlist::count() const

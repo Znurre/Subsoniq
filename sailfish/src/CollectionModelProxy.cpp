@@ -4,6 +4,7 @@ CollectionModelProxy::CollectionModelProxy()
 {
 	setSourceModel(&m_subject);
 	setFilterRole(CollectionModel::Title);
+	setFilterCaseSensitivity(Qt::CaseInsensitive);
 
 	connect(&m_subject, &CollectionModel::statusChanged, this, &CollectionModelProxy::statusChanged);
 }

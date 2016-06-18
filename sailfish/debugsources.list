@@ -1,4 +1,5 @@
 /usr/src/debug/src
+/usr/src/debug/moc_PlaylistPageViewModel.cpp
 /usr/src/debug/home
 /usr/src/debug/moc_CoverImage.cpp
 /usr/src/debug/moc_ICollectionNodeProxy.cpp

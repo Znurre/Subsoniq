@@ -65,6 +65,7 @@ SubsoniqPage
 			}
 		}
 
+		currentIndex: -1
 		model: VisualDataModel
 		{
 			id: visualDataModel

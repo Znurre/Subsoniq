@@ -78,14 +78,14 @@ CoverBackground
 
 		CoverAction
 		{
-			iconSource: "image://theme/icon-cover-next-song"
-			onTriggered: main.player.next()
+			iconSource: model.playPauseIcon
+			onTriggered: model.playPause()
 		}
 
 		CoverAction
 		{
-			iconSource: model.playPauseIcon
-			onTriggered: model.playPause()
+			iconSource: "image://theme/icon-cover-next-song"
+			onTriggered: main.player.next()
 		}
 	}
 }

@@ -37,7 +37,8 @@ SOURCES += src/sailfish.cpp \
     src/SearchModel.cpp \
     src/TypeGroupingResolver.cpp \
     src/SubsoniqModelBase.cpp \
-    src/CoverImage.cpp
+    src/CoverImage.cpp \
+    src/PlaylistPageViewModel.cpp
 
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
@@ -89,7 +90,8 @@ HEADERS += \
     src/SearchModel.h \
     src/TypeGroupingResolver.h \
     src/SubsoniqModelBase.h \
-    src/CoverImage.h
+    src/CoverImage.h \
+    src/PlaylistPageViewModel.h
 
 resources.files = icon-s-album.png icon-s-playlist.png icon-s-artists.png icon-s-search.png icon-s-setting.png
 resources.path = /usr/share/$${TARGET}

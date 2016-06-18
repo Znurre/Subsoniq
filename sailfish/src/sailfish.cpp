@@ -36,6 +36,7 @@
 
 #include "SettingsPageViewModel.h"
 #include "MediaControlsViewModel.h"
+#include "PlaylistPageViewModel.h"
 #include "MainViewModel.h"
 
 #include "Track.h"
@@ -53,6 +54,7 @@
 int main(int argc, char *argv[])
 {
 	qmlRegisterType<SettingsPageViewModel>("harbour.subsoniq", 1, 0, "SettingsPageViewModel");
+	qmlRegisterType<PlaylistPageViewModel>("harbour.subsoniq", 1, 0, "PlaylistPageViewModel");
 	qmlRegisterType<MainViewModel>("harbour.subsoniq", 1, 0, "MainViewModel");
 	qmlRegisterType<MediaControlsViewModel>("harbour.subsoniq", 1, 0, "MediaControlsViewModel");
 	qmlRegisterType<CoverImage>("harbour.subsoniq", 1, 0, "CoverImage");
