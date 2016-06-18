@@ -28,7 +28,8 @@ class SubsoniqModelBase : public QAbstractItemModel
 		enum Status
 		{
 			Loading,
-			Finished
+			Finished,
+			Empty
 		};
 
 		SubsoniqModelBase();

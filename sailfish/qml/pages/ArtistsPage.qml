@@ -42,6 +42,12 @@ SubsoniqPage
 			running: collectionModel.status === CollectionModel.Loading
 		}
 
+		ViewPlaceholder
+		{
+			enabled: collectionModel.status === CollectionModel.Empty
+			text: "Your library is empty"
+		}
+
 		anchors
 		{
 			fill: parent
@@ -49,8 +55,14 @@ SubsoniqPage
 
 		header: SearchField
 		{
+			anchors
+			{
+				left: parent.left
+				right: parent.right
+				rightMargin: Theme.paddingLarge
+			}
+
 			id: searchField
-			width: parent.width
 			placeholderText: "Filter"
 
 			onTextChanged: collectionModel.setFilterFixedString(searchField.text)

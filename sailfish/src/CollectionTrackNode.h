@@ -32,8 +32,7 @@ class CollectionTrackNode : public ICollectionNode
 
 		bool hasChildren() const override;
 		bool canFetchMore() const override;
-
-		void fetchMore() override;
+		bool fetchMore() override;
 
 	private:
 		Track m_track;

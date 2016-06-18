@@ -78,7 +78,7 @@ bool CollectionTrackNode::canFetchMore() const
 	return false;
 }
 
-void CollectionTrackNode::fetchMore()
+bool CollectionTrackNode::fetchMore()
 {
-
+	return true;
 }

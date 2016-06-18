@@ -38,8 +38,14 @@ SubsoniqPage
 
 		header: SearchField
 		{
+			anchors
+			{
+				left: parent.left
+				right: parent.right
+				rightMargin: Theme.paddingLarge
+			}
+
 			id: searchField
-			width: parent.width
 			placeholderText: "Search"
 
 			Keys.onReturnPressed: searchModel.search(searchField.text)

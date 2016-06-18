@@ -101,7 +101,10 @@ void CollectionModel::fetchMore(const QModelIndex &parent)
 
 	if (node)
 	{
-		node->fetchMore();
+		if (!node->fetchMore())
+		{
+			return setStatus(Empty);
+		}
 	}
 
 	setStatus(Finished);

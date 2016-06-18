@@ -43,9 +43,11 @@ bool CollectionNodeBase::canFetchMore() const
 	return m_canFetchMore;
 }
 
-void CollectionNodeBase::fetchMore()
+bool CollectionNodeBase::fetchMore()
 {
 	m_adapter.getMusicDirectory(id(), this, &CollectionNodeBase::response);
+
+	return !m_children.isEmpty();
 }
 
 void CollectionNodeBase::response(const QJsonObject &envelope)

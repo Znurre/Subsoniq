@@ -29,8 +29,7 @@ class ICollectionNode : public QObject
 
 		virtual bool hasChildren() const = 0;
 		virtual bool canFetchMore() const = 0;
-
-		virtual void fetchMore() = 0;
+		virtual bool fetchMore() = 0;
 
 		operator QString() const
 		{

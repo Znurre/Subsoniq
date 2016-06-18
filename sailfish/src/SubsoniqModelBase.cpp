@@ -2,7 +2,7 @@
 #include "ICollectionNode.h"
 
 SubsoniqModelBase::SubsoniqModelBase()
-	: m_status(Loading)
+	: m_status(Finished)
 {
 
 }

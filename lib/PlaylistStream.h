@@ -43,6 +43,7 @@ class PlaylistStream : public QIODevice
 		void onBufferUnderrun();
 		void onReadyRead(QNetworkReply *reply);
 		void onFinished(QNetworkReply *reply);
+		void onError();
 
 		mutable QWaitCondition m_wait;
 		mutable QMutex m_waitMutex;

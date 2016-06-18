@@ -68,9 +68,11 @@ bool CollectionRootNode::canFetchMore() const
 	return m_canFetchMore;
 }
 
-void CollectionRootNode::fetchMore()
+bool CollectionRootNode::fetchMore()
 {
 	m_adapter.getIndexes(this, &CollectionRootNode::response);
+
+	return !m_children.isEmpty();
 }
 
 void CollectionRootNode::response(const QJsonObject &envelope)

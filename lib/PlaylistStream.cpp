@@ -38,6 +38,7 @@ void PlaylistStream::queue(PlaylistNode *node)
 
 		connect(reply, &QNetworkReply::readyRead, readyRead, &ISenderInjector::invoke);
 		connect(reply, &QNetworkReply::finished, finished, &ISenderInjector::invoke);
+		connect(reply, (void (QNetworkReply::*)(QNetworkReply::NetworkError))&QNetworkReply::error, this, &PlaylistStream::onError);
 
 		m_status = Buffering;
 	}
@@ -123,9 +124,19 @@ void PlaylistStream::onReadyRead(QNetworkReply *reply)
 
 void PlaylistStream::onFinished(QNetworkReply *reply)
 {
-	m_status = Idle;
+	if (m_status != End)
+	{
+		m_status = Idle;
+	}
 
 	reply->deleteLater();
+}
+
+void PlaylistStream::onError()
+{
+	qDebug() << "Error";
+
+	m_status = End;
 }
 
 qint64 PlaylistStream::readData(char *data, qint64 maxlen)

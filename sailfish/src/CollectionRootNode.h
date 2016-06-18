@@ -29,8 +29,7 @@ class CollectionRootNode : public ICollectionNode
 
 		bool hasChildren() const override;
 		bool canFetchMore() const override;
-
-		void fetchMore() override;
+		bool fetchMore() override;
 
 	private:
 		void response(const QJsonObject &envelope);

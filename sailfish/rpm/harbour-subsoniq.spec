@@ -14,7 +14,7 @@ Name:       harbour-subsoniq
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    Subsoniq
 Version:    0.1
-Release:    5
+Release:    2
 Group:      Qt/Qt
 License:    LICENSE
 URL:        http://example.org/
@@ -66,6 +66,6 @@ desktop-file-install --delete-original       \
 %{_bindir}
 %{_datadir}/%{name}
 %{_datadir}/applications/%{name}.desktop
-%{_datadir}/icons/hicolor/86x86/apps/%{name}.png
+%{_datadir}/icons/hicolor/*/apps/%{name}.png
 # >> files
 # << files

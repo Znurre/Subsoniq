@@ -96,6 +96,8 @@ HEADERS += \
 resources.files = icon-s-album.png icon-s-playlist.png icon-s-artists.png icon-s-search.png icon-s-setting.png
 resources.path = /usr/share/$${TARGET}
 
+SAILFISHAPP_ICONS = 86x86 108x108 128x128 256x256
+
 INSTALLS += resources
 
 LIBS += -L$$OUT_PWD/../lib/ -lsubsoniq
