@@ -50,6 +50,7 @@
 #include "ICollectionNodeProxy.h"
 #include "CoverImage.h"
 #include "PlaylistNode.h"
+#include "DetailedSearchModel.h"
 
 int main(int argc, char *argv[])
 {
@@ -63,6 +64,7 @@ int main(int argc, char *argv[])
 	qmlRegisterType<CollectionModelProxy>("harbour.subsoniq", 1, 0, "CollectionModelProxy");
 	qmlRegisterType<HighlightsModel>("harbour.subsoniq", 1, 0, "HighlightsModel");
 	qmlRegisterType<SearchModel>("harbour.subsoniq", 1, 0, "SearchModel");
+	qmlRegisterType<DetailedSearchModel>("harbour.subsoniq", 1, 0, "DetailedSearchModel");
 //	qmlRegisterType<MetadataController>("harbour.subsoniq", 1, 0, "MetadataController");
 
 	qmlRegisterType<Player>();

@@ -4,6 +4,8 @@
 #include <QList>
 #include <QString>
 
+#include "FetchMoreNode.h"
+
 class ICollectionNode;
 
 class IResolver
@@ -27,7 +29,8 @@ class Resolver : public IResolver
 
 		bool canHandle(ICollectionNode *node) const override
 		{
-			return dynamic_cast<TNode *>(node);
+			return dynamic_cast<TNode *>(node)
+				|| dynamic_cast<FetchMoreNode<TNode> *>(node);
 		}
 
 		QString grouping() const override

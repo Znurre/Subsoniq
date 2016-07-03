@@ -1,8 +1,8 @@
 %dir /usr/lib/debug
 %dir /usr/lib/debug/.build-id
-%dir /usr/lib/debug/.build-id/da
+%dir /usr/lib/debug/.build-id/05
 %dir /usr/lib/debug/usr
 %dir /usr/lib/debug/usr/bin
-/usr/lib/debug/.build-id/da/94e5c32c4d2aa77ff18fb58f93b606d5bff02d
-/usr/lib/debug/.build-id/da/94e5c32c4d2aa77ff18fb58f93b606d5bff02d.debug
+/usr/lib/debug/.build-id/05/771ad0ad8d4938cd2f9c90c5dac502198b6717.debug
+/usr/lib/debug/.build-id/05/771ad0ad8d4938cd2f9c90c5dac502198b6717
 /usr/lib/debug/usr/bin/harbour-subsoniq.debug

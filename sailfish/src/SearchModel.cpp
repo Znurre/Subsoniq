@@ -20,51 +20,6 @@ QModelIndex SearchModel::index(int row, int column, const QModelIndex &parent) c
 	return createIndex(row, column, node);
 }
 
-QVariant SearchModel::data(const QModelIndex &index, int role) const
-{
-	ICollectionNode *node = (ICollectionNode *)index.internalPointer();
-
-	switch (role)
-	{
-		case Roles::ModelData:
-		{
-			return QVariant::fromValue(node);
-		}
-
-		case Roles::Title:
-		{
-			return node->title();
-		}
-
-		case Roles::Icon:
-		{
-			return node->icon();
-		}
-
-		case Roles::ViewTemplate:
-		{
-			return node->viewTemplate();
-		}
-
-		case Roles::NodeId:
-		{
-			return node->id();
-		}
-
-		case Roles::Grouping:
-		{
-			return m_typeGroupingResolver.resolve(node);
-		}
-
-		case Roles::ModelIndex:
-		{
-			return index;
-		}
-	}
-
-	return QVariant();
-}
-
 int SearchModel::rowCount(const QModelIndex &parent) const
 {
 	Q_UNUSED(parent);
@@ -79,11 +34,9 @@ void SearchModel::search(const QString &query)
 	qDeleteAll(m_nodes);
 
 	m_nodes.clear();
-	m_adapter.search2(query, this, &SearchModel::response);
+	m_query = query;
 
-	setStatus(Finished);
-
-	emit layoutChanged();
+	m_adapter.search2(query, LIMIT, 0, this, &SearchModel::response);
 }
 
 void SearchModel::response(const QJsonObject &envelope)
@@ -103,6 +56,11 @@ void SearchModel::response(const QJsonObject &envelope)
 		m_nodes << new CollectionArtistNode(QString::null, object);
 	}
 
+	if (artist.count() == LIMIT)
+	{
+		m_nodes << new FetchMoreNode<CollectionArtistNode>(m_query, "artist");
+	}
+
 	const QJsonArray &album = searchResult2
 		.value("album")
 		.toArray();
@@ -112,6 +70,11 @@ void SearchModel::response(const QJsonObject &envelope)
 		const QJsonObject &object = value.toObject();
 
 		m_nodes << new CollectionAlbumNode(object);
+	}
+
+	if (album.count() == LIMIT)
+	{
+		m_nodes << new FetchMoreNode<CollectionAlbumNode>(m_query, "album");
 	}
 
 	const QJsonArray &song = searchResult2
@@ -124,4 +87,13 @@ void SearchModel::response(const QJsonObject &envelope)
 
 		m_nodes << new CollectionTrackNode(object);
 	}
+
+	if (song.count() == LIMIT)
+	{
+		m_nodes << new FetchMoreNode<CollectionTrackNode>(m_query, "song");
+	}
+
+	setStatus(Finished);
+
+	emit layoutChanged();
 }

@@ -11,6 +11,7 @@
 /usr/src/debug/src
 /usr/src/debug/moc_SettingsPageViewModel.cpp
 /usr/src/debug/moc_CollectionNodeBase.cpp
+/usr/src/debug/moc_DetailedSearchModel.cpp
 /usr/src/debug/moc_CollectionModelProxy.cpp
 /usr/src/debug/moc_PlaylistModel.cpp
 /usr/src/debug/moc_SearchModel.cpp

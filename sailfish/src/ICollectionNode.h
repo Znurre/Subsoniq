@@ -21,6 +21,11 @@ class ICollectionNode : public QObject
 		virtual QString id() const = 0;
 		virtual QString grouping() const = 0;
 
+		virtual QString type() const
+		{
+			return QString::null;
+		}
+
 		virtual ICollectionNode *childAt(int index) const = 0;
 
 		virtual Track *track() = 0;

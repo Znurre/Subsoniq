@@ -85,13 +85,19 @@ class SubsonicAdapter : public QObject
 			return *this;
 		}
 
-		template<class TInstance>
-		SubsonicAdapter &search2(const QString &query, TInstance *instance, JsonCallback<TInstance> callback)
+		template<class TInstance, class TMethodInstance>
+		SubsonicAdapter &search2(const QString &query, int limit, int offset, TInstance *instance, JsonCallback<TMethodInstance> callback)
 		{
 			m_requestFactory
 				.request("search2.view"
-					, api::query = query)
-				.callback(instance, callback);
+					, api::query = query
+					, api::artistCount = limit
+					, api::artistOffset = offset
+					, api::albumCount = limit
+					, api::albumOffset = offset
+					, api::songCount = limit
+					, api::songOffset = offset)
+				.asyncCallback(instance, callback);
 
 			return *this;
 		}

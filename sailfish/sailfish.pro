@@ -38,7 +38,9 @@ SOURCES += src/sailfish.cpp \
     src/TypeGroupingResolver.cpp \
     src/SubsoniqModelBase.cpp \
     src/CoverImage.cpp \
-    src/PlaylistPageViewModel.cpp
+    src/PlaylistPageViewModel.cpp \
+    src/DetailedSearchModel.cpp \
+    src/SearchModelBase.cpp
 
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
@@ -91,7 +93,10 @@ HEADERS += \
     src/TypeGroupingResolver.h \
     src/SubsoniqModelBase.h \
     src/CoverImage.h \
-    src/PlaylistPageViewModel.h
+    src/PlaylistPageViewModel.h \
+    src/FetchMoreNode.h \
+    src/DetailedSearchModel.h \
+    src/SearchModelBase.h
 
 resources.files = icon-s-album.png icon-s-playlist.png icon-s-artists.png icon-s-search.png icon-s-setting.png
 resources.path = /usr/share/$${TARGET}
@@ -104,3 +109,7 @@ LIBS += -L$$OUT_PWD/../lib/ -lsubsoniq
 
 INCLUDEPATH += $$PWD/../lib
 DEPENDPATH += $$PWD/../lib
+
+DISTFILES += \
+    qml/pages/FetchMoreTemplate.qml \
+    qml/pages/DetailedSearchPage.qml

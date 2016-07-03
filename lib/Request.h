@@ -29,6 +29,12 @@ class Request
 		}
 
 		template<class TInstance, class TCallback>
+		void asyncCallback(const TInstance *instance, TCallback callback)
+		{
+			asyncCallback((TInstance *)instance, callback);
+		}
+
+		template<class TInstance, class TCallback>
 		void asyncCallback(TInstance *instance, TCallback callback)
 		{
 			QNetworkReply *reply = m_network.get(m_request);

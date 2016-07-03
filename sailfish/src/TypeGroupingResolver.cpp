@@ -2,6 +2,7 @@
 #include "CollectionArtistNode.h"
 #include "CollectionAlbumNode.h"
 #include "CollectionTrackNode.h"
+#include "FetchMoreNode.h"
 
 TypeGroupingResolver::TypeGroupingResolver()
 {

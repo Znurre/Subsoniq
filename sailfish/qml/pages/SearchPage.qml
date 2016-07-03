@@ -36,6 +36,17 @@ SubsoniqPage
 			}
 		}
 
+		BusyIndicator
+		{
+			anchors
+			{
+				centerIn: parent
+			}
+
+			size: BusyIndicatorSize.Large
+			running: searchModel.status === CollectionModel.Loading
+		}
+
 		header: SearchField
 		{
 			anchors

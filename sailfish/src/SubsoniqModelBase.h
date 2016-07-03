@@ -22,7 +22,8 @@ class SubsoniqModelBase : public QAbstractItemModel
 			ViewTemplate = Qt::UserRole + 3,
 			NodeId = Qt::UserRole + 4,
 			Grouping = Qt::UserRole + 5,
-			ModelIndex = Qt::UserRole + 6
+			ModelIndex = Qt::UserRole + 6,
+			Type = Qt::UserRole + 7
 		};
 
 		enum Status

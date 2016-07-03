@@ -32,6 +32,12 @@ namespace api
 	const Key maxBitRate = "maxBitRate";
 	const Key size = "size";
 	const Key type = "type";
+	const Key artistCount = "artistCount";
+	const Key artistOffset = "artistOffset";
+	const Key albumCount = "albumCount";
+	const Key albumOffset = "albumOffset";
+	const Key songCount = "songCount";
+	const Key songOffset = "songOffset";
 }
 
 #endif // KEY_H
