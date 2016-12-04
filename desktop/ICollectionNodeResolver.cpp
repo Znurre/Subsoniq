@@ -2,8 +2,9 @@
 #include "CollectionTrackNode.h"
 #include "ICollectionNodeResolver.h"
 
-ICollectionNodeResolver::ICollectionNodeResolver(ICollectionNode *parent)
-	: m_parent(parent)
+ICollectionNodeResolver::ICollectionNodeResolver(CollectionModel *model, ICollectionNode *parent)
+	: m_model(model)
+	, m_parent(parent)
 {
 
 }
@@ -16,7 +17,7 @@ ICollectionNode *ICollectionNodeResolver::resolve(const QJsonObject &object, int
 
 	if (isDirectory)
 	{
-		return new CollectionAlbumNode(object, m_parent, index);
+		return new CollectionAlbumNode(object, m_model, m_parent, index);
 	}
 
 	return new CollectionTrackNode(object, m_parent, index);

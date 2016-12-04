@@ -11,7 +11,7 @@ Playlist::Playlist(MetadataController &metadata)
 
 }
 
-void Playlist::add(Track *track)
+void Playlist::add(const Track *track)
 {
 	const int index = count();
 

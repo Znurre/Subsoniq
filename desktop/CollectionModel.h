@@ -10,6 +10,8 @@ class ICollectionNode;
 
 class CollectionModel : public QAbstractItemModel
 {
+	friend class CollectionNodeBase;
+
 	public:
 		CollectionModel();
 		~CollectionModel();
@@ -28,8 +30,9 @@ class CollectionModel : public QAbstractItemModel
 		void fetchMore(const QModelIndex &parent) override;
 
 	private:
+		ICollectionNode *getNode(const QModelIndex &index) const;
+
 		void response(const QJsonObject &envelope);
-		void nodeExpanded(ICollectionNode *node);
 
 		ICollectionNode *m_root;
 		SubsonicAdapter m_adapter;

@@ -48,7 +48,7 @@ class Playlist : public QObject
 	public:
 		Playlist(MetadataController &metadata);
 
-		void add(Track *track);
+		void add(const Track *track);
 		void remove(PlaylistNode *node);
 		void clear();
 

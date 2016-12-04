@@ -10,7 +10,7 @@
 class CollectionArtistNode : public CollectionNodeBase
 {
 	public:
-		CollectionArtistNode(const QJsonObject &object, ICollectionNode *parent, int index);
+		CollectionArtistNode(const QJsonObject &object, CollectionModel *model, ICollectionNode *parent, int index);
 
 		QIcon icon() const override;
 		QSize sizeHint() const override;

@@ -7,8 +7,8 @@
 #include "CollectionArtistItemDelegate.h"
 #include "CollectionArtistNode.h"
 
-CollectionArtistNode::CollectionArtistNode(const QJsonObject &object, ICollectionNode *parent, int index)
-	: CollectionNodeBase(parent, index)
+CollectionArtistNode::CollectionArtistNode(const QJsonObject &object, CollectionModel *model, ICollectionNode *parent, int index)
+	: CollectionNodeBase(model, parent, index)
 	, m_object(object)
 {
 

@@ -10,8 +10,10 @@
 
 class CollectionAlbumNode : public CollectionNodeBase
 {
+	const QIcon ICON_DEFAULT = QIcon::fromTheme("media-optical-audio");
+
 	public:
-		CollectionAlbumNode(const QJsonObject &object, ICollectionNode *parent, int index);
+		CollectionAlbumNode(const QJsonObject &object, CollectionModel *model, ICollectionNode *parent, int index);
 
 		QIcon icon() const override;
 		QSize sizeHint() const override;

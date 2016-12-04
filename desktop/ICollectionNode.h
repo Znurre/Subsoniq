@@ -34,9 +34,6 @@ class ICollectionNode : public QObject
 		virtual bool canFetchMore() const = 0;
 
 		virtual void fetchMore() = 0;
-
-	signals:
-		void dataChanged(ICollectionNode *node);
 };
 
 #endif // ICOLLECTIONNODE

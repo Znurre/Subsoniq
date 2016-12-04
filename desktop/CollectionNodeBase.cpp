@@ -2,15 +2,15 @@
 
 #include "CollectionAlbumNode.h"
 #include "CollectionNodeBase.h"
+#include "CollectionModel.h"
 
-CollectionNodeBase::CollectionNodeBase(ICollectionNode *parent, int index)
-	: m_parent(parent)
-	, m_collectionNodeResolver(this)
+CollectionNodeBase::CollectionNodeBase(CollectionModel *model, ICollectionNode *parent, int index)
+	: m_model(model)
+	, m_parent(parent)
+	, m_collectionNodeResolver(model, this)
 	, m_fetches(0)
 	, m_index(index)
 {
-//	connect(&m_adapter, &SubsonicAdapter::finished, &m_transformer, &IResponseTransformer::handle);
-//	connect(&m_transformer, &JsonResponseTransformer::response, this, &CollectionNodeBase::response);
 }
 
 CollectionNodeBase::~CollectionNodeBase()
@@ -20,7 +20,7 @@ CollectionNodeBase::~CollectionNodeBase()
 
 ICollectionNode *CollectionNodeBase::childAt(int index) const
 {
-	return m_children[index];
+	return m_children.value(index);
 }
 
 ICollectionNode *CollectionNodeBase::parent() const
@@ -60,6 +60,13 @@ void CollectionNodeBase::fetchMore()
 	m_adapter.getMusicDirectory(id(), this, &CollectionNodeBase::response);
 }
 
+void CollectionNodeBase::raiseDataChanged()
+{
+	const QModelIndex index = m_model->createIndex(m_index, 0, this);
+
+	emit m_model->dataChanged(index, index);
+}
+
 void CollectionNodeBase::response(const QJsonObject &envelope)
 {
 	int i = 0;
@@ -68,21 +75,21 @@ void CollectionNodeBase::response(const QJsonObject &envelope)
 		.value("directory")
 		.toObject();
 
-	const QJsonArray&child = directory
+	const QJsonArray &child = directory
 		.value("child")
 		.toArray();
+
+	const QModelIndex index = m_model->createIndex(m_index, 0, this);
+
+	m_model->beginInsertRows(index, 0, child.count() - 1);
 
 	for (const QJsonValue &value : child)
 	{
 		const QJsonObject &object = value
 			.toObject();
 
-		ICollectionNode *node = m_collectionNodeResolver.resolve(object, i++);
-
-		connect(node, &ICollectionNode::dataChanged, this, &ICollectionNode::dataChanged);
-
-		m_children << node;
+		m_children << m_collectionNodeResolver.resolve(object, i++);
 	}
 
-	emit dataChanged(this);
+	m_model->endInsertRows();
 }

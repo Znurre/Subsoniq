@@ -2,19 +2,16 @@
 #include "CollectionAlbumNode.h"
 #include "CollectionItemDelegate.h"
 
-CollectionAlbumNode::CollectionAlbumNode(const QJsonObject &object, ICollectionNode *parent, int index)
-	: CollectionNodeBase(parent, index)
-	, m_image("media-album-cover-manager-amarok.png")
+CollectionAlbumNode::CollectionAlbumNode(const QJsonObject &object, CollectionModel *model, ICollectionNode *parent, int index)
+	: CollectionNodeBase(model, parent, index)
+	, m_image(ICON_DEFAULT)
 	, m_object(object)
 {
-//	connect(&m_adapter, &SubsonicAdapter::finished, &m_transformer, &IResponseTransformer::handle);
-//	connect(&m_transformer, &ImageResponseTransformer::response, this, &CollectionAlbumNode::imageResponse);
+	const QString &coverArtId = object
+		.value("coverArt")
+		.toString();
 
-//	const QString &coverArtId = object
-//		.value("coverArt")
-//		.toString();
-
-//	m_adapter.getCoverArt(coverArtId, "64", this, &CollectionAlbumNode::imageResponse);
+	m_adapter.getCoverArt(coverArtId, "64", this, &CollectionAlbumNode::imageResponse);
 }
 
 QIcon CollectionAlbumNode::icon() const
@@ -45,7 +42,10 @@ void CollectionAlbumNode::imageResponse(const QImage &image)
 {
 	const QPixmap &pixmap = QPixmap::fromImage(image);
 
-	m_image = pixmap;
+	if (!pixmap.isNull())
+	{
+		m_image = pixmap;
+	}
 
-	emit dataChanged(this);
+	raiseDataChanged();
 }

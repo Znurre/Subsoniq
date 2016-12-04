@@ -20,7 +20,9 @@ SOURCES += \
     CollectionNodeBase.cpp \
     CollectionTrackNode.cpp \
     ICollectionNodeResolver.cpp \
-	PlaylistModel.cpp
+	PlaylistModel.cpp \
+    SettingsDialog.cpp \
+    CollectionModelProxy.cpp
 
 HEADERS += \
     MainWindow.h \
@@ -38,7 +40,9 @@ HEADERS += \
     CollectionNodeBase.h \
     CollectionTrackNode.h \
     ICollectionNodeResolver.h \
-	PlaylistModel.h
+	PlaylistModel.h \
+    SettingsDialog.h \
+    CollectionModelProxy.h
 
 LIBS += -L$$OUT_PWD/../lib/ -lsubsoniq
 

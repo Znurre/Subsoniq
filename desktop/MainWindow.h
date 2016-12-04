@@ -5,6 +5,7 @@
 
 #include "Player.h"
 #include "MetadataController.h"
+#include "SettingsDialog.h"
 
 class MainWindow : public QMainWindow
 {
@@ -12,6 +13,7 @@ class MainWindow : public QMainWindow
 		MainWindow();
 
 	private:
+		SettingsDialog m_settingsDialog;
 		MetadataController m_metadata;
 		Playlist m_playlist;
 		Player m_player;

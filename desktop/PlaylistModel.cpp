@@ -8,7 +8,7 @@
 PlaylistModel::PlaylistModel(Playlist &playlist)
 	: m_playlist(playlist)
 {
-//	connect(&m_playlist, &Playlist::playlistChanged, this, &PlaylistModel::onPlaylistChanged);
+	connect(&m_playlist, &Playlist::nodeAppended, this, &PlaylistModel::onPlaylistChanged);
 }
 
 int PlaylistModel::rowCount(const QModelIndex &parent) const

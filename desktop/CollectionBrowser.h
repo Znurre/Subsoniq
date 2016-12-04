@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+#include "CollectionModelProxy.h"
+
 class Track;
 
 class CollectionBrowserWidget : public QWidget
@@ -13,7 +15,10 @@ class CollectionBrowserWidget : public QWidget
 		CollectionBrowserWidget();
 
 	private:
+		void filter(const QString &filter);
 		void onItemDoubleClicked(const QModelIndex &index);
+
+		CollectionModelProxy m_model;
 
 	signals:
 		void trackSelected(const Track *track);

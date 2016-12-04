@@ -5,7 +5,6 @@
 
 #include "CollectionBrowser.h"
 #include "CollectionItemDelegate.h"
-#include "CollectionModel.h"
 #include "ICollectionNode.h"
 
 CollectionBrowserWidget::CollectionBrowserWidget()
@@ -13,10 +12,8 @@ CollectionBrowserWidget::CollectionBrowserWidget()
 	QLineEdit *searchBox = new QLineEdit();
 	searchBox->setPlaceholderText("Search collection");
 
-	CollectionModel *collectionModel = new CollectionModel();
-
 	QTreeView *collectionView = new QTreeView();
-	collectionView->setModel(collectionModel);
+	collectionView->setModel(&m_model);
 
 	CollectionItemDelegate *delegate = new CollectionItemDelegate();
 
@@ -31,6 +28,12 @@ CollectionBrowserWidget::CollectionBrowserWidget()
 	layout->addWidget(collectionView, 1);
 
 	connect(collectionView, &QTreeView::doubleClicked, this, &CollectionBrowserWidget::onItemDoubleClicked);
+	connect(searchBox, &QLineEdit::textChanged, this, &CollectionBrowserWidget::filter);
+}
+
+void CollectionBrowserWidget::filter(const QString &filter)
+{
+	m_model.setFilterFixedString(filter);
 }
 
 void CollectionBrowserWidget::onItemDoubleClicked(const QModelIndex &index)

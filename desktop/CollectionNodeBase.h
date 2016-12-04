@@ -6,10 +6,12 @@
 #include "JsonResponseTransformer.h"
 #include "SubsonicAdapter.h"
 
+class CollectionModel;
+
 class CollectionNodeBase : public ICollectionNode
 {
 	public:
-		CollectionNodeBase(ICollectionNode *parent, int index);
+		CollectionNodeBase(CollectionModel *model, ICollectionNode *parent, int index);
 		~CollectionNodeBase();
 
 		ICollectionNode *childAt(int index) const override;
@@ -28,13 +30,15 @@ class CollectionNodeBase : public ICollectionNode
 	protected:
 		virtual QString id() const = 0;
 
+		void raiseDataChanged();
+
 	private:
 		void response(const QJsonObject &envelope);
 
+		CollectionModel *m_model;
 		ICollectionNode *m_parent;
 		ICollectionNodeResolver m_collectionNodeResolver;
 
-//		JsonResponseTransformer m_transformer;
 		SubsonicAdapter m_adapter;
 
 		QList<ICollectionNode *> m_children;

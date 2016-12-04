@@ -22,11 +22,11 @@ MainWindow::MainWindow()
 	setCentralWidget(centralWidget);
 
 	QMenuBar *menuBar = new QMenuBar();
-	menuBar->addAction("Settings");
+	menuBar->addAction("Settings", &m_settingsDialog, SLOT(show()));
 
 	setMenuBar(menuBar);
 
-//	connect(collectionBrowser, &CollectionBrowserWidget::trackSelected, &m_playlist, &Playlist::add);
+	connect(collectionBrowser, &CollectionBrowserWidget::trackSelected, &m_playlist, &Playlist::add);
 	connect(playlist, &PlaylistWidget::nodeSelected, &m_player, &Player::play);
 }
 

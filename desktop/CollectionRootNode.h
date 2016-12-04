@@ -5,10 +5,12 @@
 
 #include "ICollectionNode.h"
 
+class CollectionModel;
+
 class CollectionRootNode : public ICollectionNode
 {
 	public:
-		CollectionRootNode(const QJsonObject &root);
+		CollectionRootNode(const QJsonObject &root, CollectionModel *model);
 		~CollectionRootNode();
 
 		QIcon icon() const override;

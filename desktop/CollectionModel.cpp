@@ -18,67 +18,28 @@ CollectionModel::~CollectionModel()
 
 void CollectionModel::response(const QJsonObject &envelope)
 {
-	m_root = new CollectionRootNode(envelope);
-
-	connect(m_root, &ICollectionNode::dataChanged, this, &CollectionModel::nodeExpanded);
+	m_root = new CollectionRootNode(envelope, this);
 
 	emit layoutChanged();
 }
 
-void CollectionModel::nodeExpanded(ICollectionNode *node)
-{
-	const QModelIndex &index = createIndex(node->row(), 0, node);
-	const QList<QPersistentModelIndex> indexes =
-	{
-		index
-	};
-
-	emit layoutChanged(indexes);
-}
-
 QModelIndex CollectionModel::index(int row, int column, const QModelIndex &parent) const
 {
-	if (!hasIndex(row, column, parent))
-	{
-		return QModelIndex();
-	}
-
-	ICollectionNode *parentNode = nullptr;
-
-	if (!parent.isValid())
-	{
-		parentNode = m_root;
-	}
-	else
-	{
-		parentNode = (ICollectionNode *)parent.internalPointer();
-	}
-
-	if (!parentNode)
-	{
-		return QModelIndex();
-	}
-
+	ICollectionNode *parentNode = getNode(parent);
 	ICollectionNode *childNode = parentNode->childAt(row);
 
-	if (childNode)
-	{
-		return createIndex(row, column, childNode);
-	}
-	else
-	{
-		return QModelIndex();
-	}
+	return createIndex(row, column, childNode);
 }
 
 QModelIndex CollectionModel::parent(const QModelIndex &child) const
 {
-	if (!child.isValid())
+	ICollectionNode *childNode = (ICollectionNode *)child.internalPointer();
+
+	if (!childNode)
 	{
 		return QModelIndex();
 	}
 
-	ICollectionNode *childNode = (ICollectionNode *)child.internalPointer();
 	ICollectionNode *parentNode = childNode->parent();
 
 	if (!parentNode || parentNode == m_root)
@@ -91,28 +52,9 @@ QModelIndex CollectionModel::parent(const QModelIndex &child) const
 
 int CollectionModel::rowCount(const QModelIndex &parent) const
 {
-	if (parent.column() > 0)
-	{
-		return 0;
-	}
+	ICollectionNode *node = getNode(parent);
 
-	ICollectionNode *parentNode;
-
-	if (!parent.isValid())
-	{
-		parentNode = m_root;
-	}
-	else
-	{
-		parentNode = (ICollectionNode *)parent.internalPointer();
-	}
-
-	if (!parentNode)
-	{
-		return 0;
-	}
-
-	return parentNode->childCount();
+	return node->childCount();
 }
 
 int CollectionModel::columnCount(const QModelIndex &parent) const
@@ -124,12 +66,12 @@ int CollectionModel::columnCount(const QModelIndex &parent) const
 
 QVariant CollectionModel::data(const QModelIndex &index, int role) const
 {
-	if (!index.isValid())
+	ICollectionNode *node = (ICollectionNode *)index.internalPointer();
+
+	if (!node)
 	{
 		return QVariant();
 	}
-
-	ICollectionNode *node = (ICollectionNode *)index.internalPointer();
 
 	if (role == Qt::DecorationRole)
 	{
@@ -183,3 +125,7 @@ void CollectionModel::fetchMore(const QModelIndex &parent)
 	}
 }
 
+ICollectionNode *CollectionModel::getNode(const QModelIndex &index) const
+{
+	return (ICollectionNode *)index.internalPointer() ?: m_root;
+}

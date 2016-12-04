@@ -4,7 +4,7 @@
 #include "CollectionArtistNode.h"
 #include "CollectionRootNode.h"
 
-CollectionRootNode::CollectionRootNode(const QJsonObject &root)
+CollectionRootNode::CollectionRootNode(const QJsonObject &root, CollectionModel *model)
 	: m_root(root)
 {
 	int i = 0;
@@ -31,11 +31,7 @@ CollectionRootNode::CollectionRootNode(const QJsonObject &root)
 			const QJsonObject &object = value
 				.toObject();
 
-			ICollectionNode *node = new CollectionArtistNode(object, this, i++);
-
-			connect(node, &ICollectionNode::dataChanged, this, &ICollectionNode::dataChanged);
-
-			m_children << node;
+			m_children << new CollectionArtistNode(object, model, this, i++);
 		}
 	}
 }
