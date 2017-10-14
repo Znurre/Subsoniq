@@ -53,19 +53,23 @@ SubsoniqPage
 			fill: parent
 		}
 
-		header: SearchField
+		header: Column
 		{
-			anchors
+			width: parent.width
+
+			PageHeader
 			{
-				left: parent.left
-				right: parent.right
-				rightMargin: Theme.paddingLarge
+				title: "Artists"
 			}
 
-			id: searchField
-			placeholderText: "Filter"
+			SearchField
+			{
+				width: parent.width
+				id: searchField
+				placeholderText: "Filter"
 
-			onTextChanged: collectionModel.setFilterFixedString(searchField.text)
+				onTextChanged: collectionModel.setFilterFixedString(searchField.text)
+			}
 		}
 
 		section

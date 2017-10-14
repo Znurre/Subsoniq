@@ -47,19 +47,25 @@ SubsoniqPage
 			running: searchModel.status === CollectionModel.Loading
 		}
 
-		header: SearchField
+		header: Column
 		{
-			anchors
+			width: parent.width
+
+			PageHeader
 			{
-				left: parent.left
-				right: parent.right
-				rightMargin: Theme.paddingLarge
+				title: "Search"
 			}
 
-			id: searchField
-			placeholderText: "Search"
+			SearchField
+			{
+				Component.onCompleted: searchField.forceActiveFocus()
 
-			Keys.onReturnPressed: searchModel.search(searchField.text)
+				width: parent.width
+				id: searchField
+				placeholderText: "Search"
+
+				Keys.onReturnPressed: searchModel.search(searchField.text)
+			}
 		}
 
 		section

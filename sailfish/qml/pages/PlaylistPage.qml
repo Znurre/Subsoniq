@@ -78,55 +78,55 @@ Page
 
 		delegate: BackgroundItem
 		{
-			width: page.width
+			x: -(removeButton.width + Theme.horizontalPageMargin)
+			width: page.width - x
 			height: Theme.itemSizeSmall
+			id: item
 
 			onClicked: context.itemActivated(modelData)
 			onPressAndHold: context.enterEditMode()
+
+			Behavior on x
+			{
+				PropertyAnimation
+				{
+					duration: 250
+
+					easing
+					{
+						type: Easing.OutCubic
+					}
+				}
+			}
+
+			states: State
+			{
+				when: context.isEditMode
+
+				PropertyChanges
+				{
+					target: item
+					x: 0
+				}
+
+				PropertyChanges
+				{
+					target: removeButton
+					opacity: 1
+				}
+			}
 
 			Image
 			{
 				anchors
 				{
-					left: parent.left
-					leftMargin: -64
 					verticalCenter: parent.verticalCenter
-					margins: Theme.paddingLarge
-
-					Behavior on leftMargin
-					{
-						PropertyAnimation
-						{
-							duration: 250
-
-							easing
-							{
-								type: Easing.OutCubic
-							}
-						}
-					}
 				}
 
 				id: removeButton
 				source: "image://theme/icon-m-clear"
 				opacity: 0
-
-				states: State
-				{
-					when: context.isEditMode
-
-					PropertyChanges
-					{
-						target: removeButton.anchors
-						leftMargin: Theme.paddingLarge
-					}
-
-					PropertyChanges
-					{
-						target: removeButton
-						opacity: 1
-					}
-				}
+				x: Theme.horizontalPageMargin
 
 				Behavior on opacity
 				{
@@ -154,18 +154,12 @@ Page
 
 			CoverImage
 			{
-				anchors
-				{
-					left: removeButton.right
-					top: parent.top
-					bottom: parent.bottom
-					margins: Theme.paddingSmall
-					leftMargin: Theme.paddingLarge
-				}
-
 				id: image
 				coverId: nodeId
+				height: parent.height - (Theme.paddingSmall * 2)
 				width: Theme.itemSizeSmall - (Theme.paddingSmall * 2)
+				x: removeButton.x + removeButton.width + Theme.horizontalPageMargin
+				y: Theme.paddingSmall
 
 				BusyIndicator
 				{
@@ -182,23 +176,18 @@ Page
 			{
 				anchors
 				{
-					left: image.right
-					right: parent.right
 					verticalCenter: parent.verticalCenter
-					margins: Theme.paddingLarge
 				}
+
+				x: image.x + image.width + Theme.paddingLarge
+				width: item.width - x - Theme.horizontalPageMargin
 
 				Label
 				{
-					anchors
-					{
-						left: parent.left
-						right: parent.right
-					}
-
 					id: labelTitle
 					text: title
 					elide: Text.ElideRight
+					width: parent.width
 
 					states: State
 					{
@@ -214,16 +203,11 @@ Page
 
 				Label
 				{
-					anchors
-					{
-						left: parent.left
-						right: parent.right
-					}
-
 					id: labelArtist
 					text: artist
 					color: Theme.secondaryColor
 					elide: Text.ElideRight
+					width: parent.width
 
 					font
 					{

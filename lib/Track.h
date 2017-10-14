@@ -13,9 +13,11 @@ class Track
 		QString artist() const;
 		QString title() const;
 		QString coverArt() const;
+		QString album() const;
 
 		int duration() const;
 		int size() const;
+		int track() const;
 
 		operator QString() const;
 

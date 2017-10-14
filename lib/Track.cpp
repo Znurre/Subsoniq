@@ -34,6 +34,13 @@ QString Track::coverArt() const
 		.toString();
 }
 
+QString Track::album() const
+{
+	return m_object
+		.value("album")
+		.toString();
+}
+
 int Track::duration() const
 {
 	return m_object
@@ -45,6 +52,13 @@ int Track::size() const
 {
 	return m_object
 		.value("size")
+		.toInt();
+}
+
+int Track::track() const
+{
+	return m_object
+		.value("track")
 		.toInt();
 }
 

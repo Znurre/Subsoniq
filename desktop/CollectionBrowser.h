@@ -16,7 +16,7 @@ class CollectionBrowserWidget : public QWidget
 
 	private:
 		void filter(const QString &filter);
-		void onItemDoubleClicked(const QModelIndex &index);
+		void onItemDoubleClicked(const QModelIndex &proxyIndex);
 
 		CollectionModelProxy m_model;
 

@@ -22,7 +22,9 @@ SOURCES += \
     ICollectionNodeResolver.cpp \
 	PlaylistModel.cpp \
     SettingsDialog.cpp \
-    CollectionModelProxy.cpp
+    CollectionModelProxy.cpp \
+    CoverImageCache.cpp \
+    CoverArtCache.cpp
 
 HEADERS += \
     MainWindow.h \
@@ -42,7 +44,9 @@ HEADERS += \
     ICollectionNodeResolver.h \
 	PlaylistModel.h \
     SettingsDialog.h \
-    CollectionModelProxy.h
+    CollectionModelProxy.h \
+    CoverImageCache.h \
+    CoverArtCache.h
 
 LIBS += -L$$OUT_PWD/../lib/ -lsubsoniq
 

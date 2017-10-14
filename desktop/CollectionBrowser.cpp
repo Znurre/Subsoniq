@@ -36,8 +36,10 @@ void CollectionBrowserWidget::filter(const QString &filter)
 	m_model.setFilterFixedString(filter);
 }
 
-void CollectionBrowserWidget::onItemDoubleClicked(const QModelIndex &index)
+void CollectionBrowserWidget::onItemDoubleClicked(const QModelIndex &proxyIndex)
 {
+	const QModelIndex &index = m_model.mapToSource(proxyIndex);
+
 	const ICollectionNode *node = (ICollectionNode *)index.internalPointer();
 	const Track *track = node->track();
 

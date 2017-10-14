@@ -4,9 +4,23 @@
 #include <QJsonObject>
 
 #include "CollectionNodeBase.h"
+#include "CoverArtCache.h"
 #include "ImageResponseTransformer.h"
 #include "JsonResponseTransformer.h"
 #include "SubsonicAdapter.h"
+
+class CoverArtResponseHandler
+{
+	public:
+		CoverArtResponseHandler(const QString &id)
+			: m_id(id)
+		{
+
+		}
+
+	private:
+		QString m_id;
+};
 
 class CollectionAlbumNode : public CollectionNodeBase
 {
@@ -25,6 +39,7 @@ class CollectionAlbumNode : public CollectionNodeBase
 		void imageResponse(const QImage &image);
 
 		SubsonicAdapter m_adapter;
+		CoverArtCache m_coverArtCache;
 
 		QIcon m_image;
 		QJsonObject m_object;
