@@ -38,6 +38,11 @@ QVariant CollectionModel::data(const QModelIndex &index, int role) const
 {
 	ICollectionNode *node = (ICollectionNode *)index.internalPointer();
 
+	if (!node)
+	{
+		return QVariant();
+	}
+
 	switch (role)
 	{
 		case Roles::ModelData:
