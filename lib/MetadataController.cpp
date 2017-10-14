@@ -72,7 +72,7 @@ void MetadataController::setCurrent(Track *current, PlaylistStream *stream)
 	}
 	else
 	{
-		m_previous += m_position;
+		m_previous = m_position;
 	}
 
 	m_scrobbler.nowPlaying(m_current);
@@ -98,6 +98,8 @@ void MetadataController::setState(QMediaPlayer::State state)
 
 void MetadataController::setPosition(int position)
 {
+	qDebug() << "position =" << position;
+
 	m_position = position;
 
 	emit positionChanged();

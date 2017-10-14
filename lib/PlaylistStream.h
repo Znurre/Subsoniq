@@ -16,6 +16,8 @@ class MetadataController;
 
 class PlaylistStream : public QIODevice
 {
+	const int BufferSize = 65536;
+
 	Q_OBJECT
 
 	enum Status
