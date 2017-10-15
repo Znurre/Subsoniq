@@ -9,8 +9,6 @@
 PlaylistModel::PlaylistModel(Playlist &playlist)
 	: m_playlist(playlist)
 {
-//	connect(&playlist, &Playlist::playlistChanged, this, &PlaylistModel::onPlaylistChanged);
-
 	connect(&playlist, &Playlist::nodeChanged, this, &PlaylistModel::onNodeChanged);
 	connect(&playlist, &Playlist::nodeAppended, this, &PlaylistModel::onNodeAppended);
 	connect(&playlist, &Playlist::nodeRemoved, this, &PlaylistModel::onNodeRemoved);
@@ -120,6 +118,7 @@ void PlaylistModel::clear()
 	m_playlist.clear();
 
 	emit layoutChanged();
+	emit playlistCleared();
 }
 
 void PlaylistModel::onNodeChanged(int nodeIndex)
@@ -132,15 +131,18 @@ void PlaylistModel::onNodeChanged(int nodeIndex)
 void PlaylistModel::onNodeAppended(int index)
 {
 	beginInsertRows(NoParent, index, index);
-
 	endInsertRows();
 }
 
 void PlaylistModel::onNodeRemoved(int index)
 {
 	beginRemoveRows(NoParent, index, index);
-
 	endRemoveRows();
+
+	if (m_playlist.count() <= 0)
+	{
+		emit playlistCleared();
+	}
 }
 
 void PlaylistModel::onPlaylistChanged()

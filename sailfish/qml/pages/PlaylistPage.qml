@@ -8,6 +8,12 @@ Page
 	id: page
 	backNavigation: !context.isEditMode
 
+	Connections
+	{
+		target: main.playlistModel
+		onPlaylistCleared: context.leaveEditMode()
+	}
+
 	RemorsePopup
 	{
 		id: remorse
@@ -34,9 +40,10 @@ Page
 			MenuItem
 			{
 				text: "Clear"
-				enabled: view.count > 0
-				onClicked: remorse.execute("Clearing", context.clear)
+				onClicked: remorse.execute("Clearing", context.clear, 3000)
 			}
+
+			visible: !context.isEditMode && view.count > 0
 		}
 
 		anchors

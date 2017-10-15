@@ -45,6 +45,9 @@ class PlaylistModel : public QAbstractListModel
 		void onPlaylistChanged();
 
 		Playlist &m_playlist;
+
+	signals:
+		void playlistCleared();
 };
 
 #endif // PLAYLISTMODEL_H
