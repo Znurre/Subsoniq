@@ -64,7 +64,9 @@ SubsoniqPage
 				id: searchField
 				placeholderText: "Search"
 
-				Keys.onReturnPressed: searchModel.search(searchField.text)
+				EnterKey.enabled: searchField.text.length > 0
+				EnterKey.iconSource: "image://theme/icon-m-enter-accept"
+				EnterKey.onClicked: searchModel.search(searchField.text)
 			}
 		}
 

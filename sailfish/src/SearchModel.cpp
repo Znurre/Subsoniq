@@ -31,16 +31,19 @@ void SearchModel::search(const QString &query)
 {
 	setStatus(Loading);
 
-	qDeleteAll(m_nodes);
-
-	m_nodes.clear();
 	m_query = query;
 
 	m_adapter.search2(query, LIMIT, 0, this, &SearchModel::response);
+
+	emit layoutChanged();
 }
 
 void SearchModel::response(const QJsonObject &envelope)
 {
+	qDeleteAll(m_nodes);
+
+	m_nodes.clear();
+
 	const QJsonObject &searchResult2 = envelope
 		.value("searchResult2")
 		.toObject();

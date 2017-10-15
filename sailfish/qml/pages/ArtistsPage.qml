@@ -69,6 +69,8 @@ SubsoniqPage
 				placeholderText: "Filter"
 
 				onTextChanged: collectionModel.setFilterFixedString(searchField.text)
+
+				EnterKey.enabled: false
 			}
 		}
 
