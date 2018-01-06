@@ -5,6 +5,8 @@
 #include <QString>
 #include <QList>
 
+class Track;
+
 class StringToken
 {
 	public:
@@ -12,6 +14,7 @@ class StringToken
 		StringToken(const int value);
 		StringToken(const QByteArray &value);
 		StringToken(const QJsonValue &value);
+		StringToken(const Track *track);
 
 		operator QString() const;
 

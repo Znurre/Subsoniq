@@ -5,6 +5,7 @@
 #include "ICollectionNode.h"
 #include "QStringEx.h"
 #include "CollectionTrackNode.h"
+#include "CollectionIterator.h"
 
 PlaylistModel::PlaylistModel(Playlist &playlist)
 	: m_playlist(playlist)
@@ -82,30 +83,30 @@ void PlaylistModel::add(ICollectionNode *node)
 {
 	Track *track = node->track();
 
+	const QString &message = QStringEx::format("%1 added to the playlist", track);
+
+	m_notification.setPreviewBody(message);
+	m_notification.setExpireTimeout(1000);
+	m_notification.publish();
+
 	m_playlist.add(track);
 }
 
 void PlaylistModel::addAll(ICollectionNode *parent)
 {
-	for (int i = 0; i < parent->childCount(); i++)
+	CollectionIterator iterator;
+
+	const QList<Track *> &tracks = iterator.getTracks(parent);
+	const QString &message = QStringEx::format("%1 songs added to the playlist", tracks.count());
+
+	for (Track *track : tracks)
 	{
-		ICollectionNode *node = parent->childAt(i);
-		ICollectionNode *track = qobject_cast<CollectionTrackNode *>(node);
-
-		if (!track)
-		{
-			if (node->canFetchMore())
-			{
-				node->fetchMore();
-			}
-
-			addAll(node);
-		}
-		else
-		{
-			add(track);
-		}
+		m_playlist.add(track);
 	}
+
+	m_notification.setPreviewBody(message);
+	m_notification.setExpireTimeout(1000);
+	m_notification.publish();
 }
 
 void PlaylistModel::remove(PlaylistNode *node)

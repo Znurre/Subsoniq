@@ -12,9 +12,11 @@
 # The name of your application
 TARGET = harbour-subsoniq
 
-CONFIG += sailfishapp c++11
+CONFIG += sailfishapp c++11 link_pkconfig
 
-QT += multimedia
+PKGCONFIG += nemonotifications-qt5
+
+QT += multimedia dbus
 
 SOURCES += src/sailfish.cpp \
     src/SettingsPageViewModel.cpp \
@@ -40,7 +42,8 @@ SOURCES += src/sailfish.cpp \
     src/CoverImage.cpp \
     src/PlaylistPageViewModel.cpp \
     src/DetailedSearchModel.cpp \
-    src/SearchModelBase.cpp
+    src/SearchModelBase.cpp \
+    src/CollectionIterator.cpp
 
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
@@ -96,7 +99,8 @@ HEADERS += \
     src/PlaylistPageViewModel.h \
     src/FetchMoreNode.h \
     src/DetailedSearchModel.h \
-    src/SearchModelBase.h
+    src/SearchModelBase.h \
+    src/CollectionIterator.h
 
 resources.files = icon-s-album.png icon-s-playlist.png icon-s-artists.png icon-s-search.png icon-s-setting.png
 resources.path = /usr/share/$${TARGET}

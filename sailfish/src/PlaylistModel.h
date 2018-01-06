@@ -3,6 +3,8 @@
 
 #include <QAbstractListModel>
 
+#include <notification.h>
+
 class Playlist;
 class Track;
 class ICollectionNode;
@@ -45,6 +47,7 @@ class PlaylistModel : public QAbstractListModel
 		void onPlaylistChanged();
 
 		Playlist &m_playlist;
+		Notification m_notification;
 
 	signals:
 		void playlistCleared();

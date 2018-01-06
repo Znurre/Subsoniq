@@ -40,7 +40,7 @@ SubsoniqPage
 
 			MenuItem
 			{
-				text: "Play all"
+				text: "Queue all"
 				onClicked: main.playlistModel.addAll(parentNode.subject)
 			}
 		}

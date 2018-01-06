@@ -1,6 +1,7 @@
 #include <QVariant>
 
 #include "QStringEx.h"
+#include "Track.h"
 
 StringToken::StringToken(const QString &value)
 {
@@ -23,6 +24,15 @@ StringToken::StringToken(const QJsonValue &value)
 
 	m_value = variant.toString();
 }
+
+StringToken::StringToken(const Track *track)
+{
+	const QString &artist = track->artist();
+	const QString &title = track->title();
+
+	m_value = QStringEx::format("%1 - %2", artist, title);
+}
+
 
 StringToken::operator QString() const
 {
