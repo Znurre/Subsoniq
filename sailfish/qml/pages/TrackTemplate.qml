@@ -3,6 +3,9 @@ import Sailfish.Silica 1.0
 
 BackgroundItem
 {
+	property bool showTrackNumber: true
+
+	id: item
 	width: page.width
 	height: Theme.itemSizeSmall
 
@@ -18,8 +21,19 @@ BackgroundItem
 		}
 
 		id: trackNumber
-		width: Theme.itemSizeSmall - (Theme.paddingSmall * 2)
 		height: column.height
+		visible: item.showTrackNumber
+
+		states: State
+		{
+			when: item.showTrackNumber
+
+			PropertyChanges
+			{
+				target: trackNumber
+				width: Theme.itemSizeSmall - (Theme.paddingSmall * 2)
+			}
+		}
 
 		Label
 		{
@@ -43,10 +57,20 @@ BackgroundItem
 			right: parent.right
 			verticalCenter: parent.verticalCenter
 			margins: Theme.paddingLarge
-			leftMargin: Theme.paddingMedium
 		}
 
 		id: column
+
+		states: State
+		{
+			when: item.showTrackNumber
+
+			PropertyChanges
+			{
+				target: column
+				anchors.leftMargin: Theme.paddingMedium
+			}
+		}
 
 		Label
 		{

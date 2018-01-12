@@ -19,6 +19,8 @@
 #include "CoverImage.h"
 #include "PlaylistNode.h"
 #include "DetailedSearchModel.h"
+#include "StoredPlaylistsModel.h"
+#include "StoredPlaylistModel.h"
 
 int main(int argc, char *argv[])
 {
@@ -33,11 +35,14 @@ int main(int argc, char *argv[])
 	qmlRegisterType<HighlightsModel>("harbour.subsoniq", 1, 0, "HighlightsModel");
 	qmlRegisterType<SearchModel>("harbour.subsoniq", 1, 0, "SearchModel");
 	qmlRegisterType<DetailedSearchModel>("harbour.subsoniq", 1, 0, "DetailedSearchModel");
+	qmlRegisterType<StoredPlaylistsModel>("harbour.subsoniq", 1, 0, "StoredPlaylistsModel");
+	qmlRegisterType<StoredPlaylistModel>("harbour.subsoniq", 1, 0, "StoredPlaylistModel");
 //	qmlRegisterType<MetadataController>("harbour.subsoniq", 1, 0, "MetadataController");
 
 	qmlRegisterType<Player>();
 	qmlRegisterType<PlaylistNode>();
 	qmlRegisterType<Playlist>();
+	qmlRegisterType<StoredPlaylist>();
 	qmlRegisterType<MetadataController>();
 	qmlRegisterType<ICollectionNode>();
 	qmlRegisterType<ICollectionNodeProxy>();

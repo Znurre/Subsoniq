@@ -12,7 +12,7 @@
 # The name of your application
 TARGET = harbour-subsoniq
 
-CONFIG += sailfishapp c++11 link_pkconfig
+CONFIG += sailfishapp c++11 link_pkconfig jsonserializer
 
 PKGCONFIG += nemonotifications-qt5
 
@@ -43,7 +43,11 @@ SOURCES += src/sailfish.cpp \
     src/PlaylistPageViewModel.cpp \
     src/DetailedSearchModel.cpp \
     src/SearchModelBase.cpp \
-    src/CollectionIterator.cpp
+    src/CollectionIterator.cpp \
+    src/StoredPlaylist.cpp \
+    src/StoredPlaylistEnvelope.cpp \
+    src/StoredPlaylistsModel.cpp \
+    src/StoredPlaylistModel.cpp
 
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
@@ -54,7 +58,6 @@ OTHER_FILES += \
     qml/pages/ArtistTemplate.qml \
     qml/pages/AlbumTemplate.qml \
     qml/pages/TrackTemplate.qml \
-    qml/pages/PlaylistPage.qml \
     qml/pages/MediaControls.qml \
     qml/pages/CollectionPage.qml \
     rpm/harbour-subsoniq.changes.in \
@@ -100,7 +103,11 @@ HEADERS += \
     src/FetchMoreNode.h \
     src/DetailedSearchModel.h \
     src/SearchModelBase.h \
-    src/CollectionIterator.h
+    src/CollectionIterator.h \
+    src/StoredPlaylist.h \
+    src/StoredPlaylistEnvelope.h \
+    src/StoredPlaylistsModel.h \
+    src/StoredPlaylistModel.h
 
 resources.files = icon-s-album.png icon-s-playlist.png icon-s-artists.png icon-s-search.png icon-s-setting.png
 resources.path = /usr/share/$${TARGET}
@@ -116,4 +123,5 @@ DEPENDPATH += $$PWD/../lib
 
 DISTFILES += \
     qml/pages/FetchMoreTemplate.qml \
-    qml/pages/DetailedSearchPage.qml
+    qml/pages/DetailedSearchPage.qml \
+    qml/pages/PlaylistPage.qml

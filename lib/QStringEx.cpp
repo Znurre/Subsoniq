@@ -33,6 +33,11 @@ StringToken::StringToken(const Track *track)
 	m_value = QStringEx::format("%1 - %2", artist, title);
 }
 
+StringToken::StringToken(const QDateTime &dateTime)
+{
+	m_value = dateTime.toString(Qt::SystemLocaleShortDate);
+}
+
 
 StringToken::operator QString() const
 {

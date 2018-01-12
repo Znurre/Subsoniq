@@ -20,6 +20,28 @@ class SubsonicAdapter : public QObject
 		}
 
 		template<class TInstance>
+		SubsonicAdapter &getPlaylists(TInstance *instance, JsonCallback<TInstance> callback)
+		{
+			m_requestFactory
+				.request("getPlaylists.view")
+				.callback(instance, callback);
+
+			return *this;
+		}
+
+		template<class TInstance>
+		SubsonicAdapter &getPlaylist(const QString &id, TInstance *instance, JsonCallback<TInstance> callback)
+		{
+			m_requestFactory
+				.request("getPlaylist.view"
+					, api::id = id
+				)
+				.callback(instance, callback);
+
+			return *this;
+		}
+
+		template<class TInstance>
 		SubsonicAdapter &getIndexes(TInstance *instance, JsonCallback<TInstance> callback)
 		{
 			m_requestFactory

@@ -9,7 +9,8 @@ ApplicationWindow
 {
 	Component.onCompleted:
 	{
-		pageStack.push("pages/ArtistsPage.qml");
+//		pageStack.push("pages/ArtistsPage.qml");
+		pageStack.push("pages/StoredPlaylistsPage.qml");
 		pageStack.pushAttached(playlistPage)
 	}
 
@@ -24,11 +25,12 @@ ApplicationWindow
 			icon: "../../icon-s-setting.png"
 		}
 
-//		ListElement
-//		{
-//			title: "Playlists"
-//			icon: "../../icon-s-playlist.png"
-//		}
+		ListElement
+		{
+			title: "Playlists"
+			pageUrl: "StoredPlaylistsPage.qml"
+			icon: "../../icon-s-playlist.png"
+		}
 
 //		ListElement
 //		{

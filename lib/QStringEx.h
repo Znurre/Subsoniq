@@ -4,6 +4,7 @@
 #include <QJsonValue>
 #include <QString>
 #include <QList>
+#include <QDateTime>
 
 class Track;
 
@@ -15,6 +16,7 @@ class StringToken
 		StringToken(const QByteArray &value);
 		StringToken(const QJsonValue &value);
 		StringToken(const Track *track);
+		StringToken(const QDateTime &dateTime);
 
 		operator QString() const;
 

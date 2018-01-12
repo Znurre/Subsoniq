@@ -3,9 +3,20 @@
 #include "CoverImage.h"
 
 CoverImage::CoverImage()
-	: m_ready(false)
+	: m_size("64")
+	, m_ready(false)
 {
 
+}
+
+QString CoverImage::size() const
+{
+	return m_size;
+}
+
+void CoverImage::setSize(const QString &size)
+{
+	m_size = size;
 }
 
 QString CoverImage::coverId() const
@@ -16,7 +27,7 @@ QString CoverImage::coverId() const
 void CoverImage::setCoverId(const QString &coverId)
 {
 	m_coverId = coverId;
-	m_adapter.getCoverArt(coverId, "64", this, &CoverImage::reply);
+	m_adapter.getCoverArt(coverId, m_size, this, &CoverImage::reply);
 
 	emit coverIdChanged();
 }
