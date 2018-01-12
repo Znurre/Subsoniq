@@ -45,6 +45,7 @@ int main(int argc, char *argv[])
 	qmlRegisterType<StoredPlaylist>();
 	qmlRegisterType<MetadataController>();
 	qmlRegisterType<ICollectionNode>();
+	qmlRegisterType<INode>();
 	qmlRegisterType<ICollectionNodeProxy>();
 
 	// SailfishApp::main() will display "qml/template.qml", if you need more

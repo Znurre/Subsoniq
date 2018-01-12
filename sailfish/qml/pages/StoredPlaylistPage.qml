@@ -7,11 +7,11 @@ SubsoniqPage
 {
 	id: page
 
-	property alias playlist: storedPlaylistModel.playlist
+	property alias playlist: playlistModel.playlist
 
 	StoredPlaylistModel
 	{
-		id: storedPlaylistModel
+		id: playlistModel
 	}
 
 	SilicaFlickable
@@ -22,6 +22,17 @@ SubsoniqPage
 		}
 
 		contentHeight: mainColumn.height
+
+		PullDownMenu
+		{
+			MenuItem
+			{
+				text: "Queue all"
+				onClicked: main.playlistModel.addAll(playlistModel.playlist)
+			}
+
+			visible: view.count > 0
+		}
 
 		ScrollDecorator {}
 
@@ -95,19 +106,40 @@ SubsoniqPage
 			Item
 			{
 				width: parent.width
-				height: Theme.paddingLarge
+				height: Theme.paddingMedium
 			}
 
 			ColumnView
 			{
+				id: view
 				width: parent.width
 				itemHeight: Theme.itemSizeSmall
-				model: storedPlaylistModel
+				model: playlistModel
 				delegate: TrackTemplate
 				{
 					showTrackNumber: false
 				}
 			}
+
+			InfoLabel
+			{
+				id: placeholder
+				text: "The playlist is empty"
+				verticalAlignment: Text.AlignVCenter
+				height: page.height - placeholder.y
+				visible: playlistModel.status === CollectionModel.Empty
+			}
 		}
+	}
+
+	BusyIndicator
+	{
+		anchors
+		{
+			centerIn: parent
+		}
+
+		size: BusyIndicatorSize.Large
+		running: playlistModel.status === CollectionModel.Loading
 	}
 }

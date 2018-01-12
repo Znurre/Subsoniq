@@ -9,10 +9,10 @@
 class CollectionIterator
 {
 	public:
-		QList<Track *> getTracks(ICollectionNode *parent) const;
+		QList<Track *> getTracks(INode *parent) const;
 
 	private:
-		void getTracks(ICollectionNode *parent, QList<Track *> &target) const;
+		void getTracks(INode *parent, QList<Track *> &target) const;
 };
 
 #endif // COLLECTIONITERATOR_H

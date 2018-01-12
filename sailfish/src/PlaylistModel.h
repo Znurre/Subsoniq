@@ -7,6 +7,7 @@
 
 class Playlist;
 class Track;
+class INode;
 class ICollectionNode;
 class PlaylistNode;
 
@@ -36,7 +37,7 @@ class PlaylistModel : public QAbstractListModel
 
 	public slots:
 		void add(ICollectionNode *node);
-		void addAll(ICollectionNode *parent);
+		void addAll(INode *parent);
 		void remove(PlaylistNode *node);
 		void clear();
 

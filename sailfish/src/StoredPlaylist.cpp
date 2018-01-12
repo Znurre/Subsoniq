@@ -1,5 +1,6 @@
 #include "StoredPlaylist.h"
 #include "QStringEx.h"
+#include "CollectionTrackNode.h"
 
 QString StoredPlaylist::id() const
 {
@@ -74,4 +75,29 @@ QString StoredPlaylist::getCreated() const
 StoredPlaylist::operator QString() const
 {
 	return m_id;
+}
+
+INode *StoredPlaylist::childAt(int index) const
+{
+	return m_tracks[index];
+}
+
+int StoredPlaylist::childCount() const
+{
+	return m_tracks.count();
+}
+
+bool StoredPlaylist::hasChildren() const
+{
+	return !m_tracks.isEmpty();
+}
+
+bool StoredPlaylist::canFetchMore() const
+{
+	return false;
+}
+
+bool StoredPlaylist::fetchMore()
+{
+	return true;
 }

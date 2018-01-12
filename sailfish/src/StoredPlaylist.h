@@ -4,9 +4,11 @@
 #include <QObject>
 #include <QJsonSerializer>
 
+#include "ICollectionNode.h"
+
 class CollectionTrackNode;
 
-class StoredPlaylist : public QObject
+class StoredPlaylist : public INode
 {
 	Q_OBJECT
 
@@ -41,6 +43,14 @@ class StoredPlaylist : public QObject
 		Q_INVOKABLE QString getCreated() const;
 
 		operator QString() const;
+
+		INode *childAt(int index) const override;
+
+		int childCount() const override;
+
+		bool hasChildren() const override;
+		bool canFetchMore() const override;
+		bool fetchMore() override;
 
 	private:
 		QString m_id;

@@ -7,7 +7,23 @@
 
 class Track;
 
-class ICollectionNode : public QObject
+class INode : public QObject
+{
+	Q_OBJECT
+
+	public:
+		virtual ~INode() = default;
+
+		virtual INode *childAt(int index) const = 0;
+
+		virtual int childCount() const = 0;
+
+		virtual bool hasChildren() const = 0;
+		virtual bool canFetchMore() const = 0;
+		virtual bool fetchMore() = 0;
+};
+
+class ICollectionNode : public INode
 {
 	Q_OBJECT
 
@@ -26,15 +42,7 @@ class ICollectionNode : public QObject
 			return QString::null;
 		}
 
-		virtual ICollectionNode *childAt(int index) const = 0;
-
 		virtual Track *track() = 0;
-
-		virtual int childCount() const = 0;
-
-		virtual bool hasChildren() const = 0;
-		virtual bool canFetchMore() const = 0;
-		virtual bool fetchMore() = 0;
 
 		operator QString() const
 		{

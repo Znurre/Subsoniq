@@ -9,8 +9,8 @@ ApplicationWindow
 {
 	Component.onCompleted:
 	{
-//		pageStack.push("pages/ArtistsPage.qml");
-		pageStack.push("pages/StoredPlaylistsPage.qml");
+		pageStack.push("pages/ArtistsPage.qml");
+//		pageStack.push("pages/StoredPlaylistsPage.qml");
 		pageStack.pushAttached(playlistPage)
 	}
 

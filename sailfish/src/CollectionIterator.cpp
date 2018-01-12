@@ -1,7 +1,7 @@
 #include "CollectionIterator.h"
 #include "CollectionTrackNode.h"
 
-QList<Track *> CollectionIterator::getTracks(ICollectionNode *parent) const
+QList<Track *> CollectionIterator::getTracks(INode *parent) const
 {
 	QList<Track *> tracks;
 
@@ -10,14 +10,15 @@ QList<Track *> CollectionIterator::getTracks(ICollectionNode *parent) const
 	return tracks;
 }
 
-void CollectionIterator::getTracks(ICollectionNode *parent, QList<Track *> &target) const
+void CollectionIterator::getTracks(INode *parent, QList<Track *> &target) const
 {
 	for (int i = 0; i < parent->childCount(); i++)
 	{
-		ICollectionNode *node = parent->childAt(i);
-		ICollectionNode *track = qobject_cast<CollectionTrackNode *>(node);
+		INode *node = parent->childAt(i);
 
-		if (!track)
+		CollectionTrackNode *trackNode = qobject_cast<CollectionTrackNode *>(node);
+
+		if (!trackNode)
 		{
 			if (node->canFetchMore())
 			{
@@ -28,7 +29,7 @@ void CollectionIterator::getTracks(ICollectionNode *parent, QList<Track *> &targ
 		}
 		else
 		{
-			target << node->track();
+			target << trackNode->track();
 		}
 	}
 }

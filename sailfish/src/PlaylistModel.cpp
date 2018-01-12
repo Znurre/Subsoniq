@@ -92,7 +92,7 @@ void PlaylistModel::add(ICollectionNode *node)
 	m_playlist.add(track);
 }
 
-void PlaylistModel::addAll(ICollectionNode *parent)
+void PlaylistModel::addAll(INode *parent)
 {
 	CollectionIterator iterator;
 

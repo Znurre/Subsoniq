@@ -21,8 +21,8 @@ int CollectionModel::status() const
 
 QModelIndex CollectionModel::index(int row, int column, const QModelIndex &parent) const
 {
-	ICollectionNode *parentNode = getNode(parent);
-	ICollectionNode *childNode = parentNode->childAt(row);
+	INode *parentNode = getNode(parent);
+	INode *childNode = parentNode->childAt(row);
 
 	return createIndex(row, column, childNode);
 }
